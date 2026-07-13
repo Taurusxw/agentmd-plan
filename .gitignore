@@ -1,0 +1,21 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# Caches and temporary output
+__pycache__/
+*.py[cod]
+*.tmp
+*.temp
+*.log
+
+# Private state and local recovery material
+backups/
+private/
+*.bundle
+artifacts/current-state.json
+artifacts/*current*.zip
