@@ -28,6 +28,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
    - Identify whether the target is global rules, project rules, a subdirectory rule, a Skill, project docs, or enforcement tooling.
    - For low-token compliance, read `references/low-token-guardrails.md` and apply the smallest required guardrail tier.
    - For ordinary development, load only `task-scaling-and-context.md` plus the one artifact-specific reference needed by the task; do not run the full rule-project preflight.
+   - If discovered edge conditions start expanding implementation or validation, read `references/acceptance-closure.md` before doing more edge-focused work.
 
 2. **Measure before changing**
    - Run `scripts/measure_rules.py` on existing rule files or documentation directories when size, versioning, duplication, or round organization matters.
@@ -72,7 +73,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
 - Read `references/global-agents-coverage.md` when checking whether this skill covers every rule currently expressed in global `AGENTS.md`.
 - Read `references/global-agents-rule-inventory.md` for item-level coverage of the current global `AGENTS.md` rules.
 - Read `references/task-scaling-and-context.md` for L0-L4 task classification, context reading depth, Skill use, and external-source decisions.
-- Read `references/acceptance-closure.md` when acceptance, release, QA, preflight, live validation, or repeated verification starts expanding the task.
+- Read `references/acceptance-closure.md` when acceptance, release, QA, preflight, live validation, repeated verification, or edge-condition hardening starts expanding the task.
 - Read `references/execution-standards.md` for the eight execution principles, ambiguity handling, fact checking, reuse, and business alignment.
 - Read `references/code-change-governance.md` for code-edit boundaries, module splitting, user-change protection, and destructive-operation review.
 - Read `references/documentation-governance.md` for document thresholds, round overflow, phase promotion, release folders, and doc-sprawl controls.

@@ -11,6 +11,7 @@
 - `artifacts/`：可审查的全局 `AGENTS.md` 候选和补丁说明。
 - `skills/seer-codex-rules/`：可安装、可维护的 Skill 源码。
 - `docs/`：公开项目状态、索引和必要开发留痕。
+- `VERSION`：当前项目发布版本。
 
 ## 工作规则
 
@@ -20,6 +21,7 @@
 4. 不提交历史私有备份、凭据、状态快照、缓存或包含机器特定信息的二进制包。
 5. 规则版本遵守 `MAJOR.MINOR.PATCH`；只修改 Skill 时不自动推进全局 `AGENTS.md` 版本。
 6. L2 以上实质开发在现有 `docs/progress/rounds/` 中留下最小可恢复记录；不为只读检查制造 round。
+7. 正式发布时，`VERSION`、Git tag、GitHub Release 和 `docs/progress/releases/vx.y.z/` 必须一致；发布包含新全局纲要时，其版本也必须一致。
 
 ## 验证与完成标准
 

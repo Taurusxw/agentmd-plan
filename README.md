@@ -1,27 +1,72 @@
 # Agentmd Plan
 
-Agentmd Plan 是一套可移植的 Codex 规则治理方案：全局 `AGENTS.md` 只保留始终生效的纲要，复杂流程由 `seer-codex-rules` Skill 按任务类型加载。
+[简体中文](README.md) | [English](README.en.md)
 
-## 包含内容
+当前版本：`v27.6.0`
 
-- `artifacts/AGENTS-27.6.0.md`：精简的全局规则纲要候选。
-- `skills/seer-codex-rules/`：规则设计、版本治理、文档治理、round/phase/release、验证与低 token guardrail Skill。
-- `docs/`：公开项目状态、文档索引和发布记录。
+Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理方案。全局 `AGENTS.md` 只保留每次任务都应生效的纲要，复杂执行规则由 `seer-codex-rules` Skill 根据任务类型按需加载。
 
-## 设计原则
+## 解决的问题
 
-1. 全局文件只保留任务分级、强制 Skill 门禁、安全底线和完成检查。
-2. 详细规则按 reference 模块化，普通任务只加载当前需要的模块。
-3. 可确定的同步、体量、路由和状态检查交给脚本，不依赖人工记忆。
-4. 本机路径、私有备份和 live 状态不进入公开仓库。
+- 防止全局 `AGENTS.md` 随规则增加而持续膨胀。
+- 让短任务保持轻量，同时为重要开发、迁移和发布保留完整验证与溯源。
+- 通过全局门禁、Skill 路由、reference 模块、校验脚本和最终披露降低规则偏移。
+- 约束重复验收、过多 round 和低概率边界条件过度开发。
+- 将个人路径、私有备份和 live 状态隔离在公开仓库之外。
+
+## 版本内容
+
+- `artifacts/AGENTS-27.6.0.md`：精简的全局规则纲要。
+- `skills/seer-codex-rules/`：规则设计、任务分级、代码与文档治理、round/phase/release、验收收束和版本治理 Skill。
+- `skills/seer-codex-rules/scripts/`：规则体量、Skill 路由、同步状态和恢复快照检查脚本。
+- `docs/`：公开项目状态、文档索引和必要的开发与发布记录。
+- `VERSION`：项目当前发布版本。
+
+## 工作机制
+
+```text
+全局 AGENTS.md
+  -> 强制加载 seer-codex-rules/SKILL.md
+      -> 判断 L0-L4 和 guardrail 等级
+          -> 只加载当前任务需要的 reference
+              -> 修改、验证、留痕、收束
+```
+
+普通文件修改任务只需加载 Skill 路由、任务分级和一个产物相关 reference。规则同步、迁移或发布才启用更完整的 guardrail，避免为了合规机械消耗上下文。
 
 ## 安装
 
-1. 将 `skills/seer-codex-rules/` 复制到 `<codex-home>/skills/seer-codex-rules/`。
-2. 审阅 `artifacts/AGENTS-27.6.0.md`，确认适合自己的工作方式后，再合并或安装到 `<codex-home>/AGENTS.md`。
-3. 项目级规则只保存项目事实，不复制全局全文。
+1. 备份现有的 `<codex-home>/AGENTS.md` 和同名 Skill。
+2. 将 `skills/seer-codex-rules/` 复制到 `<codex-home>/skills/seer-codex-rules/`。
+3. 审阅 `artifacts/AGENTS-27.6.0.md`，确认符合自己的工作方式。
+4. 将该 artifact 安装为 `<codex-home>/AGENTS.md`。
+5. 运行下方校验命令，确认版本、Skill 路由和同步状态。
 
-`<codex-home>` 通常是环境变量 `CODEX_HOME` 指向的目录；未设置时一般使用 `<user-home>/.codex`。
+`<codex-home>` 通常由环境变量 `CODEX_HOME` 指定；未设置时一般是 `<user-home>/.codex`。
+
+## 核心治理规则
+
+### 任务分级
+
+- `L0`：只读分析，不修改文件，不写开发留痕。
+- `L1`：微小变更，最小修改和直接验证，默认不新增 round。
+- `L2`：常规开发，运行针对性测试并按现有项目体系留痕。
+- `L3`：重要变更，先评估影响，记录决策并扩大验证范围。
+- `L4`：阶段、迁移或发布，使用 phase/release 结构完成交接。
+
+### 验收与边界收束
+
+- 原始验收标准通过后停止追加门槛。
+- 新发现只有在阻塞原始目标或涉及重大安全、权限、隐私和数据风险时，才自动进入当前任务。
+- 普通边界条件必须有证据、直接关联目标，并能通过适度修改和针对性测试闭环。
+- L2 最多执行一次额外边界加固；连续两次只增强假设性健壮性时停止当前任务。
+
+### 留痕控制
+
+- 同一目标连续推进优先更新已有记录。
+- round 编号按日期重置，同一天的独立目标才递增。
+- 目录容量只能改变记录位置，不能成为跳过必要留痕的理由。
+- 多日、多轮或发布工作升级为 phase/release，避免 round 无限堆积。
 
 ## 校验
 
@@ -30,19 +75,25 @@ Agentmd Plan 是一套可移植的 Codex 规则治理方案：全局 `AGENTS.md`
 ```powershell
 python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-27.6.0.md
 python -m py_compile skills/seer-codex-rules/scripts/guardrail_check.py skills/seer-codex-rules/scripts/measure_rules.py skills/seer-codex-rules/scripts/snapshot_state.py
-python skills/seer-codex-rules/scripts/guardrail_check.py --project . --global-agents artifacts/AGENTS-27.6.0.md --downloads-agents artifacts/AGENTS-27.6.0.md --skill skills/seer-codex-rules --json
+python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-27.6.0.md --downloads-agents artifacts/AGENTS-27.6.0.md --skill skills/seer-codex-rules --json
 ```
 
-安装到个人环境后，可以使用 `snapshot_state.py --write` 建立私有状态清单和 Skill 快照。生成的状态与备份应保存在私有项目中，不提交到公开仓库。
+安装到个人环境后，可以使用 `snapshot_state.py --write` 在私有位置创建状态清单和 Skill 恢复快照。不要把包含个人路径的 live manifest 或备份提交到公开仓库。
 
-## 隐私边界
+## 升级与回退
 
-公开仓库不包含个人机器路径、历史私有备份、live 状态 manifest 或凭据。公开前保留的私有历史应存放在仓库外。
+- 发布版本、Git tag 和 GitHub Release 使用 `vMAJOR.MINOR.PATCH`。
+- 全局工作模型或兼容边界变化升级 `MAJOR`。
+- 新增长期规则、Skill 路由或治理能力升级 `MINOR`。
+- 不改变行为的错字、格式和链接修正升级 `PATCH`。
+- 回退时恢复升级前的全局规则和 Skill，并重新运行同步与覆盖检查。
 
-## 参与和安全
+## 隐私与安全
 
-提交改进前阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。安全问题请按 [SECURITY.md](SECURITY.md) 私下报告。
+公开仓库不包含个人机器路径、历史私有备份、live 状态、凭据或二进制恢复包。文字规则不能替代 sandbox、approval、权限、测试、CI 或人工安全确认。
 
-## License
+## 参与和许可
 
-[MIT](LICENSE)
+提交改进前阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。安全问题请按照 [SECURITY.md](SECURITY.md) 私下报告。
+
+本项目采用 [MIT License](LICENSE)。
