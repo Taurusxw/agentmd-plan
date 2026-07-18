@@ -1,4 +1,4 @@
 interface:
   display_name: "Seer Codex Rules"
-  short_description: "Govern Codex rule systems and AGENTS.md"
+  short_description: "Govern Codex rules and architecture drift"
   default_prompt: "Use $seer-codex-rules to audit and improve my Codex AGENTS.md rule system."

@@ -1,6 +1,6 @@
 ---
 name: seer-codex-rules
-description: Design, revise, audit, version, compact, migrate, and maintain Codex rule systems, and act as a lightweight compliance gate for file-changing development tasks. Use for AGENTS.md, project rules, Codex workflows, task-level checks, documentation governance, progress records, versioning, rule migration, or start/end compliance checks that route to detailed rule modules.
+description: Design, revise, audit, version, compact, migrate, and maintain Codex rule systems, and act as a lightweight compliance gate for file-changing development tasks. Use for AGENTS.md, project rules, Codex workflows, task-level checks, architecture drift and repeated patch hotspots, documentation governance, progress records, versioning, rule migration, or start/end compliance checks that route to detailed rule modules.
 ---
 
 # Seer Codex Rules
@@ -29,6 +29,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
    - For low-token compliance, read `references/low-token-guardrails.md` and apply the smallest required guardrail tier.
    - For ordinary development, load only `task-scaling-and-context.md` plus the one artifact-specific reference needed by the task; do not run the full rule-project preflight.
    - If discovered edge conditions start expanding implementation or validation, read `references/acceptance-closure.md` before doing more edge-focused work.
+   - If the same production file or module is repeatedly patched, or a change adds an independent responsibility, broadens a dispatcher/interface, or duplicates non-trivial sibling logic, read `references/architecture-drift.md` and run its event-triggered check.
 
 2. **Measure before changing**
    - Run `scripts/measure_rules.py` on existing rule files or documentation directories when size, versioning, duplication, or round organization matters.
@@ -76,12 +77,14 @@ Use the smallest mode that satisfies the request. If the user asks for execution
 - Read `references/acceptance-closure.md` when acceptance, release, QA, preflight, live validation, repeated verification, or edge-condition hardening starts expanding the task.
 - Read `references/execution-standards.md` for the eight execution principles, ambiguity handling, fact checking, reuse, and business alignment.
 - Read `references/code-change-governance.md` for code-edit boundaries, module splitting, user-change protection, and destructive-operation review.
+- Read `references/architecture-drift.md` when cumulative patches, repeated hotspots, broad entry interfaces, or sibling duplication may be eroding module boundaries.
 - Read `references/documentation-governance.md` for document thresholds, round overflow, phase promotion, release folders, and doc-sprawl controls.
 - Read `references/verification-and-reporting.md` for validation depth, output shape, risk disclosure, and final response requirements.
 - Read `references/project-agents-template.md` when creating or reviewing lightweight project-level `AGENTS.md` files.
 - Read `references/rule-review-checklist.md` for audits, refactors, and final review before touching global rules.
 - Run `scripts/measure_rules.py` for deterministic line, byte, version, date, and progress-directory checks.
 - Run `scripts/guardrail_check.py` for a low-token preflight over global gate, dynamic reference routing, coverage anchors, synchronized copies, current state, and project provenance.
+- Run `scripts/structure_check.py <project-root>` only when architecture-drift triggers fire; its signals require human boundary review and never mandate splitting by line count alone.
 - Run `scripts/snapshot_state.py --write` after substantive Skill changes to refresh the canonical Skill snapshot and `artifacts/current-state.json`.
 
 ## Safety Rules

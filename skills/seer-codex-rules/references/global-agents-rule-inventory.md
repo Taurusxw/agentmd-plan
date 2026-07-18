@@ -1,10 +1,10 @@
 # Global AGENTS Rule Inventory
 
-This inventory maps `<codex-home>/AGENTS.md` version `27.6.0` to detailed `seer-codex-rules` modules.
+This inventory maps `<codex-home>/AGENTS.md` version `27.7.0` to detailed `seer-codex-rules` modules.
 
-Source global version: `27.6.0`
-Source global SHA256: `CCC2E9C1A5BDAC974FE906887189BCA7E4C6C3A9861CD93CB91CCE92F3F23072`
-Coverage verified: `2026-07-13`
+Source global version: `27.7.0`
+Source global SHA256: `40B38F5424B71887F3905AB864FF4DB895E3C540F383777CE8CF79E4B2EF53C7`
+Coverage verified: `2026-07-18`
 
 ## 1. Core Principles
 
@@ -42,6 +42,7 @@ Coverage verified: `2026-07-13`
 | L3 important change | `task-scaling-and-context.md`, `documentation-governance.md`, `verification-and-reporting.md` |
 | L4 phase or release | `task-scaling-and-context.md`, `documentation-governance.md` |
 | Upgrade for contracts, data, auth, security, deploy, dependency, compatibility, rollback, cross-layer, duration, or handoff | `task-scaling-and-context.md` |
+| Repeated patch hotspots plus responsibility, interface, duplication, or test-coupling drift upgrade to L3 | `task-scaling-and-context.md`, `architecture-drift.md` |
 | Analysis-only requests remain L0 | `task-scaling-and-context.md` |
 
 ## 4. Mandatory Skill Gate
@@ -69,6 +70,8 @@ Coverage verified: `2026-07-13`
 | Check imports, paths, types, tests, docs, and generated outputs | `code-change-governance.md` |
 | Confirm delete, rename, migration, and history rewrite | `code-change-governance.md` |
 | Preserve unexpected user-owned changes | `code-change-governance.md` |
+| Run an event-triggered architecture-drift review for cumulative hotspots | `architecture-drift.md`, `code-change-governance.md` |
+| Treat line count as a signal rather than a mandatory split verdict | `architecture-drift.md`, `code-change-governance.md` |
 
 ## 6. Documentation, Traceability, And Versions
 

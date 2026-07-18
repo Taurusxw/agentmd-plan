@@ -16,7 +16,7 @@
 
 | Path | Purpose |
 |---|---|
-| `../artifacts/AGENTS-27.6.0.md` | 当前正式全局纲要 artifact。 |
+| `../artifacts/AGENTS-27.7.0.md` | 当前正式全局纲要 artifact。 |
 | `../skills/seer-codex-rules/` | 可安装的 Skill 源码。 |
 | `progress/rounds/` | 有长期价值的公开开发记录。 |
-| `progress/releases/v27.6.0/` | `v27.6.0` 发布说明与验收记录。 |
+| `progress/releases/v27.7.0/` | `v27.7.0` 发布说明与验收记录。 |

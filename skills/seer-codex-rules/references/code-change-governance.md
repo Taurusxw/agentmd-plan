@@ -46,6 +46,12 @@ Split a file or module when at least one is true:
 
 Do not split when the result is only shallow wrappers, pass-through functions, or extra files with no clearer boundary.
 
+## Cumulative Drift Bridge
+
+The smallest complete change is a per-task rule, not permission to patch the same hotspot forever. Load `architecture-drift.md` when recent rounds or commits repeatedly touch one production module, or when the current patch adds an independent responsibility, broadens a dispatcher/interface, duplicates non-trivial sibling logic, or makes tests depend on unrelated subsystems.
+
+Treat line count as a navigation signal only. Refactor when combined evidence shows a stable boundary with a smaller interface and better locality; do not create shallow wrappers merely to reduce file size.
+
 ## Deep Module Standard
 
 Prefer modules with:

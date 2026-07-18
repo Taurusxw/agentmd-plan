@@ -33,6 +33,7 @@ REQUIRED_REFERENCES = {
     "task-scaling-and-context.md",
     "execution-standards.md",
     "code-change-governance.md",
+    "architecture-drift.md",
     "documentation-governance.md",
     "verification-and-reporting.md",
     "project-agents-template.md",
@@ -43,6 +44,7 @@ REQUIRED_SCRIPTS = {
     "measure_rules.py",
     "guardrail_check.py",
     "snapshot_state.py",
+    "structure_check.py",
 }
 
 TEMPLATE_MARKERS = (

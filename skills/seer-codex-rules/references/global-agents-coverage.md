@@ -2,9 +2,9 @@
 
 Use this matrix to verify that the concise global outline delegates detailed behavior without losing semantic coverage.
 
-Source global version: `27.6.0`
-Source global SHA256: `CCC2E9C1A5BDAC974FE906887189BCA7E4C6C3A9861CD93CB91CCE92F3F23072`
-Coverage verified: `2026-07-13`
+Source global version: `27.7.0`
+Source global SHA256: `40B38F5424B71887F3905AB864FF4DB895E3C540F383777CE8CF79E4B2EF53C7`
+Coverage verified: `2026-07-18`
 
 ## Coverage Rule
 
@@ -16,9 +16,9 @@ Each global rule must be `covered`, `delegated`, or deliberately `omitted`. Cove
 |---|---|---|
 | 1. Core principles | covered | `execution-standards.md`, `code-change-governance.md`, `documentation-governance.md`, `verification-and-reporting.md`, `acceptance-closure.md` |
 | 2. Instruction and rule locations | covered | `rule-governance.md`, `project-agents-template.md`, `task-scaling-and-context.md` |
-| 3. Task levels | covered | `task-scaling-and-context.md`, `documentation-governance.md`, `verification-and-reporting.md` |
+| 3. Task levels | covered | `task-scaling-and-context.md`, `architecture-drift.md`, `documentation-governance.md`, `verification-and-reporting.md` |
 | 4. Mandatory Skill gate | covered | `low-token-guardrails.md`, `task-scaling-and-context.md`, `verification-and-reporting.md` |
-| 5. Execution and edit baselines | covered | `execution-standards.md`, `code-change-governance.md` |
+| 5. Execution and edit baselines | covered | `execution-standards.md`, `code-change-governance.md`, `architecture-drift.md` |
 | 6. Documentation, traceability, and versions | covered | `documentation-governance.md`, `rule-governance.md` |
 | 7. Validation and acceptance closure | covered | `verification-and-reporting.md`, `acceptance-closure.md` |
 | 8. Completion check | covered | `verification-and-reporting.md`, `rule-review-checklist.md` |

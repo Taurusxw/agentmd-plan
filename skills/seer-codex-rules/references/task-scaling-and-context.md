@@ -24,6 +24,7 @@ Upgrade at least one level when:
 - the user needs handoff evidence, auditability, or repeatable operations;
 - uncertainty requires a plan before implementation;
 - the same goal has spread across multiple rounds and needs a phase.
+- the same production module is a repeated patch hotspot and the current change also adds a responsibility, broadens an entry interface, spreads duplication, or increases cross-subsystem test coupling; treat this as at least L3 and use `architecture-drift.md`.
 
 Do not upgrade merely because an agent likes process. A safe one-turn fix should remain lightweight.
 
