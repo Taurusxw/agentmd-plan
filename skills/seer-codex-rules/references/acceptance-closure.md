@@ -4,7 +4,7 @@ Use this reference when a task risks turning into endless acceptance, repeated Q
 
 ## Core Rule
 
-Acceptance proves the current goal is good enough to close. It must not keep generating new mandatory work unless the user explicitly expands scope or a true blocker prevents safe completion.
+Acceptance proves the current goal is good enough to close. It must not keep generating new mandatory work unless the user explicitly expands scope or a true blocker prevents safe completion. For persistent Goal mode, `goal-mode-closure.md` freezes the completion contract that defines what "original goal" and `required work` mean.
 
 ## Edge-Condition Scope Gate
 
@@ -101,7 +101,7 @@ Use this rule:
 - `hardens future process`: follow-up, not current blocker.
 - `nice-to-have or broader improvement`: backlog.
 
-If three consecutive acceptance iterations produce process hardening rather than user-visible progress, stop and ask whether to close or open a new phase.
+If acceptance iterations produce process hardening rather than user-visible progress, apply the Goal no-progress circuit breaker. When the frozen criteria pass, close automatically and list optional follow-ups without opening another phase or Goal. Ask only when an unresolved blocker materially changes scope.
 
 ## Final Answer Requirements
 

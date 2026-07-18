@@ -2,7 +2,7 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-Current version: `v27.7.0`
+Current version: `v27.8.0`
 
 Agentmd Plan is a portable, verifiable, low-token governance system for Codex rules. The global `AGENTS.md` keeps only the outline that must remain active on every task, while the `seer-codex-rules` Skill loads detailed execution rules on demand.
 
@@ -12,12 +12,13 @@ Agentmd Plan is a portable, verifiable, low-token governance system for Codex ru
 - Keeps small tasks lightweight while preserving validation and traceability for important development, migrations, and releases.
 - Reduces rule drift through a global gate, Skill routing, modular references, validation scripts, and final disclosure.
 - Constrains repeated acceptance loops, excessive rounds, and overdevelopment of low-probability edge conditions.
+- Freezes finite completion criteria for persistent Goals so auto-continuations cannot turn optional edges into endless required work.
 - Restores architecture and module-boundary decisions before repeated patches turn a production hotspot into structural drift.
 - Keeps personal paths, private backups, and live state outside the public repository.
 
 ## Release Contents
 
-- `artifacts/AGENTS-27.7.0.md`: the concise global rule outline.
+- `artifacts/AGENTS-27.8.0.md`: the concise global rule outline.
 - `skills/seer-codex-rules/`: the Skill for rule design, task scaling, code and documentation governance, round/phase/release handling, acceptance closure, and versioning.
 - `skills/seer-codex-rules/scripts/`: checks for rule size, Skill routing, structural hotspots, synchronized state, and recovery snapshots.
 - `docs/`: public project status, document index, and necessary development and release records.
@@ -39,7 +40,7 @@ An ordinary file-changing task loads the Skill router, task-scaling guidance, an
 
 1. Back up the existing `<codex-home>/AGENTS.md` and Skill directory.
 2. Copy `skills/seer-codex-rules/` to `<codex-home>/skills/seer-codex-rules/`.
-3. Review `artifacts/AGENTS-27.7.0.md` and confirm that it matches your operating preferences.
+3. Review `artifacts/AGENTS-27.8.0.md` and confirm that it matches your operating preferences.
 4. Install that artifact as `<codex-home>/AGENTS.md`.
 5. Run the validation commands below to verify the version, Skill routing, and synchronized state.
 
@@ -62,6 +63,13 @@ An ordinary file-changing task loads the Skill router, task-scaling guidance, an
 - An ordinary edge condition needs evidence, direct relevance to the goal, and a proportionate fix with focused validation.
 - L2 permits at most one extra edge-hardening pass; stop when two consecutive iterations improve only hypothetical robustness.
 
+### Goal Mode Closure
+
+- When creating or resuming a persistent Goal, store the outcome, 3-5 frozen criteria, non-goals, fixed validation budget, and closure rule in the Goal objective.
+- Convert open-ended words such as fully, completely, best, or no omissions into observable criteria instead of unlimited `required work`.
+- Admit new findings only when a criterion fails, the current change caused a regression, or a material safety risk appears; list other findings as at most three follow-ups.
+- If one continuation makes no contract progress, allow one diagnostic pass only for a real blocker. Mark the Goal `complete` as soon as all criteria pass, without recursively hardening test or acceptance tooling.
+
 ### Architecture Drift Control
 
 - Load the architecture-drift reference and script only when one production module is repeatedly patched or the current change adds responsibility, interface breadth, duplicated logic, or test coupling.
@@ -81,10 +89,10 @@ An ordinary file-changing task loads the Skill router, task-scaling guidance, an
 Run from the repository root:
 
 ```powershell
-python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-27.7.0.md
+python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-27.8.0.md
 python -m py_compile skills/seer-codex-rules/scripts/guardrail_check.py skills/seer-codex-rules/scripts/measure_rules.py skills/seer-codex-rules/scripts/snapshot_state.py skills/seer-codex-rules/scripts/structure_check.py
-python -m unittest discover -s skills/seer-codex-rules/tests -p test_structure_check.py -v
-python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-27.7.0.md --downloads-agents artifacts/AGENTS-27.7.0.md --skill skills/seer-codex-rules --json
+python -m unittest discover -s skills/seer-codex-rules/tests -p "test_*.py" -v
+python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-27.8.0.md --downloads-agents artifacts/AGENTS-27.8.0.md --skill skills/seer-codex-rules --json
 ```
 
 After installation, `snapshot_state.py --write` can create a private state manifest and Skill recovery snapshot. Do not commit live manifests or backups that contain personal paths.

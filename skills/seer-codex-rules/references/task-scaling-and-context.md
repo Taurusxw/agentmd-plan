@@ -28,6 +28,8 @@ Upgrade at least one level when:
 
 Do not upgrade merely because an agent likes process. A safe one-turn fix should remain lightweight.
 
+An active persistent Goal does not automatically make work L4. Classify by actual risk and scope, then use `goal-mode-closure.md` to prevent auto-continuations from expanding the frozen objective.
+
 ## Reading Depth
 
 Use the minimum context that can make the work correct.

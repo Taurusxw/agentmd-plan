@@ -22,12 +22,14 @@ REQUIRED_GATE_PHRASES = [
     "必须读取并遵守",
     "最终回答必须说明",
     "未覆盖风险",
+    "完成契约",
 ]
 
 REQUIRED_REFERENCES = {
     "rule-governance.md",
     "low-token-guardrails.md",
     "acceptance-closure.md",
+    "goal-mode-closure.md",
     "global-agents-coverage.md",
     "global-agents-rule-inventory.md",
     "task-scaling-and-context.md",
@@ -45,6 +47,20 @@ REQUIRED_SCRIPTS = {
     "guardrail_check.py",
     "snapshot_state.py",
     "structure_check.py",
+}
+
+REQUIRED_REFERENCE_PHRASES = {
+    "goal-mode-closure.md": {
+        "Completion Contract",
+        "Frozen Criteria",
+        "Required-Work Admission",
+        "No-Progress Circuit Breaker",
+        "`complete`",
+        "All Frozen Criteria pass: mark `complete`",
+        "they are not `required work`",
+        "Do not create or launch another Goal automatically",
+        "does not lower a platform-required blocked threshold",
+    },
 }
 
 TEMPLATE_MARKERS = (
@@ -167,6 +183,16 @@ def check_skill(skill_dir: Path) -> dict[str, object]:
     missing_scripts = sorted(REQUIRED_SCRIPTS - existing_scripts)
     has_frontmatter = skill_text.startswith("---") and "name: seer-codex-rules" in skill_text
 
+    missing_reference_phrases: dict[str, list[str]] = {}
+    for name, phrases in REQUIRED_REFERENCE_PHRASES.items():
+        reference_path = refs_dir / name
+        if not reference_path.is_file():
+            continue
+        reference_text = read_text(reference_path)
+        missing_phrases = sorted(phrase for phrase in phrases if phrase not in reference_text)
+        if missing_phrases:
+            missing_reference_phrases[name] = missing_phrases
+
     residues: list[str] = []
     for path in skill_files(skill_dir):
         if path.suffix.lower() not in {".md", ".yaml", ".yml"}:
@@ -185,6 +211,7 @@ def check_skill(skill_dir: Path) -> dict[str, object]:
             not broken_routes,
             not unrouted_refs,
             not missing_scripts,
+            not missing_reference_phrases,
             not residues,
         )
     )
@@ -199,6 +226,7 @@ def check_skill(skill_dir: Path) -> dict[str, object]:
         "broken_reference_routes": broken_routes,
         "unrouted_references": unrouted_refs,
         "missing_scripts": missing_scripts,
+        "missing_reference_phrases": missing_reference_phrases,
         "template_residue": residues,
     }
 

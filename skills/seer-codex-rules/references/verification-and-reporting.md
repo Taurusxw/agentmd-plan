@@ -74,6 +74,8 @@ For L2+:
 
 Do not force headings when a one-paragraph answer is clearer, but never omit important validation or risk facts.
 
+For an active persistent Goal, use the compact status from `goal-mode-closure.md`. Once all Frozen Criteria pass, report `complete`; optional findings remain follow-ups and do not justify another validation loop.
+
 ## Traceability Check
 
 For rule and documentation work, explicitly answer:

@@ -1,9 +1,9 @@
 # Global AGENTS Rule Inventory
 
-This inventory maps `<codex-home>/AGENTS.md` version `27.7.0` to detailed `seer-codex-rules` modules.
+This inventory maps `<codex-home>/AGENTS.md` version `27.8.0` to detailed `seer-codex-rules` modules.
 
-Source global version: `27.7.0`
-Source global SHA256: `40B38F5424B71887F3905AB864FF4DB895E3C540F383777CE8CF79E4B2EF53C7`
+Source global version: `27.8.0`
+Source global SHA256: `53DB9EF5531A27938DF4A31F1AD73321FE21519AE1ABF9E3BFD32A28DF3095E1`
 Coverage verified: `2026-07-18`
 
 ## 1. Core Principles
@@ -99,6 +99,8 @@ Coverage verified: `2026-07-18`
 | Disclose unrun checks and residual risk | `verification-and-reporting.md` |
 | Stop after acceptance; classify external blocks as residual risk | `acceptance-closure.md` |
 | Only blockers and material safety findings expand current scope | `acceptance-closure.md` |
+| Persistent Goals freeze finite pass/fail criteria before implementation | `goal-mode-closure.md`, `acceptance-closure.md` |
+| Passing Goal criteria close immediately; optional findings are not required work | `goal-mode-closure.md`, `verification-and-reporting.md` |
 
 ## 8. Completion Check
 

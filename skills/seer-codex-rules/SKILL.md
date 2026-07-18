@@ -1,6 +1,6 @@
 ---
 name: seer-codex-rules
-description: Design, revise, audit, version, compact, migrate, and maintain Codex rule systems, and act as a lightweight compliance gate for file-changing development tasks. Use for AGENTS.md, project rules, Codex workflows, task-level checks, architecture drift and repeated patch hotspots, documentation governance, progress records, versioning, rule migration, or start/end compliance checks that route to detailed rule modules.
+description: Design, revise, audit, version, compact, migrate, and maintain Codex rule systems, and act as a lightweight compliance gate for file-changing development tasks. Use for AGENTS.md, project rules, Codex workflows, task-level checks, Goal mode completion and runaway edge-condition loops, architecture drift and repeated patch hotspots, documentation governance, progress records, versioning, rule migration, or start/end compliance checks that route to detailed rule modules.
 ---
 
 # Seer Codex Rules
@@ -28,6 +28,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
    - Identify whether the target is global rules, project rules, a subdirectory rule, a Skill, project docs, or enforcement tooling.
    - For low-token compliance, read `references/low-token-guardrails.md` and apply the smallest required guardrail tier.
    - For ordinary development, load only `task-scaling-and-context.md` plus the one artifact-specific reference needed by the task; do not run the full rule-project preflight.
+   - When a persistent Goal is created, resumed, or close to completion, read `references/goal-mode-closure.md`, freeze its completion contract in the Goal objective, and treat optional findings as non-required work.
    - If discovered edge conditions start expanding implementation or validation, read `references/acceptance-closure.md` before doing more edge-focused work.
    - If the same production file or module is repeatedly patched, or a change adds an independent responsibility, broadens a dispatcher/interface, or duplicates non-trivial sibling logic, read `references/architecture-drift.md` and run its event-triggered check.
 
@@ -74,6 +75,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
 - Read `references/global-agents-coverage.md` when checking whether this skill covers every rule currently expressed in global `AGENTS.md`.
 - Read `references/global-agents-rule-inventory.md` for item-level coverage of the current global `AGENTS.md` rules.
 - Read `references/task-scaling-and-context.md` for L0-L4 task classification, context reading depth, Skill use, and external-source decisions.
+- Read `references/goal-mode-closure.md` whenever a persistent Goal is created, resumed, auto-continued, or evaluated for completion.
 - Read `references/acceptance-closure.md` when acceptance, release, QA, preflight, live validation, repeated verification, or edge-condition hardening starts expanding the task.
 - Read `references/execution-standards.md` for the eight execution principles, ambiguity handling, fact checking, reuse, and business alignment.
 - Read `references/code-change-governance.md` for code-edit boundaries, module splitting, user-change protection, and destructive-operation review.

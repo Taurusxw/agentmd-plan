@@ -2,12 +2,14 @@
 
 ## Current State
 
-- 当前项目发布版本为 `v27.7.0`，包含已验证的全局纲要和配套 Skill。
+- 当前项目发布版本为 `v27.8.0`，包含已验证的全局纲要和配套 Skill。
 - `seer-codex-rules` 已作为可浏览源码纳入仓库。
 - 项目采用 MIT License，并完成首次公开发布净化。
 
 ## Recent Progress
 
+- 增加 Goal 模式冻结完成契约、必做工作准入、一次探测、禁止递归加固和无进展断路器。
+- guardrail 现在校验全局“完成契约”门禁以及 Goal reference 的关键停止锚点。
 - 增加累计架构漂移门禁：结合近期 round/Git 热点、规模、宽接口和同目录重复逻辑判断，不以行数单独要求拆分。
 - 增加 `structure_check.py` 和独立单元测试，并在真实多轮项目中验证热点识别。
 - 增加独立中英文说明书、项目版本文件和 `v27.6.0` release 文档。
@@ -27,11 +29,12 @@
 ## Risks
 
 - 规则系统仍依赖 Codex 正确触发 Skill；脚本和最终披露用于降低而非消除偏移。
-- `27.7.0` 是可复用正式版本，结构检查只能提供证据，使用者仍需判断模块语义和有意重复。
+- `27.8.0` 是可复用正式版本，文字门禁可以显著降低目标漂移，但无法替代平台 Goal 状态机和用户范围决策。
 
 ## Detailed Records
 
-- `docs/progress/releases/v27.7.0/RELEASE_NOTES.md`
+- `docs/progress/releases/v27.8.0/RELEASE_NOTES.md`
+- `docs/progress/rounds/2026-07-18-round-002-goal-mode-closure.md`
 - `docs/progress/rounds/2026-07-18-round-001-architecture-drift-gate.md`
 - `docs/progress/rounds/2026-07-14-round-002-activate-global-27.6.0.md`
 - `docs/progress/rounds/2026-07-14-round-001-edge-condition-scope-gate.md`

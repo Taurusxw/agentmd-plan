@@ -65,3 +65,4 @@ If drift is found, fix it before continuing when it affects the current task. Ot
 - Refresh the state manifest only after a substantive Skill or approved global change, not during read-only analysis.
 - Keep global `AGENTS.md` as a gate and summary, not the detailed rule body.
 - Prefer final one-line disclosure unless the user asks for detailed audit output.
+- Load `goal-mode-closure.md` only while a persistent Goal is being created, resumed, auto-continued, or closed. Keep its compact contract in the Goal objective instead of rereading project history on every continuation.
