@@ -16,6 +16,7 @@ Use layered controls, but load detail only when the task needs it.
 | Current Skill snapshot | no prompt cost | Keeps the live Skill recoverable without replaying old rounds. |
 | Final disclosure | low | Makes drift visible by stating Skill use, key references, and uncovered risk. |
 | Project provenance | medium only when needed | Records substantial rule or Skill changes for recovery. |
+| Delegation gate | low when used | Prevents unnecessary agents, full-context forks, duplicate work, and verbose child returns. |
 
 ## Guardrail Tiers
 
@@ -66,3 +67,7 @@ If drift is found, fix it before continuing when it affects the current task. Ot
 - Keep global `AGENTS.md` as a gate and summary, not the detailed rule body.
 - Prefer final one-line disclosure unless the user asks for detailed audit output.
 - Load `goal-mode-closure.md` only while a persistent Goal is being created, resumed, auto-continued, or closed. Keep its compact contract in the Goal objective instead of rereading project history on every continuation.
+- Keep single-agent execution as the default. Before spawning, require an independent bounded task and a concrete time, context-isolation, or specialist-review benefit.
+- Use one child normally and at most two concurrently; a configured ceiling of three is an emergency bound, not a target.
+- Start children with a compact task packet instead of full history unless omitted history would make the task unsafe or incorrect.
+- Require compact evidence and conclusions rather than raw logs, close completed children immediately, and never invent token savings when exact usage is unavailable.

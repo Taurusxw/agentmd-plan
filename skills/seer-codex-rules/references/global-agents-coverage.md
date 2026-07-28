@@ -2,9 +2,9 @@
 
 Use this matrix to verify that the concise global outline delegates detailed behavior without losing semantic coverage.
 
-Source global version: `27.8.0`
-Source global SHA256: `53DB9EF5531A27938DF4A31F1AD73321FE21519AE1ABF9E3BFD32A28DF3095E1`
-Coverage verified: `2026-07-18`
+Source global version: `27.9.0`
+Source global SHA256: `4DB79C46EBE32C94E97222E0E09D07CC7FB466D01150B756D7D7DE696BC4D91C`
+Coverage verified: `2026-07-28`
 
 ## Coverage Rule
 
@@ -14,10 +14,10 @@ Each global rule must be `covered`, `delegated`, or deliberately `omitted`. Cove
 
 | Global Section | Status | Detailed Coverage |
 |---|---|---|
-| 1. Core principles | covered | `execution-standards.md`, `code-change-governance.md`, `documentation-governance.md`, `verification-and-reporting.md`, `acceptance-closure.md`, `goal-mode-closure.md` |
+| 1. Core principles | covered | `execution-standards.md`, `code-change-governance.md`, `documentation-governance.md`, `verification-and-reporting.md`, `acceptance-closure.md`, `goal-mode-closure.md`, `multi-agent-governance.md` |
 | 2. Instruction and rule locations | covered | `rule-governance.md`, `project-agents-template.md`, `task-scaling-and-context.md` |
 | 3. Task levels | covered | `task-scaling-and-context.md`, `architecture-drift.md`, `documentation-governance.md`, `verification-and-reporting.md` |
-| 4. Mandatory Skill gate | covered | `low-token-guardrails.md`, `task-scaling-and-context.md`, `verification-and-reporting.md` |
+| 4. Mandatory Skill gate | covered | `low-token-guardrails.md`, `task-scaling-and-context.md`, `verification-and-reporting.md`, `multi-agent-governance.md` |
 | 5. Execution and edit baselines | covered | `execution-standards.md`, `code-change-governance.md`, `architecture-drift.md` |
 | 6. Documentation, traceability, and versions | covered | `documentation-governance.md`, `rule-governance.md` |
 | 7. Validation and acceptance closure | covered | `verification-and-reporting.md`, `acceptance-closure.md`, `goal-mode-closure.md` |

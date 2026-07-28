@@ -23,6 +23,8 @@ REQUIRED_GATE_PHRASES = [
     "最终回答必须说明",
     "未覆盖风险",
     "完成契约",
+    "普通并发不超过 2",
+    "multi-agent-governance.md",
 ]
 
 REQUIRED_REFERENCES = {
@@ -36,6 +38,7 @@ REQUIRED_REFERENCES = {
     "execution-standards.md",
     "code-change-governance.md",
     "architecture-drift.md",
+    "multi-agent-governance.md",
     "documentation-governance.md",
     "verification-and-reporting.md",
     "project-agents-template.md",
@@ -47,6 +50,7 @@ REQUIRED_SCRIPTS = {
     "guardrail_check.py",
     "snapshot_state.py",
     "structure_check.py",
+    "agent_routing_check.py",
 }
 
 REQUIRED_REFERENCE_PHRASES = {
@@ -60,6 +64,16 @@ REQUIRED_REFERENCE_PHRASES = {
         "they are not `required work`",
         "Do not create or launch another Goal automatically",
         "does not lower a platform-required blocked threshold",
+    },
+    "multi-agent-governance.md": {
+        "Single-Agent Default",
+        "Delegation Benefit Gate",
+        "Critical Path Ownership",
+        "Model Routing Matrix",
+        "Compact Context Packet",
+        "Normal concurrency: one child",
+        "No Nested Delegation",
+        "Close Completed Agents",
     },
 }
 
@@ -234,7 +248,13 @@ def check_skill(skill_dir: Path) -> dict[str, object]:
 def check_project(project_dir: Path) -> dict[str, object]:
     required = [
         "README.md",
+        "README.en.md",
         "AGENTS.md",
+        "VERSION",
+        "config/agents.toml.example",
+        "config/agents/explorer-fast.toml",
+        "config/agents/worker-balanced.toml",
+        "config/agents/reviewer-deep.toml",
         "docs/DOC_INDEX.md",
         "docs/PROGRESS.md",
         "docs/progress/README.md",

@@ -9,6 +9,7 @@
 ## 目录结构
 
 - `artifacts/`：可审查的全局 `AGENTS.md` 候选和补丁说明。
+- `config/`：可移植的 Codex 多 Agent 默认配置和角色模板。
 - `skills/seer-codex-rules/`：可安装、可维护的 Skill 源码。
 - `docs/`：公开项目状态、索引和必要开发留痕。
 - `VERSION`：当前项目发布版本。
@@ -16,7 +17,7 @@
 ## 工作规则
 
 1. 全局规则先在 `artifacts/` 形成候选，再由使用者审查并安装。
-2. Skill 源码以 `skills/seer-codex-rules/` 为公开事实来源；实质修改必须同步相关 reference、脚本和验证。
+2. Skill 源码以 `skills/seer-codex-rules/` 为公开事实来源；实质修改必须同步相关 reference、脚本和验证。多 Agent 配置以 `config/` 模板为公开事实来源，本机安装副本不得反向写入机器特定信息。
 3. 文档和示例使用 `<codex-home>`、`<project-root>`、`<user-home>` 等占位符，不提交本机用户名、私有目录或当前机器状态。
 4. 不提交历史私有备份、凭据、状态快照、缓存或包含机器特定信息的二进制包。
 5. 规则版本遵守 `MAJOR.MINOR.PATCH`；只修改 Skill 时不自动推进全局 `AGENTS.md` 版本。
@@ -25,7 +26,7 @@
 
 ## 验证与完成标准
 
-- Skill 通过结构校验、Python 语法检查、reference 路由、Goal 契约锚点、结构热点脚本测试和模板残留检查。
+- Skill 通过结构校验、Python 语法检查、reference 路由、Goal 契约锚点、多 Agent 路由、结构热点脚本测试和模板残留检查。
 - 全局候选通过体量、版本、日期和语义覆盖检查。
 - 发布前运行秘密扫描、私有路径扫描、`git diff --check` 和 GitHub 元数据检查。
 - 最终说明列出改动、版本动作、测试、留痕和残留风险。

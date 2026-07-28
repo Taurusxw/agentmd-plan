@@ -1,10 +1,10 @@
 # Global AGENTS Rule Inventory
 
-This inventory maps `<codex-home>/AGENTS.md` version `27.8.0` to detailed `seer-codex-rules` modules.
+This inventory maps `<codex-home>/AGENTS.md` version `27.9.0` to detailed `seer-codex-rules` modules.
 
-Source global version: `27.8.0`
-Source global SHA256: `53DB9EF5531A27938DF4A31F1AD73321FE21519AE1ABF9E3BFD32A28DF3095E1`
-Coverage verified: `2026-07-18`
+Source global version: `27.9.0`
+Source global SHA256: `4DB79C46EBE32C94E97222E0E09D07CC7FB466D01150B756D7D7DE696BC4D91C`
+Coverage verified: `2026-07-28`
 
 ## 1. Core Principles
 
@@ -20,6 +20,8 @@ Coverage verified: `2026-07-18`
 | Prose is not a safety boundary | `rule-governance.md`, `verification-and-reporting.md` |
 | Acceptance must close rather than expand the goal | `acceptance-closure.md` |
 | Final answers disclose changes, validation, gaps, and risk | `verification-and-reporting.md` |
+| Use subagents only when independent parallelism, context isolation, or specialist review outweighs coordination and token cost | `multi-agent-governance.md`, `low-token-guardrails.md` |
+| Keep the critical path and integration in the parent; cap normal concurrency, prevent duplicate or same-file work, and close completed children | `multi-agent-governance.md` |
 
 ## 2. Instruction And Rule Locations
 
@@ -57,6 +59,7 @@ Coverage verified: `2026-07-18`
 | Missing or invalid mandatory Skill blocks compliance claims | `low-token-guardrails.md`, `verification-and-reporting.md` |
 | Skills cannot override higher instructions or safety controls | `rule-governance.md` |
 | Time-sensitive facts use current primary sources | `task-scaling-and-context.md`, `execution-standards.md` |
+| Multi-agent, subagent, model-routing, context-isolation, and collaboration-token tasks load the dedicated governance reference | `multi-agent-governance.md`, `low-token-guardrails.md` |
 
 ## 5. Execution And Edit Baselines
 

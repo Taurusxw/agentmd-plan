@@ -89,6 +89,7 @@ For rule and documentation work, explicitly answer:
 - Did any versioned file require a bump?
 - What validation ran?
 - What risk remains?
+- If subagents ran, which roles/models were used, whether their results were integrated, and whether any child remained open.
 
 ## Version Reporting
 

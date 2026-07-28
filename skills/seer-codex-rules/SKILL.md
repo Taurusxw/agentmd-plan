@@ -1,6 +1,6 @@
 ---
 name: seer-codex-rules
-description: Design, revise, audit, version, compact, migrate, and maintain Codex rule systems, and act as a lightweight compliance gate for file-changing development tasks. Use for AGENTS.md, project rules, Codex workflows, task-level checks, Goal mode completion and runaway edge-condition loops, architecture drift and repeated patch hotspots, documentation governance, progress records, versioning, rule migration, or start/end compliance checks that route to detailed rule modules.
+description: Design, revise, audit, version, compact, migrate, and maintain Codex rule systems, and act as a lightweight compliance gate for file-changing development tasks. Use for AGENTS.md, project rules, Codex workflows, multi-agent or subagent delegation, model routing, collaboration token control, task-level checks, Goal mode completion and runaway edge-condition loops, architecture drift and repeated patch hotspots, documentation governance, progress records, versioning, rule migration, or start/end compliance checks that route to detailed rule modules.
 ---
 
 # Seer Codex Rules
@@ -17,6 +17,7 @@ Use this skill to govern Codex rule systems without letting global `AGENTS.md` b
 - `design-system`: propose a new rule architecture, version policy, or documentation model.
 - `migrate-rules`: move oversized or specialized guidance from `AGENTS.md` into a Skill or project document.
 - `skill-maintenance`: create or refine a Codex Skill that carries complex workflow rules.
+- `agent-orchestration`: decide whether to delegate, select a task-appropriate model role, constrain context and concurrency, and integrate compact results.
 
 Use the smallest mode that satisfies the request. If the user asks for execution or says to proceed, edit files directly after reading the relevant context.
 
@@ -31,6 +32,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
    - When a persistent Goal is created, resumed, or close to completion, read `references/goal-mode-closure.md`, freeze its completion contract in the Goal objective, and treat optional findings as non-required work.
    - If discovered edge conditions start expanding implementation or validation, read `references/acceptance-closure.md` before doing more edge-focused work.
    - If the same production file or module is repeatedly patched, or a change adds an independent responsibility, broadens a dispatcher/interface, or duplicates non-trivial sibling logic, read `references/architecture-drift.md` and run its event-triggered check.
+   - Before any subagent or parallel delegation, read `references/multi-agent-governance.md`; delegation is not authorized merely because a task is large, difficult, or described as thorough.
 
 2. **Measure before changing**
    - Run `scripts/measure_rules.py` on existing rule files or documentation directories when size, versioning, duplication, or round organization matters.
@@ -80,6 +82,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
 - Read `references/execution-standards.md` for the eight execution principles, ambiguity handling, fact checking, reuse, and business alignment.
 - Read `references/code-change-governance.md` for code-edit boundaries, module splitting, user-change protection, and destructive-operation review.
 - Read `references/architecture-drift.md` when cumulative patches, repeated hotspots, broad entry interfaces, or sibling duplication may be eroding module boundaries.
+- Read `references/multi-agent-governance.md` before spawning, routing, or coordinating subagents, including model selection, context isolation, concurrency, result compression, and lifecycle closure.
 - Read `references/documentation-governance.md` for document thresholds, round overflow, phase promotion, release folders, and doc-sprawl controls.
 - Read `references/verification-and-reporting.md` for validation depth, output shape, risk disclosure, and final response requirements.
 - Read `references/project-agents-template.md` when creating or reviewing lightweight project-level `AGENTS.md` files.
@@ -87,11 +90,13 @@ Use the smallest mode that satisfies the request. If the user asks for execution
 - Run `scripts/measure_rules.py` for deterministic line, byte, version, date, and progress-directory checks.
 - Run `scripts/guardrail_check.py` for a low-token preflight over global gate, dynamic reference routing, coverage anchors, synchronized copies, current state, and project provenance.
 - Run `scripts/structure_check.py <project-root>` only when architecture-drift triggers fire; its signals require human boundary review and never mandate splitting by line count alone.
+- Run `scripts/agent_routing_check.py` after installing or changing `[agents]` defaults or custom agent files; use `--config` and `--agents-dir` to validate portable templates.
 - Run `scripts/snapshot_state.py --write` after substantive Skill changes to refresh the canonical Skill snapshot and `artifacts/current-state.json`.
 
 ## Safety Rules
 
 - Never treat `AGENTS.md` as the only safety boundary for destructive, secret-bearing, permission-sensitive, legal, financial, or deployment-critical actions.
+- Never treat additional agents as automatic quality improvement; keep the critical path in the parent and delegate only when the documented benefit gate passes.
 - Do not keep adding global rules after the file crosses its warning thresholds; propose extraction to a Skill or project-specific rule.
 - Do not delete, rename, archive, or migrate historical rule material unless the user approved that scope or the project rule explicitly permits it.
 - Do not create duplicate long-term document names for the same responsibility.

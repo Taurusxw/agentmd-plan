@@ -2,12 +2,16 @@
 
 ## Current State
 
-- 当前项目发布版本为 `v27.8.0`，包含已验证的全局纲要和配套 Skill。
+- 当前项目发布版本为 `v27.9.0`，包含已验证的多 Agent 模型路由、全局纲要和配套 Skill。
 - `seer-codex-rules` 已作为可浏览源码纳入仓库。
 - 项目采用 MIT License，并完成首次公开发布净化。
 
 ## Recent Progress
 
+- 增加单 Agent 默认和派遣收益门禁，避免任务规模或“全面”措辞自动触发子 Agent。
+- 增加 Terra/high 最低与兜底、Terra/max 实现、Sol/high 重大风险复核的角色路由，更高强度只由用户启用。
+- 增加紧凑上下文包、结果压缩、并发 1/2/3 边界、禁止嵌套和完成即回收。
+- 增加可移植 Agent 模板、live 配置和确定性 `agent_routing_check.py`。
 - 增加 Goal 模式冻结完成契约、必做工作准入、一次探测、禁止递归加固和无进展断路器。
 - guardrail 现在校验全局“完成契约”门禁以及 Goal reference 的关键停止锚点。
 - 增加累计架构漂移门禁：结合近期 round/Git 热点、规模、宽接口和同目录重复逻辑判断，不以行数单独要求拆分。
@@ -22,6 +26,7 @@
 
 ## Next Steps
 
+- 从实际任务记录派遣次数、上下文 fork、返工和耗时代理指标，再判断是否需要调整角色边界。
 - 根据实际使用反馈继续完善跨平台路径和安装体验。
 - 根据跨语言项目反馈扩展结构信号解析，同时保持事件触发和人工语义复核。
 - 仅在有明确收益时增加 GitHub 安全和社区自动化。
@@ -29,10 +34,12 @@
 ## Risks
 
 - 规则系统仍依赖 Codex 正确触发 Skill；脚本和最终披露用于降低而非消除偏移。
-- `27.8.0` 是可复用正式版本，文字门禁可以显著降低目标漂移，但无法替代平台 Goal 状态机和用户范围决策。
+- 自定义 Agent 的发现可能需要新任务或重启；脚本可验证配置，但不能证明每次语义派遣都完全正确。
 
 ## Detailed Records
 
+- `docs/progress/releases/v27.9.0/RELEASE_NOTES.md`
+- `docs/progress/rounds/2026-07-28-round-001-multi-agent-model-routing.md`
 - `docs/progress/releases/v27.8.0/RELEASE_NOTES.md`
 - `docs/progress/rounds/2026-07-18-round-002-goal-mode-closure.md`
 - `docs/progress/rounds/2026-07-18-round-001-architecture-drift-gate.md`

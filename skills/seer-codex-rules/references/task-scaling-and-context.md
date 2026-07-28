@@ -28,6 +28,8 @@ Upgrade at least one level when:
 
 Do not upgrade merely because an agent likes process. A safe one-turn fix should remain lightweight.
 
+Task level does not by itself authorize delegation. L0-L2 normally remain single-agent; L3-L4 may use bounded sidecars only after the benefit gate in `multi-agent-governance.md` passes. A large but sequential or tightly coupled task still belongs in the parent.
+
 An active persistent Goal does not automatically make work L4. Classify by actual risk and scope, then use `goal-mode-closure.md` to prevent auto-continuations from expanding the frozen objective.
 
 ## Reading Depth
@@ -59,6 +61,8 @@ When using a Skill:
 2. Read only the referenced files needed for the current variant.
 3. Prefer bundled scripts or assets when they exist.
 4. Validate according to the Skill's own instructions.
+
+When delegation is considered, read `multi-agent-governance.md` once, select the smallest role that can complete the bounded subtask, and do not load unrelated governance references into the child context.
 
 ## External Source Decisions
 
