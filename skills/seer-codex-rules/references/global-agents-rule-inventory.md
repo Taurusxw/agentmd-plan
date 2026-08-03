@@ -1,10 +1,10 @@
 # Global AGENTS Rule Inventory
 
-This inventory maps `<codex-home>/AGENTS.md` version `27.9.0` to detailed `seer-codex-rules` modules.
+This inventory maps `<codex-home>/AGENTS.md` version `27.12.0` to detailed `seer-codex-rules` modules and explicitly routed companion Skills.
 
-Source global version: `27.9.0`
-Source global SHA256: `4DB79C46EBE32C94E97222E0E09D07CC7FB466D01150B756D7D7DE696BC4D91C`
-Coverage verified: `2026-07-28`
+Source global version: `27.12.0`
+Source global SHA256: `4D9BDD34E635D5321F9BFB8A21321041F175C8404B026A5142A7A64E97759266`
+Coverage verified: `2026-08-01`
 
 ## 1. Core Principles
 
@@ -22,6 +22,7 @@ Coverage verified: `2026-07-28`
 | Final answers disclose changes, validation, gaps, and risk | `verification-and-reporting.md` |
 | Use subagents only when independent parallelism, context isolation, or specialist review outweighs coordination and token cost | `multi-agent-governance.md`, `low-token-guardrails.md` |
 | Keep the critical path and integration in the parent; cap normal concurrency, prevent duplicate or same-file work, and close completed children | `multi-agent-governance.md` |
+| Route source-bearing research to Seer Knowledge by default; honor no-save and Book-only overrides; keep development inputs isolated; record original/clickable/lawful-download links and truthful restrictions for every completed Knowledge or Book deliverable | `<codex-home>/skills/seer-capture/SKILL.md`, `<codex-home>/skills/seer-capture/references/research-and-book-workflow.md` |
 
 ## 2. Instruction And Rule Locations
 

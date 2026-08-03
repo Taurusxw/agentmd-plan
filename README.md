@@ -2,7 +2,7 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-当前版本：`v27.9.0`
+当前正式发布：`v27.12.0`
 
 Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理方案。全局 `AGENTS.md` 只保留每次任务都应生效的纲要，复杂执行规则由 `seer-codex-rules` Skill 根据任务类型按需加载。
 
@@ -16,10 +16,11 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 - 在连续补丁侵蚀模块边界前，用事件触发的热点检查恢复结构化与模块化决策。
 - 用单 Agent 默认、Terra/high 起步的模型路由、紧凑上下文包和并发上限控制子 Agent 的协调与 token 成本。
 - 将个人路径、私有备份和 live 状态隔离在公开仓库之外。
+- 将有来源的调研默认路由到 `seer-capture`，同时把其他仓库中的代码、日志和附件保留为开发输入，除非用户明确标记入库或成书。
 
 ## 版本内容
 
-- `artifacts/AGENTS-27.9.0.md`：精简的全局规则纲要。
+- `artifacts/AGENTS-27.12.0.md`：与当前 live 全局规则及正式发布一致的全局纲要。
 - `config/`：Terra/high 子 Agent 兜底，以及 Terra/high 探索、Terra/max 实现和 Sol/high 深度复核角色模板。
 - `skills/seer-codex-rules/`：规则设计、任务分级、代码与文档治理、round/phase/release、验收收束和版本治理 Skill。
 - `skills/seer-codex-rules/scripts/`：规则体量、Skill 路由、结构热点、同步状态和恢复快照检查脚本。
@@ -43,7 +44,7 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 
 1. 备份现有的 `<codex-home>/AGENTS.md`、`config.toml`、`agents/` 和同名 Skill。
 2. 将 `skills/seer-codex-rules/` 复制到 `<codex-home>/skills/seer-codex-rules/`。
-3. 审阅 `artifacts/AGENTS-27.9.0.md`，确认符合自己的工作方式。
+3. 审阅 `artifacts/AGENTS-27.12.0.md`，确认符合自己的工作方式。
 4. 将该 artifact 安装为 `<codex-home>/AGENTS.md`。
 5. 将 `config/agents.toml.example` 的 `[agents]` 表合并进 `<codex-home>/config.toml`，并将 `config/agents/*.toml` 复制到 `<codex-home>/agents/`。
 6. 运行下方校验命令，确认版本、Skill 路由、模型角色和同步状态。
@@ -101,11 +102,11 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 在仓库根目录运行：
 
 ```powershell
-python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-27.9.0.md
+python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-27.12.0.md
 python -m py_compile skills/seer-codex-rules/scripts/agent_routing_check.py skills/seer-codex-rules/scripts/guardrail_check.py skills/seer-codex-rules/scripts/measure_rules.py skills/seer-codex-rules/scripts/snapshot_state.py skills/seer-codex-rules/scripts/structure_check.py
 python -m unittest discover -s skills/seer-codex-rules/tests -p "test_*.py" -v
 python skills/seer-codex-rules/scripts/agent_routing_check.py --config config/agents.toml.example --agents-dir config/agents --json
-python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-27.9.0.md --downloads-agents artifacts/AGENTS-27.9.0.md --skill skills/seer-codex-rules --json
+python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-27.12.0.md --downloads-agents artifacts/AGENTS-27.12.0.md --skill skills/seer-codex-rules --json
 ```
 
 安装到个人环境后，不带路径运行 `agent_routing_check.py --json` 可检查 live 配置；`snapshot_state.py --write` 可创建私有状态清单和 Skill 恢复快照。不要提交包含个人路径的 live manifest 或备份。

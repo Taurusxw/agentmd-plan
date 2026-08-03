@@ -16,8 +16,13 @@
 
 | Path | Purpose |
 |---|---|
-| `../artifacts/AGENTS-27.9.0.md` | 当前正式全局纲要 artifact。 |
+| `../artifacts/AGENTS-27.12.0.md` | 与当前 live 全局规则及正式发布一致的全局纲要。 |
 | `../config/` | 可移植的多 Agent 默认配置和角色模板。 |
 | `../skills/seer-codex-rules/` | 可安装的 Skill 源码。 |
 | `progress/rounds/` | 有长期价值的公开开发记录。 |
-| `progress/releases/v27.9.0/` | `v27.9.0` 发布说明与验收记录。 |
+| `progress/releases/v27.12.0/` | 当前 `v27.12.0` 发布说明与验收记录。 |
+| `progress/releases/v27.9.0/` | 历史 `v27.9.0` 发布说明与验收记录。 |
+
+## Recent Governance Record
+
+- `progress/rounds/2026-08-03-round-001-provenance-sync-27.12.0.md`：修复 live/public/private provenance 漂移并完成正式发布。
