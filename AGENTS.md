@@ -23,6 +23,7 @@
 5. 规则版本遵守 `MAJOR.MINOR.PATCH`；只修改 Skill 时不自动推进全局 `AGENTS.md` 版本。
 6. L2 以上实质开发在现有 `docs/progress/rounds/` 中留下最小可恢复记录；不为只读检查制造 round。
 7. 正式发布时，`VERSION`、Git tag、GitHub Release 和 `docs/progress/releases/vx.y.z/` 必须一致；发布包含新全局纲要时，其版本也必须一致。
+8. 本项目是全局主 `AGENTS.md`、同步副本和 `seer-codex-rules` 源码/安装副本的唯一直接维护项目。只有当前工作区包含本项目、最近项目规则声明该所有权且任务明确针对治理系统时才能写入；其他项目提交的建议必须先作为变更报告进入本项目评估。
 
 ## 验证与完成标准
 

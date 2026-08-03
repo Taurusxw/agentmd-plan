@@ -2,12 +2,14 @@
 
 ## Current State
 
-- 当前正式发布为 `v27.13.0`；live 全局规则、Downloads 副本、公开 artifact 和 Skill 已同步。
+- 当前正式发布为 `v28.1.0`；live 全局规则、Downloads 副本、公开 artifact 和 Skill 已同步。
 - `seer-codex-rules` 已作为可浏览源码纳入仓库。
 - 项目采用 MIT License，并完成首次公开发布净化。
 
 ## Recent Progress
 
+- 正式发布 `v28.1.0`：普通阅读、截图、链接和调研默认只分析，只有当次明确命名的 Knowledge/Book 请求才调用 `seer-capture`。
+- 将集中治理所有权门禁推进为 `28.1.0`：除 `agentmd-plan` 专有项目外，其他项目和对话不得修改全局主 `AGENTS.md` 或 `seer-codex-rules`，只能生成详细变更报告交由本项目评估。
 - 正式发布 `v27.13.0`，将 GPT-5.6 执行效率治理、同步状态、Git tag 和 GitHub Release 纳入同一发布基线。
 - 增加面向 GPT-5.6 的精简授权边界：目标内本地读取、编辑和非破坏性验证不再重复确认，真实外部、破坏性、付费、凭据或范围扩张动作按授权范围确认一次。
 - 将验证改为直接、行为、affected、full 四级证据梯，加入通过证据复用、失效条件、失败分类和单次重试策略。
@@ -46,6 +48,8 @@
 
 ## Detailed Records
 
+- `docs/progress/releases/v28.1.0/RELEASE_NOTES.md`
+- `docs/progress/rounds/2026-08-03-round-003-centralized-governance-ownership-28.1.0.md`
 - `docs/progress/releases/v27.13.0/RELEASE_NOTES.md`
 - `docs/progress/rounds/2026-08-03-round-002-gpt-5p6-execution-efficiency.md`
 - `docs/progress/releases/v27.12.0/RELEASE_NOTES.md`

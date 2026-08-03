@@ -2,8 +2,8 @@
 
 Use this matrix to verify that the concise global outline delegates detailed behavior without losing semantic coverage.
 
-Source global version: `27.13.0`
-Source global SHA256: `F5E8D50863462A6EE0B7F733177E0F1971F86D873108656DD0B9EAFA532014B7`
+Source global version: `28.1.0`
+Source global SHA256: `54633C3A5D2C9E38174BFAA45246B8B1460DF18F585B4BC9253E06ECA0B0D273`
 Coverage verified: `2026-08-03`
 
 ## Coverage Rule
@@ -14,10 +14,10 @@ Each global rule must be `covered`, `delegated`, or deliberately `omitted`. Cove
 
 | Global Section | Status | Detailed Coverage |
 |---|---|---|
-| 1. Core principles | covered | `task-scaling-and-context.md`, `execution-standards.md`, `code-change-governance.md`, `documentation-governance.md`, `verification-and-reporting.md`, `acceptance-closure.md`, `goal-mode-closure.md`, `multi-agent-governance.md`, companion `<codex-home>/skills/seer-capture/SKILL.md` |
-| 2. Instruction and rule locations | covered | `rule-governance.md`, `project-agents-template.md`, `task-scaling-and-context.md` |
+| 1. Core principles | covered | `task-scaling-and-context.md`, `execution-standards.md`, `code-change-governance.md`, `documentation-governance.md`, `verification-and-reporting.md`, `acceptance-closure.md`, `goal-mode-closure.md`, `multi-agent-governance.md`, `governance-ownership-boundary.md`, companion `<codex-home>/skills/seer-capture/SKILL.md` |
+| 2. Instruction and rule locations | covered | `rule-governance.md`, `project-agents-template.md`, `task-scaling-and-context.md`, `governance-ownership-boundary.md` |
 | 3. Task levels | covered | `task-scaling-and-context.md`, `architecture-drift.md`, `documentation-governance.md`, `verification-and-reporting.md` |
-| 4. Mandatory Skill gate | covered | `low-token-guardrails.md`, `task-scaling-and-context.md`, `verification-and-reporting.md`, `multi-agent-governance.md` |
+| 4. Mandatory Skill gate | covered | `low-token-guardrails.md`, `task-scaling-and-context.md`, `verification-and-reporting.md`, `multi-agent-governance.md`, `governance-ownership-boundary.md` |
 | 5. Execution and edit baselines | covered | `execution-standards.md`, `code-change-governance.md`, `architecture-drift.md` |
 | 6. Documentation, traceability, and versions | covered | `documentation-governance.md`, `rule-governance.md` |
 | 7. Validation and acceptance closure | covered | `verification-and-reporting.md`, `acceptance-closure.md`, `goal-mode-closure.md` |

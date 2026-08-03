@@ -8,6 +8,8 @@
 
 ## Recent
 
+- [v28.1.0 Release](releases/v28.1.0/RELEASE_NOTES.md)
+- [2026-08-03 Round 003: Centralized Governance Ownership 28.1.0](rounds/2026-08-03-round-003-centralized-governance-ownership-28.1.0.md)
 - [v27.13.0 Release](releases/v27.13.0/RELEASE_NOTES.md)
 - [2026-08-03 Round 002: GPT-5.6 Execution Efficiency](rounds/2026-08-03-round-002-gpt-5p6-execution-efficiency.md)
 - [v27.12.0 Release](releases/v27.12.0/RELEASE_NOTES.md)

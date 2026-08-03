@@ -1,9 +1,9 @@
 # Global AGENTS Rule Inventory
 
-This inventory maps `<codex-home>/AGENTS.md` version `27.13.0` to detailed `seer-codex-rules` modules and explicitly routed companion Skills.
+This inventory maps `<codex-home>/AGENTS.md` version `28.1.0` to detailed `seer-codex-rules` modules and explicitly routed companion Skills.
 
-Source global version: `27.13.0`
-Source global SHA256: `F5E8D50863462A6EE0B7F733177E0F1971F86D873108656DD0B9EAFA532014B7`
+Source global version: `28.1.0`
+Source global SHA256: `54633C3A5D2C9E38174BFAA45246B8B1460DF18F585B4BC9253E06ECA0B0D273`
 Coverage verified: `2026-08-03`
 
 ## 1. Core Principles
@@ -24,7 +24,8 @@ Coverage verified: `2026-08-03`
 | Final answers disclose changes, validation, gaps, and risk | `verification-and-reporting.md` |
 | Use subagents only when independent parallelism, context isolation, or specialist review outweighs coordination and token cost | `multi-agent-governance.md`, `low-token-guardrails.md` |
 | Keep the critical path and integration in the parent; cap normal concurrency, prevent duplicate or same-file work, and close completed children | `multi-agent-governance.md` |
-| Route source-bearing research to Seer Knowledge by default; honor no-save and Book-only overrides; keep development inputs isolated; record original/clickable/lawful-download links and truthful restrictions for every completed Knowledge or Book deliverable | `<codex-home>/skills/seer-capture/SKILL.md`, `<codex-home>/skills/seer-capture/references/research-and-book-workflow.md` |
+| Keep source-bearing research analysis-only by default; require explicit per-material Knowledge or Book authorization; prevent authorization carryover across conversations and workflows; preserve development-input isolation; record original/clickable/lawful-download links and truthful restrictions for every authorized deliverable | `<codex-home>/skills/seer-capture/SKILL.md`, `<codex-home>/skills/seer-capture/references/research-and-book-workflow.md` |
+| Allow global `AGENTS.md`, synchronized-copy, and `seer-codex-rules` writes only in the dedicated `agentmd-plan` owner project; require every other project or conversation to produce a detailed user-mediated change report and prohibit indirect bypass | `governance-ownership-boundary.md`, `rule-governance.md`, `low-token-guardrails.md` |
 
 ## 2. Instruction And Rule Locations
 

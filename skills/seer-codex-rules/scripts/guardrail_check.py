@@ -29,10 +29,14 @@ REQUIRED_GATE_PHRASES = [
     "同一授权范围只确认一次",
     "不因追求更强信心重跑",
     "全量回归",
+    "agentmd-plan` 专有项目",
+    "严禁直接修改",
+    "详细变更报告",
 ]
 
 REQUIRED_REFERENCES = {
     "rule-governance.md",
+    "governance-ownership-boundary.md",
     "low-token-guardrails.md",
     "acceptance-closure.md",
     "goal-mode-closure.md",
@@ -58,6 +62,13 @@ REQUIRED_SCRIPTS = {
 }
 
 REQUIRED_REFERENCE_PHRASES = {
+    "governance-ownership-boundary.md": {
+        "## Protected Assets",
+        "## Owner Context Gate",
+        "## Report-Only Mode",
+        "## Required Change Report",
+        "another project or conversation",
+    },
     "task-scaling-and-context.md": {
         "Action Authorization Envelope",
         "same action class, target, and material risk",

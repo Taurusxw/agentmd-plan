@@ -29,6 +29,9 @@ multi-agent-governance.md
 同一授权范围只确认一次
 不因追求更强信心重跑
 全量回归
+agentmd-plan` 专有项目
+严禁直接修改
+详细变更报告
 """
             path.write_text(base, encoding="utf-8")
             self.assertIn("完成契约", MODULE.check_global_gate(path)["missing_gate_phrases"])
@@ -52,6 +55,9 @@ multi-agent-governance.md
 同一授权范围只确认一次
 不因追求更强信心重跑
 全量回归
+agentmd-plan` 专有项目
+严禁直接修改
+详细变更报告
 """
             path.write_text(text, encoding="utf-8")
             self.assertIn("普通并发不超过 2", MODULE.check_global_gate(path)["missing_gate_phrases"])
@@ -72,7 +78,18 @@ multi-agent-governance.md
                 *MODULE.REQUIRED_GATE_PHRASES[:-1],
             ])
             path.write_text(text, encoding="utf-8")
-            self.assertIn("全量回归", MODULE.check_global_gate(path)["missing_gate_phrases"])
+            self.assertIn("详细变更报告", MODULE.check_global_gate(path)["missing_gate_phrases"])
+
+    def test_global_gate_requires_governance_owner_boundary(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "AGENTS.md"
+            text = "\n".join([
+                "版本：28.0.0",
+                "定版日期：2026-08-03",
+                *(phrase for phrase in MODULE.REQUIRED_GATE_PHRASES if phrase != "严禁直接修改"),
+            ])
+            path.write_text(text, encoding="utf-8")
+            self.assertIn("严禁直接修改", MODULE.check_global_gate(path)["missing_gate_phrases"])
 
 
 if __name__ == "__main__":
