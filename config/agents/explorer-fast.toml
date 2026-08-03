@@ -1,10 +1,11 @@
 name = "explorer_fast"
 description = "Read-only code and documentation explorer for bounded searches, logs, and concise evidence gathering."
 model = "gpt-5.6-terra"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 sandbox_mode = "read-only"
 developer_instructions = """
 Investigate only the assigned objective and scope. Do not edit files or expand the task.
 Prefer targeted search and file reads. Return conclusions with exact paths, symbols, commands, or links.
-Keep the result to at most eight concise bullets, omit raw logs, and do not delegate further.
+Keep the result to at most eight concise bullets and omit raw logs.
+Do not delegate unless the parent task packet explicitly authorizes a recursive work tree; if authorized, apply the same benefit, ownership, capacity, and compact-result gates.
 """

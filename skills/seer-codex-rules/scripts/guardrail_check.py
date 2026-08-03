@@ -23,7 +23,9 @@ REQUIRED_GATE_PHRASES = [
     "最终回答必须说明",
     "未覆盖风险",
     "完成契约",
-    "普通并发不超过 2",
+    "主动派生合适的子 Agent",
+    "不设固定治理上限",
+    "容量不是派遣目标",
     "multi-agent-governance.md",
     "无需再次确认",
     "同一授权范围只确认一次",
@@ -32,6 +34,9 @@ REQUIRED_GATE_PHRASES = [
     "agentmd-plan` 专有项目",
     "严禁直接修改",
     "详细变更报告",
+    "最新有效全局规则",
+    "旧对话",
+    "最高版本号",
 ]
 
 REQUIRED_REFERENCES = {
@@ -67,7 +72,10 @@ REQUIRED_REFERENCE_PHRASES = {
         "## Owner Context Gate",
         "## Report-Only Mode",
         "## Required Change Report",
+        "## Latest Effective Global Rule",
         "another project or conversation",
+        "current effective live global rules",
+        "highest semantic version",
     },
     "task-scaling-and-context.md": {
         "Action Authorization Envelope",
@@ -97,13 +105,17 @@ REQUIRED_REFERENCE_PHRASES = {
         "does not lower a platform-required blocked threshold",
     },
     "multi-agent-governance.md": {
-        "Single-Agent Default",
+        "Agent-First Decision",
+        "Explicit Delegation Authorization",
         "Delegation Benefit Gate",
         "Critical Path Ownership",
+        "Adaptive Fan-Out And Waves",
+        "Runtime Capacity And Backend Semantics",
         "Model Routing Matrix",
-        "Compact Context Packet",
-        "Normal concurrency: one child",
-        "No Nested Delegation",
+        "Fresh Context And Fork Semantics",
+        "Conditional Nested Delegation",
+        "fork_turns=\"none\"",
+        "no fixed governance ceiling",
         "Close Completed Agents",
     },
 }

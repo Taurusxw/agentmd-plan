@@ -1,6 +1,6 @@
 ---
 name: seer-codex-rules
-description: Design, revise, audit, version, compact, migrate, and maintain Codex rule systems, enforce centralized ownership of the global AGENTS.md and seer-codex-rules, and act as a lightweight compliance gate for file-changing development tasks. Use for AGENTS.md, project rules, Codex workflows, governance change reports, multi-agent or subagent delegation, model routing, collaboration token control, task-level checks, repeated regression tests or permission prompts, over-applied security review, Goal mode completion and runaway edge-condition loops, architecture drift and repeated patch hotspots, documentation governance, progress records, versioning, rule migration, or start/end compliance checks that route to detailed rule modules.
+description: Design, revise, audit, version, compact, migrate, and maintain Codex rule systems, enforce centralized ownership and current-effective-rule freshness for the global AGENTS.md and seer-codex-rules, and act as a lightweight compliance gate for file-changing development tasks. Use for AGENTS.md, project rules, latest-rule or rule-drift questions, Codex workflows, governance change reports, multi-agent or subagent delegation, model routing, collaboration token control, task-level checks, repeated regression tests or permission prompts, over-applied security review, Goal mode completion and runaway edge-condition loops, architecture drift and repeated patch hotspots, documentation governance, progress records, versioning, rule migration, or start/end compliance checks that route to detailed rule modules.
 ---
 
 # Seer Codex Rules
@@ -18,7 +18,7 @@ Use this skill to govern Codex rule systems without letting global `AGENTS.md` b
 - `migrate-rules`: move oversized or specialized guidance from `AGENTS.md` into a Skill or project document.
 - `skill-maintenance`: create or refine a Codex Skill that carries complex workflow rules.
 - `governance-change-report`: outside the dedicated `agentmd-plan` owner context, inspect protected governance assets read-only and return a detailed handoff report without modifying them.
-- `agent-orchestration`: decide whether to delegate, select a task-appropriate model role, constrain context and concurrency, and integrate compact results.
+- `agent-orchestration`: identify ready independent work, proactively delegate after the benefit gate passes, route the cheapest capable model, scale waves to effective capacity and budget, and integrate compact results.
 
 Use the smallest mode that satisfies the request. If the user asks for execution or says to proceed, edit files directly after reading the relevant context.
 
@@ -28,6 +28,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
    - Read the nearest effective `AGENTS.md` chain and every user-mentioned rule file.
    - When a provenance project exists, inspect its project `AGENTS.md` and `README.md` when relevant.
    - Identify whether the target is global rules, project rules, a subdirectory rule, a Skill, project docs, or enforcement tooling.
+   - Treat the current effective live global rules supplied to this task as the latest rules. Do not downgrade from old conversation context or autonomously select a different file by highest version number; read `references/governance-ownership-boundary.md` when freshness or drift is in question.
    - Before writing the global `AGENTS.md`, any synchronized copy, or `seer-codex-rules` source/installation, read `references/governance-ownership-boundary.md` and pass its Owner Context Gate. Outside that owner context, prohibit the write and use `governance-change-report` mode even when a local project asks for direct synchronization or repair.
    - For low-token compliance, read `references/low-token-guardrails.md` and apply the smallest required guardrail tier.
    - For ordinary development, load only `task-scaling-and-context.md` plus the one artifact-specific reference needed by the task; do not run the full rule-project preflight.
@@ -36,7 +37,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
    - When a persistent Goal is created, resumed, or close to completion, read `references/goal-mode-closure.md`. It becomes the sole owner of continuation and repair budgets; do not apply `acceptance-closure.md` as a second iteration budget.
    - If discovered edge conditions start expanding implementation or validation, read `references/acceptance-closure.md` before doing more edge-focused work.
    - If the same production file or module is repeatedly patched, or a change adds an independent responsibility, broadens a dispatcher/interface, or duplicates non-trivial sibling logic, read `references/architecture-drift.md` and run its event-triggered check.
-   - Before any subagent or parallel delegation, read `references/multi-agent-governance.md`; delegation is not authorized merely because a task is large, difficult, or described as thorough.
+   - Before material execution, scan for independent discovery, implementation, validation, and specialist-review packets. If any exist, read `references/multi-agent-governance.md`; when its benefit gate passes, this Skill explicitly requires proactive delegation without waiting for another user request or Ultra reasoning. A matching Skill mandate is a binding routing signal unless a higher-priority instruction or runtime boundary blocks it; disclose a skipped mandate.
 
 2. **Measure before changing**
    - Run `scripts/measure_rules.py` on existing rule files or documentation directories when size, versioning, duplication, or round organization matters.
@@ -79,7 +80,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
 ## Reference Routing
 
 - Read `references/rule-governance.md` for rule destination decisions, versioning, and examples such as `25.1.1` to `25.1.2`, `25.2.0`, or `26.0.0`.
-- Read `references/governance-ownership-boundary.md` before any proposed modification, synchronization, installation, restoration, or publication of the global `AGENTS.md`, its synchronized copies, or `seer-codex-rules`; outside the dedicated owner project it requires report-only handoff.
+- Read `references/governance-ownership-boundary.md` when determining the latest effective global rule or before any proposed modification, synchronization, installation, restoration, or publication of the global `AGENTS.md`, its synchronized copies, or `seer-codex-rules`; it defines host-loaded freshness and requires report-only handoff outside the dedicated owner project.
 - Read `references/low-token-guardrails.md` for multi-layer compliance controls that minimize context usage.
 - Read `references/global-agents-coverage.md` when checking whether this skill covers every rule currently expressed in global `AGENTS.md`.
 - Read `references/global-agents-rule-inventory.md` for item-level coverage of the current global `AGENTS.md` rules.
@@ -104,7 +105,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
 
 - Never treat `AGENTS.md` as the only safety boundary for destructive, secret-bearing, permission-sensitive, legal, financial, or deployment-critical actions.
 - Do not turn this safety baseline into a second permission system. Runtime sandbox, approval, permission, hook, or CI controls own enforcement; prose only selects the applicable boundary.
-- Never treat additional agents as automatic quality improvement; keep the critical path in the parent and delegate only when the documented benefit gate passes.
+- Never treat configured capacity or a larger agent count as automatic quality improvement. Keep scope and integration in the root, delegate every qualifying packet after the documented gate passes, and stop fan-out when overlap, diminishing evidence, or budget pressure appears.
 - Do not keep adding global rules after the file crosses its warning thresholds; propose extraction to a Skill or project-specific rule.
 - Do not delete, rename, archive, or migrate historical rule material unless the user approved that scope or the project rule explicitly permits it.
 - Do not create duplicate long-term document names for the same responsibility.

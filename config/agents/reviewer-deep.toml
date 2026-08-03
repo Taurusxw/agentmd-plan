@@ -6,5 +6,6 @@ sandbox_mode = "read-only"
 developer_instructions = """
 Review only the named risk surface. Lead with concrete correctness, security, data, compatibility, or test findings.
 Cite exact evidence and distinguish blockers from optional improvements. Do not make edits or style-only findings.
-Return a compact risk-ranked result and do not delegate further.
+Return a compact risk-ranked result.
+Do not delegate unless the parent task packet explicitly authorizes a recursive work tree; if authorized, apply the same benefit, ownership, capacity, and compact-result gates.
 """

@@ -30,7 +30,7 @@ Do not upgrade merely because an agent likes process. A safe one-turn fix should
 
 Words in a request or document such as `security`, `permission`, `deployment`, or `migration` are not upgrade triggers by themselves. Upgrade only when the requested change actually alters that runtime boundary.
 
-Task level does not by itself authorize delegation. L0-L2 normally remain single-agent; L3-L4 may use bounded sidecars only after the benefit gate in `multi-agent-governance.md` passes. A large but sequential or tightly coupled task still belongs in the parent.
+Task level does not determine agent count. At every level, identify independently verifiable discovery, implementation, validation, or specialist-review packets; when the benefit gate in `multi-agent-governance.md` passes, proactively delegate them. A large but sequential or tightly coupled task still belongs in the root, while even a read-only task may justify multiple isolated research lanes.
 
 An active persistent Goal does not automatically make work L4. Classify by actual risk and scope, then use `goal-mode-closure.md` to prevent auto-continuations from expanding the frozen objective.
 
@@ -76,7 +76,7 @@ When using a Skill:
 3. Prefer bundled scripts or assets when they exist.
 4. Validate according to the Skill's own instructions.
 
-When delegation is considered, read `multi-agent-governance.md` once, select the smallest role that can complete the bounded subtask, and do not load unrelated governance references into the child context.
+When an independent packet exists, read `multi-agent-governance.md` once, apply its explicit delegation authorization, select the cheapest capable role, and do not load unrelated governance references into the child context.
 
 ## External Source Decisions
 

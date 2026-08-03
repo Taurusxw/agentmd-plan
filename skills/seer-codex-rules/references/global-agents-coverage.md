@@ -2,9 +2,9 @@
 
 Use this matrix to verify that the concise global outline delegates detailed behavior without losing semantic coverage.
 
-Source global version: `28.1.0`
-Source global SHA256: `54633C3A5D2C9E38174BFAA45246B8B1460DF18F585B4BC9253E06ECA0B0D273`
-Coverage verified: `2026-08-03`
+Source global version: `29.0.0`
+Source global SHA256: `E82A3B28999BC93B6F702A06E2C345C062B908FFC85D50CAF70EF3167DEC1638`
+Coverage verified: `2026-08-04`
 
 ## Coverage Rule
 

@@ -32,14 +32,20 @@ multi-agent-governance.md
 agentmd-plan` 专有项目
 严禁直接修改
 详细变更报告
+最新有效全局规则
+旧对话
+最高版本号
 """
             path.write_text(base, encoding="utf-8")
             self.assertIn("完成契约", MODULE.check_global_gate(path)["missing_gate_phrases"])
 
-            path.write_text(base + "完成契约\n普通并发不超过 2\n", encoding="utf-8")
+            path.write_text(
+                base + "完成契约\n主动派生合适的子 Agent\n不设固定治理上限\n容量不是派遣目标\n",
+                encoding="utf-8",
+            )
             self.assertTrue(MODULE.check_global_gate(path)["ok"])
 
-    def test_global_gate_requires_multi_agent_ceiling(self) -> None:
+    def test_global_gate_requires_adaptive_multi_agent_authorization(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "AGENTS.md"
             text = """# AGENTS.md
@@ -58,9 +64,15 @@ multi-agent-governance.md
 agentmd-plan` 专有项目
 严禁直接修改
 详细变更报告
+最新有效全局规则
+旧对话
+最高版本号
 """
             path.write_text(text, encoding="utf-8")
-            self.assertIn("普通并发不超过 2", MODULE.check_global_gate(path)["missing_gate_phrases"])
+            missing = MODULE.check_global_gate(path)["missing_gate_phrases"]
+            self.assertIn("主动派生合适的子 Agent", missing)
+            self.assertIn("不设固定治理上限", missing)
+            self.assertIn("容量不是派遣目标", missing)
 
     def test_installed_skill_contains_goal_closure_anchors(self) -> None:
         skill = Path(__file__).parents[1]
@@ -75,7 +87,7 @@ agentmd-plan` 专有项目
             text = "\n".join([
                 "版本：27.13.0",
                 "定版日期：2026-08-03",
-                *MODULE.REQUIRED_GATE_PHRASES[:-1],
+                *(phrase for phrase in MODULE.REQUIRED_GATE_PHRASES if phrase != "详细变更报告"),
             ])
             path.write_text(text, encoding="utf-8")
             self.assertIn("详细变更报告", MODULE.check_global_gate(path)["missing_gate_phrases"])
@@ -90,6 +102,17 @@ agentmd-plan` 专有项目
             ])
             path.write_text(text, encoding="utf-8")
             self.assertIn("严禁直接修改", MODULE.check_global_gate(path)["missing_gate_phrases"])
+
+    def test_global_gate_requires_latest_effective_rule(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "AGENTS.md"
+            text = "\n".join([
+                "版本：28.2.0",
+                "定版日期：2026-08-03",
+                *(phrase for phrase in MODULE.REQUIRED_GATE_PHRASES if phrase != "最高版本号"),
+            ])
+            path.write_text(text, encoding="utf-8")
+            self.assertIn("最高版本号", MODULE.check_global_gate(path)["missing_gate_phrases"])
 
 
 if __name__ == "__main__":

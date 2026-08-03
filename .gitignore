@@ -19,3 +19,4 @@ private/
 *.bundle
 artifacts/current-state.json
 artifacts/*current*.zip
+docs/HANDOFF.md

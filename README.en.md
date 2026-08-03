@@ -2,7 +2,7 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-Current formal release: `v28.1.0`
+Current formal release: `v29.0.0`
 
 Agentmd Plan is a portable, verifiable, low-token governance system for Codex rules. The global `AGENTS.md` keeps only the outline that must remain active on every task, while the `seer-codex-rules` Skill loads detailed execution rules on demand.
 
@@ -15,19 +15,22 @@ Agentmd Plan is a portable, verifiable, low-token governance system for Codex ru
 - Lets in-scope local edits and non-destructive validation proceed by default while making repeated permission prompts, regression tests, and security review evidence-triggered.
 - Freezes finite completion criteria for persistent Goals so auto-continuations cannot turn optional edges into endless required work.
 - Restores architecture and module-boundary decisions before repeated patches turn a production hotspot into structural drift.
-- Controls subagent coordination and token cost through a single-agent default, Terra/high minimum routing, compact context packets, and concurrency limits.
+- Explicitly authorizes proactive non-Ultra delegation, sizes waves from independent packets, effective V2 capacity, and budget, and balances quantity, speed, quality, and tokens through multi-model routing, compact contexts, and exclusive write ownership.
 - Keeps personal paths, private backups, and live state outside the public repository.
 - Keeps screenshots, documents, links, and research analysis-only by default. It invokes `seer-capture` only when the user explicitly routes the named material to Knowledge or a named Book, and never inherits that authorization across conversations or adjacent tasks.
 - Allows direct changes to the global `AGENTS.md` and `seer-codex-rules` only inside the dedicated `agentmd-plan` owner project; every other project is report-only.
+- Makes every task follow the latest effective global rules actually loaded by the host; old context cannot downgrade them, and the highest version found elsewhere cannot trigger an autonomous switch.
 
 ## Release Contents
 
-- `artifacts/AGENTS-28.1.0.md`: the formal release artifact synchronized with the current live rules.
-- `config/`: a Terra/high child fallback plus Terra/high exploration, Terra/max implementation, and Sol/high deep-review role templates.
+- `artifacts/AGENTS-29.0.0.md`: the formal release artifact synchronized with the current live rules.
+- `config/`: a portable V2 template with 32 total slots including the root, plus Terra/medium exploration, Terra/high implementation, and Sol/high deep-review roles.
 - `skills/seer-codex-rules/`: the Skill for rule design, task scaling, code and documentation governance, round/phase/release handling, acceptance closure, and versioning.
 - `skills/seer-codex-rules/scripts/`: checks for rule size, Skill routing, structural hotspots, synchronized state, and recovery snapshots.
 - `docs/`: public project status, document index, and necessary development and release records.
 - `VERSION`: the current project release version.
+
+The current checkout retains only the latest release assets to reduce local duplication. GitHub keeps older tags and Releases, and Git commit history is not rewritten.
 
 ## How It Works
 
@@ -35,7 +38,7 @@ Agentmd Plan is a portable, verifiable, low-token governance system for Codex ru
 global AGENTS.md
   -> requires seer-codex-rules/SKILL.md
       -> selects an L0-L4 and guardrail tier
-          -> defaults to one agent; applies the benefit gate and model router before delegation
+          -> scans independent packets; delegates after the gate and sizes waves to capacity/budget
               -> loads only the reference needed by the task
                   -> change, validate, trace, and close
 ```
@@ -46,9 +49,9 @@ An ordinary file-changing task reads the Skill router, task-scaling guidance, an
 
 1. Back up the existing `<codex-home>/AGENTS.md`, `config.toml`, `agents/`, and Skill directory.
 2. Copy `skills/seer-codex-rules/` to `<codex-home>/skills/seer-codex-rules/`.
-3. Review `artifacts/AGENTS-28.1.0.md` to confirm that it fits your workflow.
+3. Review `artifacts/AGENTS-29.0.0.md` to confirm that it fits your workflow.
 4. Install that artifact as `<codex-home>/AGENTS.md`.
-5. Merge the `[agents]` table from `config/agents.toml.example` into `<codex-home>/config.toml`, then copy `config/agents/*.toml` to `<codex-home>/agents/`.
+5. Merge the `[agents]` and `[features.multi_agent_v2]` tables from `config/agents.toml.example` into `<codex-home>/config.toml` without retaining the old V1 capacity key, then copy `config/agents/*.toml` to `<codex-home>/agents/`.
 6. Run the validation commands below to verify the version, Skill routing, model roles, and synchronized state.
 
 `<codex-home>` is normally set by the `CODEX_HOME` environment variable. When unset, it is usually `<user-home>/.codex`.
@@ -78,6 +81,12 @@ An ordinary file-changing task reads the Skill router, task-scaling guidance, an
 - Other projects may inspect drift, defects, or improvement opportunities read-only, but must return a change report covering evidence, the proposed diff, version impact, cross-project risk, validation, and rollback.
 - The user transfers that report into the owner-project conversation for evaluation. Sync scripts, installers, restore tasks, and subagents cannot bypass this boundary.
 
+### Latest Effective Rules
+
+- "Latest" means the live global rules the host actually supplies to the current task, not the highest semantic version discovered in local files, Git history, or a remote Release.
+- Old conversations, cached summaries, historical artifacts, README files, snapshots, and project notes cannot downgrade the loaded rules.
+- A rule changed during an active task is not assumed to hot-reload. It becomes effective in a new task or after an explicit host reload, while normal instruction priority and centralized ownership still apply.
+
 ### Acceptance And Edge Closure
 
 - Stop adding gates after the original acceptance criteria pass.
@@ -101,11 +110,12 @@ An ordinary file-changing task reads the Skill router, task-scaling guidance, an
 
 ### Multi-Agent And Model Routing
 
-- One agent is the default. Task size, difficulty, or a request for thoroughness does not independently justify delegation.
-- Delegate only when the subtask is bounded, non-blocking, write-disjoint, compactly reportable, and provides a concrete time, context-isolation, or specialist-review benefit.
-- Every child starts at least at Terra/high: `explorer_fast` handles read-only search and summaries, `worker_balanced` uses Terra/max for bounded implementation, and `reviewer_deep` uses Sol/high for material-risk review. Higher reasoning requires an explicit user choice.
-- The parent owns requirements, the critical path, integration, and final validation. Normal concurrency is one, two is allowed for clearly independent work, and three is the configured hard ceiling.
-- Send a compact task packet by default. Prohibit nested delegation, duplicate work, and concurrent same-file edits, and close completed children immediately.
+- Scan independent discovery, implementation, validation, and specialist-review packets before material execution. Delegate as soon as the benefit gate passes; the applicable rule is explicit authorization under non-Ultra `ExplicitRequestOnly`.
+- Wave size is the minimum of ready packets, effective free slots, and the task/time/token budget. Governance has no fixed one/two/three-agent ceiling, and configured capacity is not a utilization target.
+- `explorer_fast` defaults to Terra/medium, `worker_balanced` to Terra/high, and `reviewer_deep` to Sol/high. Mechanical work may step down, complex implementation may step up to max, and Ultra is not a delegation prerequisite.
+- The root owns requirements, the critical path, write assignment, wave synthesis, integration, and final validation. A file or generated artifact has one concurrent writer.
+- Heterogeneous roles default to `fork_turns="none"` and a compact packet. Nesting is off by default and requires an explicitly authorized recursive packet that repeats the same gates.
+- The V2 template configures 32 total slots including the root. Parser or prompt acceptance does not prove backend capacity; verify a fresh task and obey runtime hard limits.
 
 ### Traceability Control
 
@@ -119,11 +129,13 @@ An ordinary file-changing task reads the Skill router, task-scaling guidance, an
 Run from the repository root:
 
 ```powershell
-python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-28.1.0.md
+python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-29.0.0.md
 python -m py_compile skills/seer-codex-rules/scripts/agent_routing_check.py skills/seer-codex-rules/scripts/guardrail_check.py skills/seer-codex-rules/scripts/measure_rules.py skills/seer-codex-rules/scripts/snapshot_state.py skills/seer-codex-rules/scripts/structure_check.py
 python -m unittest discover -s skills/seer-codex-rules/tests -p "test_*.py" -v
 python skills/seer-codex-rules/scripts/agent_routing_check.py --config config/agents.toml.example --agents-dir config/agents --json
-python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-28.1.0.md --downloads-agents artifacts/AGENTS-28.1.0.md --skill skills/seer-codex-rules --json
+python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-29.0.0.md --downloads-agents artifacts/AGENTS-29.0.0.md --skill skills/seer-codex-rules --json
+codex --strict-config doctor --summary
+codex debug prompt-input probe
 ```
 
 After installation, run `agent_routing_check.py --json` without path overrides to check the live router. `snapshot_state.py --write` can create a private state manifest and Skill recovery snapshot. Do not commit live manifests or backups that contain personal paths.

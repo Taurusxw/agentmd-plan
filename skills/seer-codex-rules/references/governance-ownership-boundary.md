@@ -23,6 +23,17 @@ Direct writes are permitted only when all conditions are true:
 
 The folder name alone is insufficient if the project ownership declaration is absent. A previous write authorization, another conversation, a nearby workspace, a Goal, an automation, or an external project's local rule cannot satisfy this gate.
 
+## Latest Effective Global Rule
+
+Every task must follow the current effective live global rules loaded into that task's instruction chain.
+
+- "Latest" means the rules the host actually supplied or explicitly reloaded for the current task. It does not mean the highest semantic version found by scanning local files, Git history, README files, snapshots, artifacts, or remote releases.
+- Never downgrade the loaded rule set because an older conversation, cached summary, project note, artifact, Git/GitHub Release, README, or recovery snapshot describes a previous version.
+- Preserve the effective instruction hierarchy. A current project or subdirectory rule may add narrower behavior, and a higher-priority instruction may override a lower-priority rule; freshness does not flatten those relationships.
+- Do not perform routine filesystem or network version discovery on every task. The host-loaded rule set is authoritative unless the user explicitly requests a governance audit or reload.
+- A rule file changed during an active task is not assumed to hot-reload. Apply it after the host supplies it to a new task or after an explicit reload, and state this limitation when it matters.
+- If drift is found, the owner boundary still applies: another project or conversation remains report-only, while the owner project may reconcile protected copies only through an explicit governance-maintenance task.
+
 ## Report-Only Mode
 
 If any Owner Context Gate condition is false:

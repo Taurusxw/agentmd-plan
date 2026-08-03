@@ -2,7 +2,7 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-当前正式发布：`v28.1.0`
+当前正式发布：`v29.0.0`
 
 Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理方案。全局 `AGENTS.md` 只保留每次任务都应生效的纲要，复杂执行规则由 `seer-codex-rules` Skill 根据任务类型按需加载。
 
@@ -15,19 +15,22 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 - 让目标内本地修改和非破坏性验证默认直行，并对重复权限确认、回归测试和安全复核设置事件触发与证据复用规则。
 - 为持续运行的 Goal 冻结有限完成条件，防止自动续跑把可选边界不断变成必做工作。
 - 在连续补丁侵蚀模块边界前，用事件触发的热点检查恢复结构化与模块化决策。
-- 用单 Agent 默认、Terra/high 起步的模型路由、紧凑上下文包和并发上限控制子 Agent 的协调与 token 成本。
+- 用规则显式授权在非 Ultra 下主动派遣，按独立工作包、V2 实时容量和预算自适应分波，并用多模型路由、紧凑上下文与互斥写入平衡数量、速度、质量和 token。
 - 将个人路径、私有备份和 live 状态隔离在公开仓库之外。
 - 截图、文档、链接和调研默认只分析、不持久化；只有用户对当次明确材料指定 `[入库]`、Knowledge 或具体 Book 时才调用 `seer-capture`，授权不跨对话或相邻任务继承。
 - 全局主 `AGENTS.md` 和 `seer-codex-rules` 只允许在 `agentmd-plan` 专有项目内修改；其他项目只能提交详细变更报告，不能直接同步或覆盖。
+- 每个任务执行宿主实际加载的最新有效全局规则；旧对话和历史文件不能降级，磁盘或远端的最高版本号也不能触发自主切换。
 
 ## 版本内容
 
-- `artifacts/AGENTS-28.1.0.md`：与当前 live 全局规则一致的正式发布纲要。
-- `config/`：Terra/high 子 Agent 兜底，以及 Terra/high 探索、Terra/max 实现和 Sol/high 深度复核角色模板。
+- `artifacts/AGENTS-29.0.0.md`：与当前 live 全局规则一致的正式发布纲要。
+- `config/`：V2 含根总容量 32 的可移植模板，以及 Terra/medium 探索、Terra/high 实现和 Sol/high 深度复核角色模板。
 - `skills/seer-codex-rules/`：规则设计、任务分级、代码与文档治理、round/phase/release、验收收束和版本治理 Skill。
 - `skills/seer-codex-rules/scripts/`：规则体量、Skill 路由、结构热点、同步状态和恢复快照检查脚本。
 - `docs/`：公开项目状态、文档索引和必要的开发与发布记录。
 - `VERSION`：项目当前发布版本。
+
+当前检出树只维护最新发布资产，以减少本地重复文件；GitHub 继续保留旧 tags 和 Releases，Git commit 历史也不改写。
 
 ## 工作机制
 
@@ -35,7 +38,7 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 全局 AGENTS.md
   -> 强制加载 seer-codex-rules/SKILL.md
       -> 判断 L0-L4 和 guardrail 等级
-          -> 默认单 Agent；考虑派遣时运行收益门禁和模型路由
+          -> 扫描独立工作包；门禁通过即主动派遣并按容量/预算分波
               -> 只加载当前任务需要的 reference
                   -> 修改、验证、留痕、收束
 ```
@@ -46,9 +49,9 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 
 1. 备份现有的 `<codex-home>/AGENTS.md`、`config.toml`、`agents/` 和同名 Skill。
 2. 将 `skills/seer-codex-rules/` 复制到 `<codex-home>/skills/seer-codex-rules/`。
-3. 审阅 `artifacts/AGENTS-28.1.0.md`，确认符合自己的工作方式。
+3. 审阅 `artifacts/AGENTS-29.0.0.md`，确认符合自己的工作方式。
 4. 将该 artifact 安装为 `<codex-home>/AGENTS.md`。
-5. 将 `config/agents.toml.example` 的 `[agents]` 表合并进 `<codex-home>/config.toml`，并将 `config/agents/*.toml` 复制到 `<codex-home>/agents/`。
+5. 将 `config/agents.toml.example` 的 `[agents]` 和 `[features.multi_agent_v2]` 表合并进 `<codex-home>/config.toml`，不要同时保留旧 V1 容量键；再将 `config/agents/*.toml` 复制到 `<codex-home>/agents/`。
 6. 运行下方校验命令，确认版本、Skill 路由、模型角色和同步状态。
 
 `<codex-home>` 通常由环境变量 `CODEX_HOME` 指定；未设置时一般是 `<user-home>/.codex`。
@@ -78,6 +81,12 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 - 其他项目即使发现漂移、缺陷或改进机会，也只能只读核查并输出包含证据、建议差异、版本影响、跨项目风险、验证和回退的变更报告。
 - 报告由用户转交本项目对话后再评估实施；自动同步、安装器、脚本、恢复任务和子 Agent 均不得绕过该边界。
 
+### 最新有效规则
+
+- “最新”以宿主实际供应给当前任务的 live 全局规则为准，不扫描磁盘、Git 历史或远端 Release 选择最高语义版本。
+- 旧对话、缓存摘要、历史 artifact、README、快照或项目文档不得把当前任务降级到旧规则。
+- 规则在任务运行中改变时不假设自动热重载；新任务或宿主明确重载后生效，并继续服从有效指令优先级和集中治理所有权。
+
 ### 验收与边界收束
 
 - 原始验收标准通过后停止追加门槛。
@@ -101,11 +110,12 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 
 ### 多 Agent 与模型路由
 
-- 单 Agent 是默认路径；任务大、难或要求全面，本身不构成派遣理由。
-- 只有独立边界、非阻塞并行、互斥写入和可压缩返回同时成立，并且存在时间、上下文隔离或专业复核收益时才派遣。
-- 所有子 Agent 最低从 Terra/high 起步：`explorer_fast` 做只读搜索和摘要，`worker_balanced` 使用 Terra/max 完成边界清晰的实现；`reviewer_deep` 使用 Sol/high 复核重大风险，更高推理强度仅由用户明确启用。
-- 主 Agent 保留需求、关键路径、集成和最终验证；普通并发为 1，明确独立时最多 2，配置硬上限为 3。
-- 默认发送紧凑任务包，不复制完整历史；禁止子 Agent 嵌套派遣、重复工作和同文件并行写入，完成后立即关闭。
+- 关键执行前扫描独立的发现、实现、验证和专业复核工作包；收益门禁通过即主动派遣，适用规则本身就是非 Ultra `ExplicitRequestOnly` 的明确授权。
+- 每波数量取就绪独立包、实时空闲槽位和任务/时间/token 预算的最小值；治理层不设 1/2/3 固定上限，配置容量也不是利用率目标。
+- `explorer_fast` 默认 Terra/medium，`worker_balanced` 默认 Terra/high，`reviewer_deep` 默认 Sol/high；机械任务可降档，复杂实现可升到 max，Ultra 不作为派遣前提。
+- 主 Agent 保留需求、关键路径、写入所有权、分波汇总、集成和最终验证；一个文件或生成物同时只允许一个写入者。
+- 异构角色默认 `fork_turns="none"` 和紧凑任务包。嵌套默认关闭，只有父任务包明确授权递归子树并重过同一门禁时才允许。
+- V2 模板配置 32 个含根总槽位；解析或提示接受该值不证明后端真实容量，必须在新任务中探测并服从运行时硬限制。
 
 ### 留痕控制
 
@@ -119,11 +129,13 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 在仓库根目录运行：
 
 ```powershell
-python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-28.1.0.md
+python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-29.0.0.md
 python -m py_compile skills/seer-codex-rules/scripts/agent_routing_check.py skills/seer-codex-rules/scripts/guardrail_check.py skills/seer-codex-rules/scripts/measure_rules.py skills/seer-codex-rules/scripts/snapshot_state.py skills/seer-codex-rules/scripts/structure_check.py
 python -m unittest discover -s skills/seer-codex-rules/tests -p "test_*.py" -v
 python skills/seer-codex-rules/scripts/agent_routing_check.py --config config/agents.toml.example --agents-dir config/agents --json
-python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-28.1.0.md --downloads-agents artifacts/AGENTS-28.1.0.md --skill skills/seer-codex-rules --json
+python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-29.0.0.md --downloads-agents artifacts/AGENTS-29.0.0.md --skill skills/seer-codex-rules --json
+codex --strict-config doctor --summary
+codex debug prompt-input probe
 ```
 
 安装到个人环境后，不带路径运行 `agent_routing_check.py --json` 可检查 live 配置；`snapshot_state.py --write` 可创建私有状态清单和 Skill 恢复快照。不要提交包含个人路径的 live manifest 或备份。

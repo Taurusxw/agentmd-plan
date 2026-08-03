@@ -1,10 +1,10 @@
 # Global AGENTS Rule Inventory
 
-This inventory maps `<codex-home>/AGENTS.md` version `28.1.0` to detailed `seer-codex-rules` modules and explicitly routed companion Skills.
+This inventory maps `<codex-home>/AGENTS.md` version `29.0.0` to detailed `seer-codex-rules` modules and explicitly routed companion Skills.
 
-Source global version: `28.1.0`
-Source global SHA256: `54633C3A5D2C9E38174BFAA45246B8B1460DF18F585B4BC9253E06ECA0B0D273`
-Coverage verified: `2026-08-03`
+Source global version: `29.0.0`
+Source global SHA256: `E82A3B28999BC93B6F702A06E2C345C062B908FFC85D50CAF70EF3167DEC1638`
+Coverage verified: `2026-08-04`
 
 ## 1. Core Principles
 
@@ -22,10 +22,12 @@ Coverage verified: `2026-08-03`
 | Prose is not a second safety boundary; runtime controls enforce applicable risks | `rule-governance.md`, `task-scaling-and-context.md`, `verification-and-reporting.md` |
 | Acceptance must close rather than expand the goal | `acceptance-closure.md` |
 | Final answers disclose changes, validation, gaps, and risk | `verification-and-reporting.md` |
-| Use subagents only when independent parallelism, context isolation, or specialist review outweighs coordination and token cost | `multi-agent-governance.md`, `low-token-guardrails.md` |
-| Keep the critical path and integration in the parent; cap normal concurrency, prevent duplicate or same-file work, and close completed children | `multi-agent-governance.md` |
+| Scan independent work before material execution and proactively delegate every packet that passes the benefit gate without requiring another user request or Ultra reasoning | `multi-agent-governance.md`, `low-token-guardrails.md`, `task-scaling-and-context.md` |
+| Adapt each wave to ready packets, effective runtime capacity, and budget without a fixed governance ceiling or capacity-utilization target | `multi-agent-governance.md`, `low-token-guardrails.md` |
+| Keep scope, critical path, write ownership, wave synthesis, integration, and final validation in the root; prevent duplicate or same-file work and close completed children | `multi-agent-governance.md` |
 | Keep source-bearing research analysis-only by default; require explicit per-material Knowledge or Book authorization; prevent authorization carryover across conversations and workflows; preserve development-input isolation; record original/clickable/lawful-download links and truthful restrictions for every authorized deliverable | `<codex-home>/skills/seer-capture/SKILL.md`, `<codex-home>/skills/seer-capture/references/research-and-book-workflow.md` |
 | Allow global `AGENTS.md`, synchronized-copy, and `seer-codex-rules` writes only in the dedicated `agentmd-plan` owner project; require every other project or conversation to produce a detailed user-mediated change report and prohibit indirect bypass | `governance-ownership-boundary.md`, `rule-governance.md`, `low-token-guardrails.md` |
+| Always apply the current effective live global rules loaded by the host; prevent old context from downgrading them, prohibit autonomous highest-version switching, preserve instruction priority, and keep drift repair inside the owner boundary | `governance-ownership-boundary.md`, `low-token-guardrails.md`, `rule-governance.md` |
 
 ## 2. Instruction And Rule Locations
 

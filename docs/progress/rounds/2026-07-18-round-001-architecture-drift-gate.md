@@ -25,7 +25,7 @@ Prevent repeated local patches from silently expanding production hotspots while
 
 - Python compilation and two unit tests pass.
 - A real-project run identifies the known background hotspot and sibling duplication.
-- Final strict guardrail, synchronization, privacy, Git, and release checks are recorded in `docs/progress/releases/v27.7.0/ACCEPTANCE.md`.
+- Final strict guardrail, synchronization, privacy, Git, and release checks were recorded in the then-current `v27.7.0` acceptance file; after local latest-only cleanup, recover that record from Git commit history when needed.
 
 ## Five-Pass Review
 
