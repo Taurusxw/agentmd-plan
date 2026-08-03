@@ -1,37 +1,74 @@
 # Verification And Reporting Reference
 
-Use this reference when deciding how to validate a change and how to report results.
+Use this reference to select the smallest evidence set that proves a change and to report it without turning completion into another workflow.
 
-## Validation By Task Level
+## Validation Ladder
 
-| Level | Minimum Credible Validation |
+Move upward only when the lower level cannot cover the changed contract.
+
+| Step | Evidence | Typical Use |
+|---|---|---|
+| V0 direct | Diff review, syntax/static check, import/reference check, or deterministic file comparison | Text, config, narrow refactor, generated metadata |
+| V1 behavior | One focused reproduction, unit/contract test, realistic sample, or rendered inspection | Bug fix, feature, UI, API behavior |
+| V2 affected | Tests, typecheck, lint, build, or integration checks for changed modules and their dependents | Shared module, cross-module behavior, public contract |
+| V3 full | Full regression, end-to-end, release, migration, security, artifact, and rollback checks | Explicit release gate or genuinely broad risk |
+
+Task-level selection:
+
+- L0: source evidence only; no edit validation.
+- L1: one V0 or V1 pass that directly covers the edit.
+- L2: one V1 pass; add V2 only when a shared interface, dependent module, or tool-enforced contract changed.
+- L3: freeze a small V1/V2 risk matrix before implementation; each check must name the risk it covers.
+- L4: run the established phase or release checklist once against the final release state.
+
+Do not run all steps by default. `acceptance-closure.md` owns retries and evidence invalidation; Goal mode uses `goal-mode-closure.md` as its sole iteration budget.
+
+## Full-Suite Triggers
+
+Run V3 full-suite or full-build validation only when at least one applies:
+
+- the user, repository, CI, phase, or release contract explicitly requires it;
+- a shared core, public API, schema, dependency graph, build system, runtime configuration, or broad compatibility boundary changed;
+- targeted or affected checks cannot observe the requested behavior;
+- a release, migration, rollback, or cross-system integration is being accepted.
+
+A high reasoning model, a long conversation, general caution, or a second reviewer does not trigger a full suite. After a relevant repair, rerun the failed and invalidated affected checks, not the entire ladder.
+
+## Security Review Triggers
+
+Run a dedicated security check only when the change affects an actual trust boundary: authentication or authorization, secrets, untrusted input, data exposure or deletion, privilege, network egress, supply-chain dependency, deployment, payment, or another explicitly named security control.
+
+Do not trigger a security scan merely because task text, documentation, tests, or governance rules mention `security`, `permission`, `sandbox`, or `approval`. Runtime sandbox and permission controls remain active without a prose-driven security review.
+
+## Bug-Discriminating Evidence
+
+For a bug fix, prefer evidence that distinguishes the defect from unchanged behavior:
+
+- a focused test or reproduction should fail on the buggy baseline when feasible and pass on the candidate;
+- when baseline replay is unsafe or impractical, explain why the chosen evidence still observes the reported failure;
+- an existing suite that passed before the fix is regression evidence, not proof that the bug was repaired;
+- do not compensate for weak evidence by running more unrelated passing tests.
+
+For features, prove the new acceptance behavior. For refactors, prove preserved public behavior plus the specific structural invariant. Evidence quality matters more than command count.
+
+## Artifact Check Selection
+
+| Artifact | Selective Checks |
 |---|---|
-| L0 | Evidence review, source references, no edit validation needed |
-| L1 | Direct syntax/static check or targeted command when available; otherwise manual diff review |
-| L2 | Targeted tests for changed behavior, relevant lint/type/build check when practical, diff review |
-| L3 | Broader test suite or integration checks, migration/API/security checks when applicable, documentation review |
-| L4 | Full release/phase acceptance, regression checks, artifact review, rollback or risk notes |
+| Rule file | `measure_rules.py`, version/date, changed coverage anchors, diff |
+| Skill | `quick_validate.py`, changed route/script tests, template-residue check |
+| Code | focused behavior test, then affected type/lint/build only when relevant |
+| Frontend | affected build and rendered browser or screenshot when layout changed |
+| API | changed request/response contract and compatibility evidence |
+| Database | migration/schema proof plus rollback or data-integrity check |
+| Docs | links/paths, duplication, version references, rendering when visual |
+| PDF, image, slides | actual render or visual inspection |
 
-If validation cannot run, say why and list the command or manual check that should be run later.
+Avoid overlapping commands. If one build already performs the relevant typecheck or generation, do not rerun that check separately unless the project documents a distinct purpose.
 
-## Validation By Artifact Type
+## Rule-Skill Commands
 
-| Artifact | Credible Checks |
-|---|---|
-| Rule file | `measure_rules.py`, version/date review, diff review, coverage checklist |
-| Skill | `quick_validate.py`, template-residue search, reference routing review, script smoke test |
-| Code | targeted tests, typecheck, lint, build, import/reference search |
-| Frontend | build plus rendered browser or screenshot check when layout matters |
-| API | request/response contract tests, schema docs, compatibility notes |
-| Database | migration dry run or schema diff, rollback consideration, data model docs |
-| Docs | link/path check, duplicate document scan, line threshold review |
-| PDF, image, slides, or document layout | actual render or visual inspection |
-
-Do not treat "command exited zero" as the only evidence. State what the command actually covered.
-
-## Rule-Skill Validation Commands
-
-Typical commands for this skill:
+Choose only commands activated by the changed surface:
 
 ```powershell
 python <skill-creator-dir>/scripts/quick_validate.py <skill-dir>
@@ -40,85 +77,25 @@ python <skill-dir>/scripts/guardrail_check.py --project <project-root> --json
 python <skill-dir>/scripts/snapshot_state.py --project <private-project-root> --write
 ```
 
-Use path quoting as needed in the active shell.
+Use `--strict`, the full unit suite, all routing checks, snapshot refresh, secret scans, or release metadata checks only when their corresponding global-sync, shared-infrastructure, private-state, or release surface changed.
 
-`guardrail_check.py` performs the template-residue check without treating ordinary prose such as "TODO" as a failure. Use `--strict` for global sync or release after known warnings have been resolved.
+## Evidence Interpretation
 
-## Output Shape
+- A zero exit code is useful only when the command covers the changed behavior.
+- Reuse a passing result until a relevant invalidator from `acceptance-closure.md` occurs.
+- Classify failures before acting: task-caused, pre-existing, transient, external block, or unknown.
+- If validation cannot run, state the reason, uncovered surface, strongest available substitute, and residual risk.
 
-For L0/L1, keep the response short:
+## Compact Reporting
 
-```markdown
-## Conclusion Or Summary
+For L0/L1, state the conclusion, evidence, and material risk in one or two short paragraphs. For L2+, add only the affected documentation/version and traceability decisions.
 
-## Verification
+For rule work, report:
 
-## Risks And Next Step
-```
+- changed rule destination and version action;
+- selected checks and what each proved;
+- round/phase/release decision;
+- synchronized-copy status and residual risk;
+- subagent role/model and closure status only when a child was actually used.
 
-For L2+:
-
-```markdown
-## Change Summary
-
-## Code Or Rule Changes
-
-## Documentation Updates
-
-## Tests And Verification
-
-## Traceability Check
-
-## Risks And Follow-Up
-```
-
-Do not force headings when a one-paragraph answer is clearer, but never omit important validation or risk facts.
-
-For an active persistent Goal, use the compact status from `goal-mode-closure.md`. Once all Frozen Criteria pass, report `complete`; optional findings remain follow-ups and do not justify another validation loop.
-
-## Traceability Check
-
-For rule and documentation work, explicitly answer:
-
-- Was a round or phase required?
-- Was progress overview updated?
-- Was changelog updated?
-- Was doc index updated?
-- Were any duplicate or forbidden document names introduced?
-- Were any rules moved between global, project, docs, Skill, or enforcement tools?
-- Did any versioned file require a bump?
-- What validation ran?
-- What risk remains?
-- If subagents ran, which roles/models were used, whether their results were integrated, and whether any child remained open.
-
-## Version Reporting
-
-Always report:
-
-- old version and new version when a versioned file changed;
-- no version bump when no versioned file changed;
-- bump class and rationale;
-- date update if applicable.
-
-For this skill, updates to `seer-codex-rules` do not require global `AGENTS.md` version changes unless global `AGENTS.md` itself is edited.
-
-## Honesty Requirements
-
-Say plainly when:
-
-- a command failed;
-- a command was not run;
-- a check was only partial;
-- a source was not official;
-- a rule is an assumption;
-- a migration was deferred;
-- a deletion or risky operation still needs user confirmation.
-
-## Final Risk Vocabulary
-
-Use clear labels:
-
-- `No known residual risk`: validation covers the changed surface.
-- `Low residual risk`: change is local, validation is targeted, no broad behavior change.
-- `Moderate residual risk`: validation was partial or change affects shared behavior.
-- `High residual risk`: important checks could not run, data/security/deployment is involved, or rollback is unclear.
+Do not paste every command, checklist question, passing retry, or raw log. Use these risk labels when useful: `No known residual risk`, `Low residual risk`, `Moderate residual risk`, or `High residual risk`.

@@ -48,7 +48,7 @@ Do not split when the result is only shallow wrappers, pass-through functions, o
 
 ## Cumulative Drift Bridge
 
-The smallest complete change is a per-task rule, not permission to patch the same hotspot forever. Load `architecture-drift.md` when recent rounds or commits repeatedly touch one production module, or when the current patch adds an independent responsibility, broadens a dispatcher/interface, duplicates non-trivial sibling logic, or makes tests depend on unrelated subsystems.
+The smallest complete change is a per-task rule, not permission to patch the same hotspot forever. Load `architecture-drift.md` only when its recent-round or commit thresholds are evidenced, or when the current patch adds an independent responsibility, broadens a dispatcher/interface, duplicates non-trivial sibling logic, or makes tests depend on unrelated subsystems. Conversation length and repeated discussion alone are not hotspot evidence.
 
 Treat line count as a navigation signal only. Refactor when combined evidence shows a stable boundary with a smaller interface and better locality; do not create shallow wrappers merely to reduce file size.
 
@@ -73,7 +73,7 @@ Rules:
 - Do not revert unrelated user changes.
 - If touched files contain user changes, read and work with them.
 - Stage or edit explicit paths only when the worktree is mixed.
-- Ask before destructive cleanup, file deletion, history rewriting, or mass movement.
+- Handle destructive cleanup, file deletion, history rewriting, or mass movement through the Action Authorization Envelope in `task-scaling-and-context.md`; do not repeat a confirmation for the same target and risk class.
 - If user changes make the requested task impossible, explain the conflict and ask for direction.
 
 ## File Delete, Rename, And Migration Review
@@ -84,7 +84,7 @@ Before deleting, renaming, or migrating files:
 2. Check imports, docs, scripts, tests, configs, and CI.
 3. Identify generated versus user-authored content.
 4. Decide whether compatibility aliases or redirects are needed.
-5. Get user confirmation for ambiguous historical or user-authored material.
+5. Reuse existing user authorization for the same target; reconfirm ambiguous historical or user-authored material only when the target or consequence changed.
 
 For documentation migration, prefer an index or summary before archiving.
 

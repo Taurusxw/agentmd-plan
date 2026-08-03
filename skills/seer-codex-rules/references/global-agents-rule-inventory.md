@@ -1,10 +1,10 @@
 # Global AGENTS Rule Inventory
 
-This inventory maps `<codex-home>/AGENTS.md` version `27.12.0` to detailed `seer-codex-rules` modules and explicitly routed companion Skills.
+This inventory maps `<codex-home>/AGENTS.md` version `27.13.0` to detailed `seer-codex-rules` modules and explicitly routed companion Skills.
 
-Source global version: `27.12.0`
-Source global SHA256: `4D9BDD34E635D5321F9BFB8A21321041F175C8404B026A5142A7A64E97759266`
-Coverage verified: `2026-08-01`
+Source global version: `27.13.0`
+Source global SHA256: `F5E8D50863462A6EE0B7F733177E0F1971F86D873108656DD0B9EAFA532014B7`
+Coverage verified: `2026-08-03`
 
 ## 1. Core Principles
 
@@ -17,7 +17,9 @@ Coverage verified: `2026-08-01`
 | Scale workflow by risk and size | `task-scaling-and-context.md` |
 | Avoid overloaded files, duplicate rules/docs, and shallow abstractions | `code-change-governance.md`, `documentation-governance.md` |
 | Preserve user changes | `code-change-governance.md` |
-| Prose is not a safety boundary | `rule-governance.md`, `verification-and-reporting.md` |
+| Read-only requests do not authorize implementation; change requests authorize in-scope local edits and non-destructive validation | `task-scaling-and-context.md` |
+| Confirm external, destructive, costly, credential-bearing, or scope-expanding actions once per unchanged authorization envelope | `task-scaling-and-context.md`, `acceptance-closure.md` |
+| Prose is not a second safety boundary; runtime controls enforce applicable risks | `rule-governance.md`, `task-scaling-and-context.md`, `verification-and-reporting.md` |
 | Acceptance must close rather than expand the goal | `acceptance-closure.md` |
 | Final answers disclose changes, validation, gaps, and risk | `verification-and-reporting.md` |
 | Use subagents only when independent parallelism, context isolation, or specialist review outweighs coordination and token cost | `multi-agent-governance.md`, `low-token-guardrails.md` |
@@ -53,7 +55,7 @@ Coverage verified: `2026-08-01`
 | Global Rule | Coverage |
 |---|---|
 | Read matching Skills before execution | `task-scaling-and-context.md`, `execution-standards.md` |
-| File-changing development uses the Seer compliance gate | `low-token-guardrails.md` |
+| File-changing development reads the Seer compliance gate once and reuses it at completion | `low-token-guardrails.md` |
 | Ordinary work loads only the needed references | `low-token-guardrails.md`, `task-scaling-and-context.md` |
 | Rule and release work runs guardrails | `low-token-guardrails.md`, `rule-review-checklist.md` |
 | Final answers disclose Skill use and uncovered risk | `verification-and-reporting.md` |
@@ -67,7 +69,7 @@ Coverage verified: `2026-08-01`
 | Global Rule | Coverage |
 |---|---|
 | Search facts first and prefer `rg` | `code-change-governance.md` |
-| Clarify destructive or material boundaries | `execution-standards.md`, `task-scaling-and-context.md` |
+| Execute safe in-scope work without reconfirmation and clarify only true authorization-boundary changes | `execution-standards.md`, `task-scaling-and-context.md` |
 | Reuse existing modules and mature tools | `execution-standards.md`, `code-change-governance.md` |
 | Avoid unrelated cleanup, hidden errors, and permanent hacks | `code-change-governance.md` |
 | Prefer deep modules and meaningful boundaries | `code-change-governance.md` |
@@ -97,7 +99,11 @@ Coverage verified: `2026-08-01`
 | Global Rule | Coverage |
 |---|---|
 | Run the smallest credible validation | `verification-and-reporting.md` |
-| Scale tests from L1 to L4 | `verification-and-reporting.md` |
+| Scale tests through direct, behavior, affected, and full validation steps | `verification-and-reporting.md` |
+| Run full regression or security review only on explicit contract or real changed-boundary triggers | `verification-and-reporting.md` |
+| Reuse passing evidence until a relevant change invalidates its coverage | `acceptance-closure.md`, `verification-and-reporting.md`, `goal-mode-closure.md` |
+| Prefer bug-discriminating evidence over more unrelated passing checks | `verification-and-reporting.md` |
+| Classify task-caused, pre-existing, transient, external, and unknown failures before retrying | `acceptance-closure.md`, `verification-and-reporting.md` |
 | Render visual artifacts | `verification-and-reporting.md` |
 | A zero exit code is not sufficient evidence | `verification-and-reporting.md` |
 | Disclose unrun checks and residual risk | `verification-and-reporting.md` |
@@ -110,9 +116,7 @@ Coverage verified: `2026-08-01`
 
 | Global Rule | Coverage |
 |---|---|
-| Report changed files and behavior | `verification-and-reporting.md` |
-| Report validation and coverage | `verification-and-reporting.md` |
-| Decide docs, progress, index, release, and version updates | `documentation-governance.md`, `rule-review-checklist.md` |
-| Report user-change protection, duplicates, open work, and risk | `code-change-governance.md`, `verification-and-reporting.md` |
-| Report Skills, references, and uncovered risk | `verification-and-reporting.md`, `low-token-guardrails.md` |
+| Report changed behavior and direct evidence once | `verification-and-reporting.md` |
+| Decide docs, progress, index, release, and version updates once | `documentation-governance.md`, `rule-review-checklist.md` |
+| Report material risk plus used Skills and references compactly | `verification-and-reporting.md`, `low-token-guardrails.md` |
 | Keep short tasks concise and larger tasks structured | `verification-and-reporting.md` |

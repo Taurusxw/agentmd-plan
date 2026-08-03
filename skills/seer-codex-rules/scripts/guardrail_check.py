@@ -25,6 +25,10 @@ REQUIRED_GATE_PHRASES = [
     "完成契约",
     "普通并发不超过 2",
     "multi-agent-governance.md",
+    "无需再次确认",
+    "同一授权范围只确认一次",
+    "不因追求更强信心重跑",
+    "全量回归",
 ]
 
 REQUIRED_REFERENCES = {
@@ -54,6 +58,22 @@ REQUIRED_SCRIPTS = {
 }
 
 REQUIRED_REFERENCE_PHRASES = {
+    "task-scaling-and-context.md": {
+        "Action Authorization Envelope",
+        "same action class, target, and material risk",
+        "do not ask again",
+    },
+    "acceptance-closure.md": {
+        "Evidence Reuse And Invalidation",
+        "No relevant invalidation, no rerun",
+        "Failure And Retry Policy",
+    },
+    "verification-and-reporting.md": {
+        "Validation Ladder",
+        "Full-Suite Triggers",
+        "Security Review Triggers",
+        "Bug-Discriminating Evidence",
+    },
     "goal-mode-closure.md": {
         "Completion Contract",
         "Frozen Criteria",

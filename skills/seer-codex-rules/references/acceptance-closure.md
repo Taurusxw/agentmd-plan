@@ -4,7 +4,7 @@ Use this reference when a task risks turning into endless acceptance, repeated Q
 
 ## Core Rule
 
-Acceptance proves the current goal is good enough to close. It must not keep generating new mandatory work unless the user explicitly expands scope or a true blocker prevents safe completion. For persistent Goal mode, `goal-mode-closure.md` freezes the completion contract that defines what "original goal" and `required work` mean.
+Acceptance proves the current goal is good enough to close. It must not keep generating new mandatory work unless the user explicitly expands scope or a true blocker prevents safe completion. For persistent Goal mode, `goal-mode-closure.md` owns the continuation and repair budget; use this reference only to classify findings, evidence, and external blocks.
 
 ## Edge-Condition Scope Gate
 
@@ -59,6 +59,24 @@ Default validation budget:
 - L3: planned acceptance checklist; no new gates after checklist passes unless a blocker appears.
 - L4: phase/release acceptance checklist; new gates require explicit scope decision.
 
+`verification-and-reporting.md` chooses which checks are credible. This section controls iteration count only; it must not create a second validation matrix.
+
+## Evidence Reuse And Invalidation
+
+A passing check remains valid for the task until something relevant invalidates it.
+
+Valid invalidators are changes to code, tests, configuration, dependencies, generated inputs, or environment covered by that check. Documentation, unrelated files, a longer conversation, a new reviewer, or a desire for stronger confidence do not invalidate it.
+
+No relevant invalidation, no rerun. After a task-scoped fix, rerun the failed check and only the affected checks whose evidence became stale. Do not repeat an overlapping build, lint, type, or test command when an existing result already covers the same surface.
+
+## Failure And Retry Policy
+
+- `task-caused or task-scoped`: fix the cause and rerun the smallest failed or affected check once.
+- `pre-existing or unrelated`: record concise evidence and continue closing; do not repair it under the current task.
+- `transient or flaky`: retry once only when the failure output or project history supports that classification.
+- `external permission, auth, service, rate limit, or hardware block`: try one safe local substitute when useful, then record residual risk and stop.
+- `unknown after one focused diagnosis`: report the proof gap; do not start an open-ended test-harness investigation.
+
 ## Stop Conditions
 
 Stop and produce the final answer when any of these is true:
@@ -68,6 +86,7 @@ Stop and produce the final answer when any of these is true:
 - remaining validation depends on external auth, rate limits, paid services, unavailable hardware, or human-only data;
 - further work would harden tools rather than validate the requested user outcome;
 - the next check would be another variant of an already passing check.
+- the same authorization question has already been answered for the current target and risk class.
 
 ## Anti-Patterns
 
@@ -90,7 +109,7 @@ When live validation is blocked by login, permission, rate limit, risk control, 
 4. close if the user goal is otherwise verified;
 5. create optional follow-up only if useful.
 
-Do not keep retrying the same blocked live path unless the user provides new credentials, new environment, or explicitly asks for another attempt.
+Do not keep retrying the same blocked live path or asking for the same permission unless the user provides new credentials, a new environment, materially broader authorization, or explicitly requests another attempt.
 
 ## New Findings During Acceptance
 

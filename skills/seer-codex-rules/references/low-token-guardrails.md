@@ -23,10 +23,10 @@ Use layered controls, but load detail only when the task needs it.
 | Tier | Use When | Required Actions |
 |---|---|---|
 | G0 unrelated read-only | Casual question or read-only work unrelated to development governance | No need to load this Skill unless another trigger matches. |
-| G1 development compliance | Any file-changing development task covered by the global gate | Read `SKILL.md`, `task-scaling-and-context.md`, and only the artifact-specific reference needed; use one compact final disclosure. |
-| G2 rule work | Auditing or editing global/project rules, docs governance, progress, version policy, or this Skill | Run `guardrail_check.py`; read targeted references; update provenance if the edit is substantial. |
-| G3 global sync | Editing global `AGENTS.md` or synced copies | Backup, update version if needed, sync copies, compare hashes, run `guardrail_check.py` and `measure_rules.py`. |
-| G4 release or migration | Large restructure, phase, archive, or policy model change | Use phase/release records, coverage inventory, broad validation, and explicit residual risk. |
+| G1 development compliance | Any file-changing development task covered by the global gate | Read `SKILL.md` once, then `task-scaling-and-context.md` and only the artifact-specific reference needed; reuse them at completion. |
+| G2 rule work | Auditing or editing global/project rules, docs governance, progress, version policy, or this Skill | Read targeted references and run `guardrail_check.py` after edits; preflight only when existing drift could change the edit. |
+| G3 global sync | Editing global `AGENTS.md` or synced copies | Confirm a recoverable prior artifact, update version, sync copies, compare hashes, and run one final `guardrail_check.py` plus `measure_rules.py`. |
+| G4 release or migration | Large restructure, phase, archive, or policy model change | Use the fixed phase/release checklist once; do not inherit additional G1-G3 validation loops. |
 
 Default to the lowest tier that covers the risk.
 
@@ -61,10 +61,12 @@ If drift is found, fix it before continuing when it affects the current task. Ot
 
 - Do not read `global-agents-rule-inventory.md` unless checking full coverage.
 - Do not read every reference for a normal task.
+- Do not reread `SKILL.md` or a reference at completion when it remains in context and did not change; the end check reuses the selected rules.
 - Prefer `guardrail_check.py` for preflight facts instead of manually reading many files.
 - Use default guardrail mode for routine work; use `--strict` only for global sync, release, or a task that must fail on warnings.
 - Refresh the state manifest only after a substantive Skill or approved global change, not during read-only analysis.
 - Keep global `AGENTS.md` as a gate and summary, not the detailed rule body.
+- Cache passing command evidence in the current task. Rerun only after a relevant invalidating change, and avoid commands whose coverage is already supplied by another passing check.
 - Prefer final one-line disclosure unless the user asks for detailed audit output.
 - Load `goal-mode-closure.md` only while a persistent Goal is being created, resumed, auto-continued, or closed. Keep its compact contract in the Goal objective instead of rereading project history on every continuation.
 - Keep single-agent execution as the default. Before spawning, require an independent bounded task and a concrete time, context-isolation, or specialist-review benefit.

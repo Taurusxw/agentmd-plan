@@ -46,15 +46,17 @@ Use this checklist before finalizing audits or edits to Codex rule systems.
 
 ## Validation
 
-- For Skills, run `quick_validate.py` and inspect `agents/openai.yaml`.
+- Choose commands from `verification-and-reporting.md`; do not run every listed validator merely because it exists.
+- For Skills, run `quick_validate.py`; inspect `agents/openai.yaml` only when metadata or routing changed.
 - For rule files, run `scripts/measure_rules.py`.
 - Inspect diffs for unintended unrelated edits.
 - If syncing duplicate copies, compare hashes.
 - If deleting, moving, or archiving, verify references and obtain user approval where needed.
+- Reuse passing evidence unless the edited surface invalidated it; full-suite and release checks remain release-triggered.
 
 ## Final Response
 
-Include:
+Include only applicable items:
 
 - changed files and destination rationale;
 - version bump decision and reason;

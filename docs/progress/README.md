@@ -8,5 +8,7 @@
 
 ## Recent
 
+- [v27.13.0 Release](releases/v27.13.0/RELEASE_NOTES.md)
+- [2026-08-03 Round 002: GPT-5.6 Execution Efficiency](rounds/2026-08-03-round-002-gpt-5p6-execution-efficiency.md)
 - [v27.12.0 Release](releases/v27.12.0/RELEASE_NOTES.md)
 - [2026-08-03 Round 001: Provenance Sync 27.12.0](rounds/2026-08-03-round-001-provenance-sync-27.12.0.md)

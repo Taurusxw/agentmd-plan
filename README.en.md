@@ -2,7 +2,7 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-Current formal release: `v27.12.0`
+Current formal release: `v27.13.0`
 
 Agentmd Plan is a portable, verifiable, low-token governance system for Codex rules. The global `AGENTS.md` keeps only the outline that must remain active on every task, while the `seer-codex-rules` Skill loads detailed execution rules on demand.
 
@@ -12,6 +12,7 @@ Agentmd Plan is a portable, verifiable, low-token governance system for Codex ru
 - Keeps small tasks lightweight while preserving validation and traceability for important development, migrations, and releases.
 - Reduces rule drift through a global gate, Skill routing, modular references, validation scripts, and final disclosure.
 - Constrains repeated acceptance loops, excessive rounds, and overdevelopment of low-probability edge conditions.
+- Lets in-scope local edits and non-destructive validation proceed by default while making repeated permission prompts, regression tests, and security review evidence-triggered.
 - Freezes finite completion criteria for persistent Goals so auto-continuations cannot turn optional edges into endless required work.
 - Restores architecture and module-boundary decisions before repeated patches turn a production hotspot into structural drift.
 - Controls subagent coordination and token cost through a single-agent default, Terra/high minimum routing, compact context packets, and concurrency limits.
@@ -20,7 +21,7 @@ Agentmd Plan is a portable, verifiable, low-token governance system for Codex ru
 
 ## Release Contents
 
-- `artifacts/AGENTS-27.12.0.md`: the global outline synchronized with the current live rules and formal release.
+- `artifacts/AGENTS-27.13.0.md`: the formal release artifact synchronized with the current live rules.
 - `config/`: a Terra/high child fallback plus Terra/high exploration, Terra/max implementation, and Sol/high deep-review role templates.
 - `skills/seer-codex-rules/`: the Skill for rule design, task scaling, code and documentation governance, round/phase/release handling, acceptance closure, and versioning.
 - `skills/seer-codex-rules/scripts/`: checks for rule size, Skill routing, structural hotspots, synchronized state, and recovery snapshots.
@@ -38,13 +39,13 @@ global AGENTS.md
                   -> change, validate, trace, and close
 ```
 
-An ordinary file-changing task loads the Skill router, task-scaling guidance, and one artifact-specific reference. Full guardrails are reserved for rule synchronization, migrations, and releases, keeping compliance from consuming unnecessary context.
+An ordinary file-changing task reads the Skill router, task-scaling guidance, and one artifact-specific reference once, then reuses that context at completion. Full guardrails are reserved for rule synchronization, migrations, and releases.
 
 ## Installation
 
 1. Back up the existing `<codex-home>/AGENTS.md`, `config.toml`, `agents/`, and Skill directory.
 2. Copy `skills/seer-codex-rules/` to `<codex-home>/skills/seer-codex-rules/`.
-3. Review `artifacts/AGENTS-27.12.0.md` and confirm that it matches your operating preferences.
+3. Review `artifacts/AGENTS-27.13.0.md` to confirm that it fits your workflow.
 4. Install that artifact as `<codex-home>/AGENTS.md`.
 5. Merge the `[agents]` table from `config/agents.toml.example` into `<codex-home>/config.toml`, then copy `config/agents/*.toml` to `<codex-home>/agents/`.
 6. Run the validation commands below to verify the version, Skill routing, model roles, and synchronized state.
@@ -58,8 +59,17 @@ An ordinary file-changing task loads the Skill router, task-scaling guidance, an
 - `L0`: read-only analysis; no file changes or development records.
 - `L1`: tiny change; smallest complete edit and direct validation, with no round by default.
 - `L2`: normal development; targeted tests and traceability within the project's existing system.
-- `L3`: important change; impact review, recorded decisions, and broader validation.
-- `L4`: phase, migration, or release; phase/release records suitable for handoff.
+- `L3`: important change; impact review and a small validation matrix mapped to real risks.
+- `L4`: phase, migration, or release; run the established phase/release checklist once against the final state.
+
+### Execution Efficiency And Authorization
+
+- Change, build, fix, or optimize requests authorize in-scope local reads, edits, formatting, and non-destructive validation without another question.
+- Confirm only external writes or publication, destructive or irreversible actions, purchases, credential disclosure, or a material change in target or risk; confirm the same authorization envelope once.
+- Move through direct, behavioral, affected, and full-release validation only as lower steps become insufficient.
+- Passing evidence expires only after a relevant code, test, configuration, dependency, generated-input, or environment change; do not repeat identical or overlapping checks.
+- Full regression and security scans are event-triggered. Merely mentioning security or permissions does not activate them.
+- Prefer tests that distinguish the buggy baseline from the fixed candidate; a suite that already passed is regression evidence, not repair proof.
 
 ### Acceptance And Edge Closure
 
@@ -102,11 +112,11 @@ An ordinary file-changing task loads the Skill router, task-scaling guidance, an
 Run from the repository root:
 
 ```powershell
-python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-27.12.0.md
+python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-27.13.0.md
 python -m py_compile skills/seer-codex-rules/scripts/agent_routing_check.py skills/seer-codex-rules/scripts/guardrail_check.py skills/seer-codex-rules/scripts/measure_rules.py skills/seer-codex-rules/scripts/snapshot_state.py skills/seer-codex-rules/scripts/structure_check.py
 python -m unittest discover -s skills/seer-codex-rules/tests -p "test_*.py" -v
 python skills/seer-codex-rules/scripts/agent_routing_check.py --config config/agents.toml.example --agents-dir config/agents --json
-python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-27.12.0.md --downloads-agents artifacts/AGENTS-27.12.0.md --skill skills/seer-codex-rules --json
+python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-27.13.0.md --downloads-agents artifacts/AGENTS-27.13.0.md --skill skills/seer-codex-rules --json
 ```
 
 After installation, run `agent_routing_check.py --json` without path overrides to check the live router. `snapshot_state.py --write` can create a private state manifest and Skill recovery snapshot. Do not commit live manifests or backups that contain personal paths.

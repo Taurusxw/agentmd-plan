@@ -25,6 +25,10 @@ seer-codex-rules
 最终回答必须说明
 未覆盖风险
 multi-agent-governance.md
+无需再次确认
+同一授权范围只确认一次
+不因追求更强信心重跑
+全量回归
 """
             path.write_text(base, encoding="utf-8")
             self.assertIn("完成契约", MODULE.check_global_gate(path)["missing_gate_phrases"])
@@ -44,6 +48,10 @@ seer-codex-rules
 未覆盖风险
 完成契约
 multi-agent-governance.md
+无需再次确认
+同一授权范围只确认一次
+不因追求更强信心重跑
+全量回归
 """
             path.write_text(text, encoding="utf-8")
             self.assertIn("普通并发不超过 2", MODULE.check_global_gate(path)["missing_gate_phrases"])
@@ -54,6 +62,17 @@ multi-agent-governance.md
 
         self.assertTrue(report["ok"])
         self.assertEqual(report["missing_reference_phrases"], {})
+
+    def test_global_gate_requires_efficiency_anchors(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "AGENTS.md"
+            text = "\n".join([
+                "版本：27.13.0",
+                "定版日期：2026-08-03",
+                *MODULE.REQUIRED_GATE_PHRASES[:-1],
+            ])
+            path.write_text(text, encoding="utf-8")
+            self.assertIn("全量回归", MODULE.check_global_gate(path)["missing_gate_phrases"])
 
 
 if __name__ == "__main__":

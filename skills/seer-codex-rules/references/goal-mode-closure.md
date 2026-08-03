@@ -1,6 +1,6 @@
 # Goal Mode Closure
 
-Use this reference only for a persistent Goal that can resume or auto-continue across turns. Its purpose is to make completion finite without weakening real correctness or safety requirements.
+Use this reference only for a persistent Goal that can resume or auto-continue across turns. Its purpose is to make completion finite without weakening real correctness or safety requirements. While active, it is the sole owner of continuation and repair budgets; other references may choose evidence or classify findings but must not add a second loop budget.
 
 ## Core Invariant
 
@@ -54,7 +54,7 @@ A cheap fix is not automatically required. Ordinary edge work needs both evidenc
 
 1. `contract`: create or normalize the Completion Contract once.
 2. `core`: implement only work that advances a Frozen Criterion.
-3. `verify`: run the fixed validation list once; do not add gates after it passes.
+3. `verify`: run the fixed validation list once and reuse passing evidence; do not add gates after it passes.
 4. `repair`: if a task-scoped failure appears, allow one focused repair and affected retest.
 5. `classify`: route new findings through Required-Work Admission.
 6. `close`: when all Frozen Criteria pass, mark the Goal `complete` immediately.
@@ -69,7 +69,7 @@ An unproven edge gets at most one cheap, focused reproduction attempt. If it can
 
 Tests, scripts, fixtures, validators, and release checks created to prove the Frozen Criteria are supporting evidence. Do not recursively harden their hypothetical edge conditions unless their failure prevents them from proving a criterion or creates a material safety risk.
 
-Once a check passes, do not rerun it unless relevant code, data, configuration, or environment changed. Prefer affected checks over another full-suite pass.
+Once a check passes, do not rerun it unless relevant code, tests, data, configuration, dependencies, or environment changed. No relevant invalidation, no rerun; prefer affected checks over another full-suite pass.
 
 ## No-Progress Circuit Breaker
 

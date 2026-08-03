@@ -2,9 +2,9 @@
 
 Use this matrix to verify that the concise global outline delegates detailed behavior without losing semantic coverage.
 
-Source global version: `27.12.0`
-Source global SHA256: `4D9BDD34E635D5321F9BFB8A21321041F175C8404B026A5142A7A64E97759266`
-Coverage verified: `2026-08-01`
+Source global version: `27.13.0`
+Source global SHA256: `F5E8D50863462A6EE0B7F733177E0F1971F86D873108656DD0B9EAFA532014B7`
+Coverage verified: `2026-08-03`
 
 ## Coverage Rule
 
@@ -14,7 +14,7 @@ Each global rule must be `covered`, `delegated`, or deliberately `omitted`. Cove
 
 | Global Section | Status | Detailed Coverage |
 |---|---|---|
-| 1. Core principles | covered | `execution-standards.md`, `code-change-governance.md`, `documentation-governance.md`, `verification-and-reporting.md`, `acceptance-closure.md`, `goal-mode-closure.md`, `multi-agent-governance.md`, companion `<codex-home>/skills/seer-capture/SKILL.md` |
+| 1. Core principles | covered | `task-scaling-and-context.md`, `execution-standards.md`, `code-change-governance.md`, `documentation-governance.md`, `verification-and-reporting.md`, `acceptance-closure.md`, `goal-mode-closure.md`, `multi-agent-governance.md`, companion `<codex-home>/skills/seer-capture/SKILL.md` |
 | 2. Instruction and rule locations | covered | `rule-governance.md`, `project-agents-template.md`, `task-scaling-and-context.md` |
 | 3. Task levels | covered | `task-scaling-and-context.md`, `architecture-drift.md`, `documentation-governance.md`, `verification-and-reporting.md` |
 | 4. Mandatory Skill gate | covered | `low-token-guardrails.md`, `task-scaling-and-context.md`, `verification-and-reporting.md`, `multi-agent-governance.md` |
@@ -23,13 +23,15 @@ Each global rule must be `covered`, `delegated`, or deliberately `omitted`. Cove
 | 7. Validation and acceptance closure | covered | `verification-and-reporting.md`, `acceptance-closure.md`, `goal-mode-closure.md` |
 | 8. Completion check | covered | `verification-and-reporting.md`, `rule-review-checklist.md` |
 
-## Five-Round Improvement Protocol
+## Single-Pass Audit Dimensions
 
-1. Coverage: map every global section and rule.
-2. Task flow: test L0-L4, Skill routing, and context depth.
-3. Change governance: test edits, documentation, progress, versions, and movement.
-4. Validation: test verification depth, failure disclosure, and acceptance closure.
-5. Maintainability: check size, routing, duplication, metadata, scripts, and portability.
+Cover these dimensions in one audit pass; they are not five sequential review rounds:
+
+1. Coverage and task flow.
+2. Change, documentation, and version governance.
+3. Validation, authorization, and closure behavior.
+4. Maintainability, routing, and duplication.
+5. Deterministic metadata, scripts, and portability.
 
 ## Acceptance Standard
 

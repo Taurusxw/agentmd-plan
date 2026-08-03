@@ -2,12 +2,17 @@
 
 ## Current State
 
-- 当前正式发布为 `v27.12.0`；公开 artifact、live 全局规则、Downloads 副本、Skill 覆盖锚点和私有恢复状态保持一致。
+- 当前正式发布为 `v27.13.0`；live 全局规则、Downloads 副本、公开 artifact 和 Skill 已同步。
 - `seer-codex-rules` 已作为可浏览源码纳入仓库。
 - 项目采用 MIT License，并完成首次公开发布净化。
 
 ## Recent Progress
 
+- 正式发布 `v27.13.0`，将 GPT-5.6 执行效率治理、同步状态、Git tag 和 GitHub Release 纳入同一发布基线。
+- 增加面向 GPT-5.6 的精简授权边界：目标内本地读取、编辑和非破坏性验证不再重复确认，真实外部、破坏性、付费、凭据或范围扩张动作按授权范围确认一次。
+- 将验证改为直接、行为、affected、full 四级证据梯，加入通过证据复用、失效条件、失败分类和单次重试策略。
+- 将全量回归与安全复核改为真实变更面触发，并要求缺陷修复优先采用能区分修复前后的证据。
+- 消除 Skill 开始/结束重读、Goal 与普通验收双重预算、全量命令篮子和覆盖审计“五轮”措辞造成的流程重入。
 - 正式发布 `v27.12.0`，将 live 全局规则、Downloads 副本、公开 artifact、覆盖 inventory、公开/live Skill 树和私有恢复状态重新同步。
 - 增加 `seer-capture` 来源型研究路由覆盖，并明确开发工作区输入默认不自动入库。
 - 修复原 `current-state.json`、README 和进度概览停留在 `27.9.0` 造成的严格 guardrail provenance 漂移。
@@ -41,6 +46,8 @@
 
 ## Detailed Records
 
+- `docs/progress/releases/v27.13.0/RELEASE_NOTES.md`
+- `docs/progress/rounds/2026-08-03-round-002-gpt-5p6-execution-efficiency.md`
 - `docs/progress/releases/v27.12.0/RELEASE_NOTES.md`
 - `docs/progress/rounds/2026-08-03-round-001-provenance-sync-27.12.0.md`
 - `docs/progress/releases/v27.9.0/RELEASE_NOTES.md`
