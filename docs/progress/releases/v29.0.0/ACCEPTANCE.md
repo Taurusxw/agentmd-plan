@@ -2,7 +2,7 @@
 
 ## Status
 
-ready-for-publication
+completed
 
 ## Release Contract
 
@@ -19,10 +19,12 @@ ready-for-publication
 - A fresh prompt exposed 32 total slots; a fresh Sol/high stress session accepted 31/31 child requests, directly observed 22 running concurrently, and completed 31/31.
 - Privacy, credential, tracked-risky-file, large-history-object, Markdown-link, and Git whitespace checks passed; no history object is at least 1 MiB.
 
-## Publication Verification Pending
+## Publication Verification Completed
 
-- After publication, verify remote `main`, exact release commit, the `v29.0.0` tag and GitHub Release, remote `VERSION`, MIT license, public visibility, `main` default branch, retained old remote tags/Releases, and absence of old local tags.
-- Change this record to `completed` only after those external checks pass.
+- Release commit `00539607ebf2f34c4002fefd02603a316306b498`, remote `main`, and the dereferenced annotated `v29.0.0` tag are identical.
+- GitHub Release `Agentmd Plan v29.0.0` is published, non-draft, non-prerelease, and marked latest; remote `VERSION` is `29.0.0`.
+- The repository remains public with an MIT license and `main` as the default branch.
+- GitHub retains all eight tags and eight Releases (`v27.6.0` through `v29.0.0`), while the local checkout retains only tag `v29.0.0`.
 
 ## Publication Path
 
