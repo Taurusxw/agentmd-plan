@@ -2,13 +2,13 @@
 
 ## Current State
 
-- 最新正式发布为 `v27.9.0`；当前可审查治理候选和本机恢复基线已同步到全局 `27.12.0`，未冒充正式发布。
+- 当前正式发布为 `v27.12.0`；公开 artifact、live 全局规则、Downloads 副本、Skill 覆盖锚点和私有恢复状态保持一致。
 - `seer-codex-rules` 已作为可浏览源码纳入仓库。
 - 项目采用 MIT License，并完成首次公开发布净化。
 
 ## Recent Progress
 
-- 将 live 全局规则、Downloads 副本、`AGENTS-27.12.0.md` 候选、覆盖 inventory、公开/live Skill 树和私有恢复状态重新同步。
+- 正式发布 `v27.12.0`，将 live 全局规则、Downloads 副本、公开 artifact、覆盖 inventory、公开/live Skill 树和私有恢复状态重新同步。
 - 增加 `seer-capture` 来源型研究路由覆盖，并明确开发工作区输入默认不自动入库。
 - 修复原 `current-state.json`、README 和进度概览停留在 `27.9.0` 造成的严格 guardrail provenance 漂移。
 - 增加单 Agent 默认和派遣收益门禁，避免任务规模或“全面”措辞自动触发子 Agent。
@@ -41,6 +41,7 @@
 
 ## Detailed Records
 
+- `docs/progress/releases/v27.12.0/RELEASE_NOTES.md`
 - `docs/progress/rounds/2026-08-03-round-001-provenance-sync-27.12.0.md`
 - `docs/progress/releases/v27.9.0/RELEASE_NOTES.md`
 - `docs/progress/rounds/2026-07-28-round-001-multi-agent-model-routing.md`

@@ -2,9 +2,7 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-Latest formal release: `v27.9.0`
-
-Current governance candidate and local recovery baseline: `27.12.0`
+Current formal release: `v27.12.0`
 
 Agentmd Plan is a portable, verifiable, low-token governance system for Codex rules. The global `AGENTS.md` keeps only the outline that must remain active on every task, while the `seer-codex-rules` Skill loads detailed execution rules on demand.
 
@@ -22,7 +20,7 @@ Agentmd Plan is a portable, verifiable, low-token governance system for Codex ru
 
 ## Release Contents
 
-- `artifacts/AGENTS-27.12.0.md`: the candidate outline synchronized with the current live global rules; the latest formal release remains `v27.9.0`.
+- `artifacts/AGENTS-27.12.0.md`: the global outline synchronized with the current live rules and formal release.
 - `config/`: a Terra/high child fallback plus Terra/high exploration, Terra/max implementation, and Sol/high deep-review role templates.
 - `skills/seer-codex-rules/`: the Skill for rule design, task scaling, code and documentation governance, round/phase/release handling, acceptance closure, and versioning.
 - `skills/seer-codex-rules/scripts/`: checks for rule size, Skill routing, structural hotspots, synchronized state, and recovery snapshots.

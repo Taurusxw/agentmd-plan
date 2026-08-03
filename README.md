@@ -2,9 +2,7 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-最新正式发布：`v27.9.0`
-
-当前治理候选与本机恢复基线：`27.12.0`
+当前正式发布：`v27.12.0`
 
 Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理方案。全局 `AGENTS.md` 只保留每次任务都应生效的纲要，复杂执行规则由 `seer-codex-rules` Skill 根据任务类型按需加载。
 
@@ -22,7 +20,7 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 
 ## 版本内容
 
-- `artifacts/AGENTS-27.12.0.md`：与当前 live 全局规则一致的候选纲要；最新正式发布仍为 `v27.9.0`。
+- `artifacts/AGENTS-27.12.0.md`：与当前 live 全局规则及正式发布一致的全局纲要。
 - `config/`：Terra/high 子 Agent 兜底，以及 Terra/high 探索、Terra/max 实现和 Sol/high 深度复核角色模板。
 - `skills/seer-codex-rules/`：规则设计、任务分级、代码与文档治理、round/phase/release、验收收束和版本治理 Skill。
 - `skills/seer-codex-rules/scripts/`：规则体量、Skill 路由、结构热点、同步状态和恢复快照检查脚本。

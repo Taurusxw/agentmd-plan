@@ -1,6 +1,6 @@
-# AGENTS.md 27.12.0 候选补丁说明
+# AGENTS.md 27.12.0 正式补丁说明
 
-本次候选动作：`27.9.0 -> 27.12.0`，按最高影响属于 `MINOR`；项目最新正式发布仍为 `v27.9.0`，本轮不创建 Git tag 或 GitHub Release。
+本次版本动作：`27.9.0 -> 27.12.0`，按最高影响属于 `MINOR`，并正式发布为 `v27.12.0`。
 
 ## 变更原因
 
@@ -8,16 +8,16 @@ live 全局规则已经增加来源型研究默认进入 Seer Knowledge 的长�
 
 ## 修改内容
 
-1. 新增与 live `<codex-home>/AGENTS.md` 字节一致的 `AGENTS-27.12.0.md` 候选。
+1. 新增与 live `<codex-home>/AGENTS.md` 字节一致的 `AGENTS-27.12.0.md` 正式 artifact。
 2. 将全局规则覆盖矩阵和逐条 inventory 锚定到 `27.12.0` 与当前 SHA-256。
 3. 显式覆盖 `seer-capture` 及其研究/成书工作流，区分来源型研究与普通开发输入。
-4. 更新中英文 README、进度概览、文档索引和本轮记录，明确“正式发布 `v27.9.0`、当前治理候选 `27.12.0`”。
+4. 更新中英文 README、进度概览、文档索引和发布记录，统一正式版本 `v27.12.0`。
 5. 使用 `snapshot_state.py --write` 刷新忽略提交的机器私有 manifest 与 Skill 恢复快照。
 
 ## 版本边界
 
-- `VERSION`、Git tag 和 release 目录保持 `27.9.0`，因为用户没有授权正式发布。
-- `27.12.0` 是当前已安装规则的可审查候选和恢复锚点，不冒充已发布版本。
+- `VERSION`、Git tag、GitHub Release、release 目录和公开 artifact 统一使用 `27.12.0`。
+- live 全局规则和 Downloads 副本保持同版本、同哈希，私有恢复状态继续忽略提交。
 
 ## 验证要求
 

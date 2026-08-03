@@ -8,4 +8,5 @@
 
 ## Recent
 
+- [v27.12.0 Release](releases/v27.12.0/RELEASE_NOTES.md)
 - [2026-08-03 Round 001: Provenance Sync 27.12.0](rounds/2026-08-03-round-001-provenance-sync-27.12.0.md)
