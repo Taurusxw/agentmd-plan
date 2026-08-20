@@ -1,42 +1,18 @@
 # Global AGENTS Coverage Matrix
 
-Use this matrix to verify that the concise global outline delegates detailed behavior without losing semantic coverage.
+Use this matrix when a global candidate changes. Coverage is semantic, not literal duplication.
 
-Source global version: `29.1.0`
-Source global SHA256: `2A84F623607689C1709B6F3F3C6E17154B7CF9326A4369238CB7101F43BECCC5`
+Source global version: `30.0.0`
 Coverage verified: `2026-08-20`
 
-## Coverage Rule
+| Global concern | Detailed coverage |
+|---|---|
+| authority, rule destinations, overrides | `rule-governance.md`, `governance-ownership-boundary.md`, `project-agents-template.md` |
+| task scale, authorization, execution | `task-scaling-and-context.md`, `execution-standards.md`, `code-change-governance.md` |
+| documentation and version governance | `documentation-governance.md`, `rule-governance.md` |
+| Goal and acceptance boundaries | `goal-mode-closure.md`, `acceptance-closure.md`, `verification-and-reporting.md` |
+| architecture drift | `architecture-drift.md` |
+| governance-sensitive routing and checks | `low-token-guardrails.md`, `verification-and-reporting.md`, `rule-review-checklist.md` |
+| multi-agent net-benefit, access, ownership | `multi-agent-governance.md` |
 
-Each global rule must be `covered`, `delegated`, or deliberately `omitted`. Coverage is semantic, not literal duplication. Global rules remain the always-on layer; references provide detailed, on-demand execution guidance.
-
-## Section Map
-
-| Global Section | Status | Detailed Coverage |
-|---|---|---|
-| 1. Core principles | covered | `task-scaling-and-context.md`, `execution-standards.md`, `code-change-governance.md`, `documentation-governance.md`, `verification-and-reporting.md`, `acceptance-closure.md`, `goal-mode-closure.md`, `multi-agent-governance.md`, `governance-ownership-boundary.md`, companion `<codex-home>/skills/seer-capture/SKILL.md` |
-| 2. Instruction and rule locations | covered | `rule-governance.md`, `project-agents-template.md`, `task-scaling-and-context.md`, `governance-ownership-boundary.md` |
-| 3. Task levels | covered | `task-scaling-and-context.md`, `architecture-drift.md`, `documentation-governance.md`, `verification-and-reporting.md` |
-| 4. Mandatory Skill gate | covered | `low-token-guardrails.md`, `task-scaling-and-context.md`, `verification-and-reporting.md`, `multi-agent-governance.md`, `governance-ownership-boundary.md` |
-| 5. Execution and edit baselines | covered | `execution-standards.md`, `code-change-governance.md`, `architecture-drift.md` |
-| 6. Documentation, traceability, and versions | covered | `documentation-governance.md`, `rule-governance.md` |
-| 7. Validation and acceptance closure | covered | `verification-and-reporting.md`, `acceptance-closure.md`, `goal-mode-closure.md` |
-| 8. Completion check | covered | `verification-and-reporting.md`, `rule-review-checklist.md` |
-
-## Single-Pass Audit Dimensions
-
-Cover these dimensions in one audit pass; they are not five sequential review rounds:
-
-1. Coverage and task flow.
-2. Change, documentation, and version governance.
-3. Validation, authorization, and closure behavior.
-4. Maintainability, routing, and duplication.
-5. Deterministic metadata, scripts, and portability.
-
-## Acceptance Standard
-
-- Source version and SHA256 match the candidate or installed global file.
-- Every section maps to at least one direct reference.
-- `SKILL.md` remains a router rather than a second global manual.
-- Detailed references remain one level below `SKILL.md`.
-- Deterministic checks cover size, metadata, routes, synchronized copies, and optional private state.
+Check that each global concern is covered, deliberately omitted, or retained in the candidate. Do not add a source hash by default; perform one final byte comparison only when a named global/live sync or recovery consumer needs it.

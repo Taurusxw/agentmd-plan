@@ -17,24 +17,17 @@ DEFAULT_AGENTS_DIR = DEFAULT_CODEX_HOME / "agents"
 ROLE_POLICIES = {
     "explorer-fast.toml": {
         "name": "explorer_fast",
-        "model_family": "terra",
-        "allowed_efforts": {"low", "medium", "high"},
         "sandbox_mode": "read-only",
     },
     "worker-balanced.toml": {
         "name": "worker_balanced",
-        "model_family": "terra",
-        "allowed_efforts": {"medium", "high", "max"},
     },
     "reviewer-deep.toml": {
         "name": "reviewer_deep",
-        "model_family": "sol",
-        "allowed_efforts": {"high", "xhigh", "max"},
         "sandbox_mode": "read-only",
     },
 }
 
-ALLOWED_DEFAULT_EFFORTS = {"low", "medium", "high"}
 ACCESS_KINDS = {"read-only", "write", "network", "approval-bearing"}
 READ_ONLY_ROLES = {"explorer_fast", "reviewer_deep"}
 KNOWN_ROLES = {str(policy["name"]) for policy in ROLE_POLICIES.values()}
@@ -60,8 +53,8 @@ def is_positive_int(value: object, minimum: int = 1) -> bool:
     return isinstance(value, int) and not isinstance(value, bool) and value >= minimum
 
 
-def model_matches_family(value: object, family: str) -> bool:
-    return isinstance(value, str) and family in value.lower()
+def is_nonempty_string(value: object) -> bool:
+    return isinstance(value, str) and bool(value.strip())
 
 
 def assess_dispatch(
@@ -180,9 +173,8 @@ def validate_config(path: Path) -> dict[str, object]:
         backend = "schema-v2-override"
         portable_configuration = False
         warnings.append(
-            "features.multi_agent_v2 is supported by the official JSON schema and "
-            "takes precedence when enabled, but is not listed in the human-readable "
-            "configuration key table; verify backend behavior before migration"
+            "features.multi_agent_v2 is a non-public, non-portable compatibility input; "
+            "do not use it in portable templates or infer runtime semantics from it"
         )
         if documented_capacity is not None:
             warnings.append(
@@ -202,7 +194,9 @@ def validate_config(path: Path) -> dict[str, object]:
                 )
             else:
                 configured_capacity = v2_capacity
-                total_slots = v2_capacity
+                # Preserve the configured value in the JSON report without claiming
+                # root-inclusion or effective runtime capacity semantics.
+                total_slots = None
     else:
         if v2 is not None and not isinstance(v2, (bool, dict)):
             errors.append("features.multi_agent_v2 must be a Boolean or table")
@@ -215,11 +209,10 @@ def validate_config(path: Path) -> dict[str, object]:
                 configured_capacity = documented_capacity
                 total_slots = documented_capacity + 1
 
-    if not model_matches_family(agents.get("default_subagent_model"), "terra"):
-        errors.append("default_subagent_model must use the fast Terra family")
-    effort = agents.get("default_subagent_reasoning_effort")
-    if effort not in ALLOWED_DEFAULT_EFFORTS:
-        errors.append("default_subagent_reasoning_effort must be low, medium, or high")
+    for field in ("default_subagent_model", "default_subagent_reasoning_effort"):
+        value = agents.get(field)
+        if value is not None and not is_nonempty_string(value):
+            errors.append(f"{field} must be a non-empty string when explicitly set")
 
     capacity = {
         "backend": backend,
@@ -228,7 +221,7 @@ def validate_config(path: Path) -> dict[str, object]:
         "total_slots": total_slots,
         "child_slots": total_slots - 1 if total_slots is not None else None,
         "capacity_semantics": (
-            "locally-observed-total-slots"
+            "non-public-non-portable-unresolved"
             if backend == "schema-v2-override" and configured_capacity is not None
             else "spawned-threads-excluding-primary"
             if configured_capacity is not None
@@ -262,12 +255,9 @@ def validate_roles(directory: Path) -> dict[str, object]:
         role_errors: list[str] = []
         if data.get("name") != policy["name"]:
             role_errors.append(f"name must be {policy['name']}")
-        if not model_matches_family(data.get("model"), str(policy["model_family"])):
-            role_errors.append(f"model must use the {policy['model_family']} family")
-        effort = data.get("model_reasoning_effort")
-        if effort not in policy["allowed_efforts"]:
-            allowed = ", ".join(sorted(policy["allowed_efforts"]))
-            role_errors.append(f"model_reasoning_effort must be one of: {allowed}")
+        for field in ("model", "model_reasoning_effort"):
+            if not is_nonempty_string(data.get(field)):
+                role_errors.append(f"{field} must be a non-empty string")
         expected_sandbox = policy.get("sandbox_mode")
         if expected_sandbox is not None and data.get("sandbox_mode") != expected_sandbox:
             role_errors.append(f"sandbox_mode must be {expected_sandbox}")

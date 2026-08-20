@@ -66,13 +66,12 @@ def parse_global_metadata(text: str) -> tuple[str, str]:
     return version.group(1), date.group(1)
 
 
-def parse_inventory_source(path: Path) -> tuple[str, str]:
+def parse_inventory_version(path: Path) -> str:
     text = read_text(path)
     version = re.search(r"Source global version:\s*`?([^`\s]+)`?", text)
-    digest = re.search(r"Source global SHA256:\s*`?([A-Fa-f0-9]{64})`?", text)
-    if not version or not digest:
-        raise SystemExit("Coverage inventory is missing source version or SHA256")
-    return version.group(1), digest.group(1).upper()
+    if not version:
+        raise SystemExit("Rule inventory is missing source version")
+    return version.group(1)
 
 
 def write_snapshot(skill_dir: Path, destination: Path) -> None:
@@ -117,9 +116,9 @@ def main() -> int:
         raise SystemExit("Canonical artifact does not match live global AGENTS.md")
 
     inventory_path = skill_dir / "references" / "global-agents-rule-inventory.md"
-    source_version, source_hash = parse_inventory_source(inventory_path)
-    if source_version != version or source_hash != global_hash:
-        raise SystemExit("Coverage inventory is not anchored to live global AGENTS.md")
+    source_version = parse_inventory_version(inventory_path)
+    if source_version != version:
+        raise SystemExit("Rule inventory version is not anchored to live global AGENTS.md")
 
     write_snapshot(skill_dir, snapshot_path)
     tree_hash, file_count = skill_tree_sha256(skill_dir)
@@ -143,7 +142,7 @@ def main() -> int:
         "coverage": {
             "inventory_path": str(inventory_path),
             "source_version": source_version,
-            "source_sha256": source_hash,
+            "source_sha256": global_hash,
         },
     }
     artifacts_dir.mkdir(parents=True, exist_ok=True)

@@ -19,26 +19,15 @@ DEFAULT_PROJECT = Path(os.environ.get("SEER_CODEX_RULES_PROJECT", Path.cwd()))
 
 REQUIRED_GATE_PHRASES = [
     "seer-codex-rules",
-    "必须读取并遵守",
-    "最终回答必须说明",
-    "未覆盖风险",
-    "完成契约",
-    "主动派生合适的子 Agent",
-    "不设固定治理上限",
-    "容量不是派遣目标",
+    "residual risk",
+    "completion contract",
+    "concrete net benefit",
     "multi-agent-governance.md",
-    "无需再次确认",
-    "同一授权范围只确认一次",
-    "不因追求更强信心重跑",
-    "全量回归",
-    "agentmd-plan` 专有项目",
-    "严禁直接修改",
-    "详细变更报告",
-    "最新有效全局规则",
-    "旧对话",
-    "最高版本号",
-    "不得用文件、逐页、树或 artifact 哈希替代",
-    "没有上述需求时默认不计算、不记录",
+    "AGENTS.override.md",
+    "agentmd-plan",
+    "Ordinary L1/L2 file edits",
+    "global/live synchronization or recovery",
+    "current effective access",
 ]
 
 REQUIRED_REFERENCES = {
@@ -109,18 +98,12 @@ REQUIRED_REFERENCE_PHRASES = {
         "does not lower a platform-required blocked threshold",
     },
     "multi-agent-governance.md": {
-        "Agent-First Decision",
-        "Explicit Delegation Authorization",
-        "Effective Permission Gate",
-        "Delegation Benefit Gate",
-        "Critical Path Ownership",
-        "Adaptive Fan-Out And Waves",
-        "Wave Budget And Stop Gate",
-        "Runtime Capacity And Backend Semantics",
-        "Model Routing Matrix",
-        "Fresh Context And Fork Semantics",
-        "Conditional Nested Delegation",
-        "fork_turns=\"none\"",
+        "Net-Benefit Gate",
+        "Root Ownership",
+        "Effective Access Gate",
+        "Waves and packets",
+        "Integration and recursion",
+        "Configuration boundary",
         "Required effective access",
         "Required capability scope",
         "Parent permission checked",
@@ -128,10 +111,8 @@ REQUIRED_REFERENCE_PHRASES = {
         "Parent access observation source",
         "Dispatch decision",
         "runtime_permissions_verified=false",
-        "no fixed governance ceiling",
-        "Close Completed Agents",
-        "Do not ask a child to create a checksum, hash, or manifest by default",
-        "A mismatch triggers one reread of current state and a root decision",
+        "non-public, non-portable compatibility input",
+        "Default to zero hashes",
     },
 }
 
@@ -188,8 +169,8 @@ def skill_tree_sha256(skill_dir: Path) -> tuple[str | None, int]:
 
 
 def parse_global_metadata(text: str) -> tuple[str | None, str | None]:
-    version = re.search(r"版本[：:]\s*([0-9]+(?:\.[0-9]+){2})", text)
-    date = re.search(r"定版日期[：:]\s*([0-9]{4}-[0-9]{2}-[0-9]{2})", text)
+    version = re.search(r"(?:版本|Version)[：:]\s*([0-9]+(?:\.[0-9]+){2})", text)
+    date = re.search(r"(?:定版日期|Effective date)[：:]\s*([0-9]{4}-[0-9]{2}-[0-9]{2})", text)
     return (
         version.group(1) if version else None,
         date.group(1) if date else None,
@@ -221,7 +202,6 @@ def check_global_gate(path: Path) -> dict[str, object]:
         "path": str(path),
         "version": version,
         "date": date,
-        "sha256": sha256(path),
         "bytes": path.stat().st_size,
         "non_empty_lines": sum(1 for line in text.splitlines() if line.strip()),
         "warning": warning,
@@ -274,7 +254,7 @@ def check_skill(skill_dir: Path) -> dict[str, object]:
             if marker in text:
                 residues.append(f"{path.relative_to(skill_dir).as_posix()}: {marker}")
 
-    tree_hash, file_count = skill_tree_sha256(skill_dir)
+    file_count = len(skill_files(skill_dir))
     ok = all(
         (
             has_frontmatter,
@@ -291,7 +271,6 @@ def check_skill(skill_dir: Path) -> dict[str, object]:
         "ok": ok,
         "path": str(skill_dir),
         "frontmatter": has_frontmatter,
-        "tree_sha256": tree_hash,
         "file_count": file_count,
         "missing_required_references": missing_required_refs,
         "required_references_not_routed": required_not_routed,
@@ -350,16 +329,12 @@ def check_hashes(paths: list[Path]) -> dict[str, object]:
     }
 
 
-def parse_inventory_source(path: Path) -> tuple[str | None, str | None]:
+def parse_inventory_version(path: Path) -> str | None:
     if not path.is_file():
-        return None, None
+        return None
     text = read_text(path)
     version = re.search(r"Source global version:\s*`?([^`\s]+)`?", text)
-    digest = re.search(r"Source global SHA256:\s*`?([A-Fa-f0-9]{64})`?", text)
-    return (
-        version.group(1) if version else None,
-        digest.group(1).upper() if digest else None,
-    )
+    return version.group(1) if version else None
 
 
 def check_state(
@@ -368,6 +343,8 @@ def check_state(
     skill_dir: Path,
     required: bool,
 ) -> dict[str, object]:
+    if not required:
+        return {"ok": True, "status": "not-requested"}
     manifest_path = project_dir / "artifacts" / "current-state.json"
     if not manifest_path.is_file():
         return {
@@ -417,12 +394,12 @@ def check_state(
         mismatches.append("current Skill snapshot hash differs from manifest")
 
     inventory_path = skill_dir / "references" / "global-agents-rule-inventory.md"
-    inventory_version, inventory_hash = parse_inventory_source(inventory_path)
-    if inventory_version != global_version or inventory_hash != global_hash:
-        mismatches.append("coverage inventory is not anchored to the live global file")
+    inventory_version = parse_inventory_version(inventory_path)
+    if inventory_version != global_version:
+        mismatches.append("rule inventory version is not anchored to the live global file")
     if coverage_state.get("source_version") != inventory_version:
         mismatches.append("coverage version differs from manifest")
-    if coverage_state.get("source_sha256") != inventory_hash:
+    if coverage_state.get("source_sha256") != global_hash:
         mismatches.append("coverage hash differs from manifest")
 
     for relative in ("README.md", "docs/PROGRESS.md"):
@@ -439,7 +416,7 @@ def check_state(
         "skill_tree_sha256": skill_hash,
         "skill_file_count": skill_count,
         "coverage_source_version": inventory_version,
-        "coverage_source_sha256": inventory_hash,
+        "coverage_source_sha256": global_hash,
     }
 
 
@@ -454,6 +431,11 @@ def main() -> int:
         action="store_true",
         help="Require a private current-state manifest and Skill snapshot",
     )
+    parser.add_argument(
+        "--compare-global-copy",
+        action="store_true",
+        help="Compare a named global copy once for an actual sync or recovery consumer",
+    )
     parser.add_argument("--strict", action="store_true", help="Fail when warnings exist")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
@@ -467,7 +449,11 @@ def main() -> int:
         "global_gate": check_global_gate(global_agents),
         "skill": check_skill(skill_dir),
         "project": check_project(project_dir),
-        "synced_hashes": check_hashes([global_agents, downloads_agents]),
+        "synced_hashes": (
+            check_hashes([global_agents, downloads_agents])
+            if args.compare_global_copy
+            else {"ok": True, "status": "not-requested"}
+        ),
         "state": check_state(project_dir, global_agents, skill_dir, args.require_state),
     }
     warnings = [

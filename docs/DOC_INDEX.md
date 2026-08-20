@@ -6,7 +6,7 @@
 |---|---|
 | `../README.md` | 中文项目说明书、安装、验证和隐私边界。 |
 | `../README.en.md` | English project manual, installation, validation, and privacy boundaries. |
-| `../VERSION` | 当前项目发布版本。 |
+| `../VERSION` | 当前准备中的项目发布目标；验收和公开发布状态见 release record。 |
 | `../AGENTS.md` | 本仓库的 Codex 工作规则。 |
 | `../CONTRIBUTING.md` | 贡献和验证要求。 |
 | `../SECURITY.md` | 私密安全报告流程。 |
@@ -16,16 +16,17 @@
 
 | Path | Purpose |
 |---|---|
-| `../artifacts/AGENTS-29.1.0.md` | 与当前 live 全局规则一致的 `v29.1.0` 正式发布纲要。 |
+| `../artifacts/AGENTS-30.0.0.md` | `v30.0.0` 全局规则候选；不表示已安装或已公开发布。 |
 | `../config/` | 可移植的多 Agent 默认配置和角色模板。 |
 | `../skills/seer-codex-rules/` | 可安装的 Skill 源码。 |
 | `progress/rounds/` | 有长期价值的公开开发记录。 |
-| `progress/releases/v29.1.0/` | 当前 `v29.1.0` 发布说明与验收记录。 |
+| `progress/releases/v30.0.0/` | `v30.0.0` 候选发布说明与待完成验收记录。 |
 
 ## Recent Governance Record
 
 - `progress/rounds/2026-08-20-round-001-integrity-evidence-governance-29.1.0.md`：将普通任务改为默认零哈希，并限制同步/恢复场景只做一次最终一致性证明。
-- `progress/rounds/2026-08-16-round-001-current-codex-subagent-governance.md`：按当前官方 Codex Subagents/配置契约迁移可移植容量键，并强化派遣权限证据、波次停止门和真实任务评测。
+- `progress/rounds/2026-08-20-round-002-release-30.0.0-governance.md`：冻结 major 候选的路由基线、验证计划、两目标发布边界和 Nature 排除项。
+- `progress/rounds/2026-08-16-round-001-current-codex-subagent-governance.md`：记录当时的容量键、派遣权限证据、波次停止门和真实任务评测；容量与模型配置均为历史资料，非当前默认值。
 - `progress/rounds/2026-08-11-round-001-handover-lifecycle-permission-aware-dispatch.md`：冻结已消费的交接快照，并为子 Agent 派遣增加父任务实时 permission mode 门禁与静态非证明信号。
 - `progress/rounds/2026-08-04-round-001-agent-first-multi-agent-governance-29.0.0.md`：以显式非 Ultra 授权、自适应 V2 fan-out、多模型分工和单位有效结果 token 控制取代固定单 Agent/1-3 上限。
 - `progress/rounds/2026-08-03-round-004-latest-effective-global-rule-28.2.0.md`：定义宿主加载优先的最新有效规则，阻止旧上下文降级和最高版本号自主切换。

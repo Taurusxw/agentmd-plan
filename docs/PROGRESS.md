@@ -2,19 +2,24 @@
 
 ## Current State
 
-- 当前正式发布、`VERSION`、公开 artifact、live 全局 `AGENTS.md`、Downloads 同步副本和 live `seer-codex-rules` 均为 `v29.1.0`；当前检出树仅保留最新版本化资产，GitHub 和 Git 历史继续保留旧版本。
-- 当前版本已将多 Agent 配置迁回官方人类可读参考中的 `[agents].max_concurrent_threads_per_session`，用 31 个 spawned-agent 子线程保持通常 32 个含根总槽位；官方 JSON Schema 支持、但键表未列出的 `features.multi_agent_v2` 只作为带警告的后端覆盖兼容输入。
-- 当前已安装 Skill 在 permission-aware dispatch 基线上加入默认零哈希、证据类型边界、单次最终快照和多 Agent mismatch 停止规则；live 与发布源码均为同一 26 文件状态。
-- 新任务已验证 Sol/high 非 Ultra 显式派遣可突破三个子 Agent：31/31 创建请求被接受，直接观察到 22 个子 Agent 同时运行；旧任务仍保留创建时的四总槽位快照。
+- `VERSION` 与当前检出树的发布目标为 `v30.0.0`；候选静态与 15 场景路由验收、Skills 分发仓库推送和维护环境安装已通过，源仓库 commit、Git tag、GitHub Release 和最终公开发布记录仍待完成。当前检出树遵循 latest-only 本地资产策略；GitHub 历史 tags/Releases 和 Git history 不改写。
+- `config/` 的容量和模型标识仅是可选示例；31/32 槽位配置与 Terra/Sol 路由是历史配置/观察，不是当前治理默认值。`features.multi_agent_v2` 是非公开、不可移植的运行时输入，不是可移植模板或迁移目标。
+- 候选仅在规则或 `AGENTS.md`、版本/progress/文档治理、发布/迁移/全局同步、架构漂移、Goal/验收扩张或多 Agent 协作等治理敏感情形加载 `seer-codex-rules`；普通 L1/L2 与单文件任务不因一次本地修改而触发它。多 Agent 仅在净收益门禁通过时派遣，容量不是目标。
+- 历史新任务观察曾以 Sol/high 非 Ultra 请求 31 个子 Agent，并直接观察到 22 个同时运行；它证明容量不是目标，也不构成当前容量或模型默认值。
 - `seer-codex-rules` 已作为可浏览源码纳入仓库。
 - 项目采用 MIT License，并完成首次公开发布净化。
 
 ## Recent Progress
 
-- 正式发布 `v29.1.0`：普通任务默认不生成完整性元数据，多 Agent 结果不再默认生成 checksum/manifest；同时纳入 permission-aware 派遣证据、官方 `[agents]` 31 子线程模板、任务级波次停止门和当前 Codex 配置兼容边界。
+- 准备 `v30.0.0` major candidate：将 `seer-codex-rules` 改为治理敏感的条件路由，并更新多 Agent 工作模型；候选保留零哈希边界、permission-aware dispatch、净收益派遣、两仓发布边界和 latest-only 本地资产策略。尚未声称候选验证或发布完成。
+- 在隔离分发仓库 worktree 中优化 5 个自有 Seer Skills：`seer-capture`、`seer-project-space-health`、`seer-math-exam`、`seer-mathbook` 和 `seer-prepare-open-source-release`。它们分别收窄捕获、深度清理、数学严谨性引用、精确图形实现和开源发布触发边界。
+- 上述 5 个 Seer Skills 已通过 commit `38cd851` 推送到 `skills-manager-backup/main`（不建 Release）并经 canonical symlink 安装；30.0.0 全局 live、Downloads 与治理 Skill 也已安装，私有回退副本与最终恢复状态已保留。
+- 最终恢复阶段发现并修复旧 `snapshot_state.py` 对公开 inventory 的常驻 SHA256 依赖；inventory 现在只锚定版本，字节指纹仅由真实恢复消费者现场生成。受影响共享测试 25/25 通过，final strict live/state/global-copy guardrail 无 mismatch。
+- 基线曾以 `gpt-5.6-sol` 只读运行 20 个路由提示；候选只重跑非 Nature 的场景 1–15并全部通过。相同 1–15 基线/候选总输入为 `2,700,004 -> 2,287,102`，median 为 `169,355 -> 133,725`；普通 cohort 总输入下降 53.3%、median 下降 60.5%，且没有实际子 Agent 派遣或 hash 命令。
+- Nature 场景 16–20 仅作只读审计观察，未来可作为候选输入；本轮不实施任何 Nature 工作。所有 `nature-*` 源码、版本、测试、安装副本和 `.agents` 重复副本均冻结，且不做重复清理。第三方 Skill 尚无获准的禁用动作。
 - 用户单独授权后，已创建忽略 Git 的本机回退副本，将 `29.1.0` 全局候选同步到 live 与 Downloads，并将同轮 Skill 增量安装到 live；未修改 Agent 配置，未执行 Git/GitHub、公开发布、HANDOFF 刷新或 31 子 Agent 压测。
 - 基于 GPT-5.6 社区多源“SHA theater”报告和 OpenAI 精简提示指导，新增默认零哈希策略：只有字节一致性验收存在实际消费者时才计算一次，禁止用文件、逐页、树或 artifact 哈希替代语义、来源、行为、测试或视觉验证；多 Agent 结果契约也禁止默认生成 checksum/manifest 或因 mismatch 进入重复哈希循环。
-- 此前已将 post-release permission-aware Skill、三份角色和 `[agents]` 31 子线程配置同步到 live；相关 validator、router、guardrail 和 fresh-task 四子 Agent 冒烟证据保持有效，本轮没有修改或重复验证这些配置。
+- 此前曾同步 permission-aware Skill、角色示例和 31 子线程配置；相关 router/guardrail 与 fresh-task 冒烟证据仅作历史参考，本轮未修改或重复验证这些配置，也不把它们设为默认值。
 - 结合当前 OpenAI Codex Subagents、配置与 Skills 官方文档，以及 Anthropic、Google、Microsoft 的多 Agent/评测一手资料，确认现有 Agent-first、渐进加载和自适应分波方向成立，并补入可移植配置边界、任务级波次预算、边际证据停止门和首轮通过/返工指标。
 - 缩短 `seer-codex-rules` frontmatter 描述以降低大型 Skill 清单的常驻上下文占用，同时保留规则、文档、验收、架构和多 Agent 触发面。
 - 验证 `seer-project-handover` 已区分显式生成与接收时一次性消费；普通接管、实现、验证和收尾不会刷新冻结 HANDOFF，只有以后再次明确请求交接才整体重建。
@@ -23,8 +28,8 @@
 - 增加 `29.0.0` Agent-first 候选：收益门禁通过即由适用规则明确要求主动派遣，无需再次点名或使用 Ultra。
 - 完成 31 子 Agent 压力验证：无 collaboration-limit 创建失败，但满载出现 `429`、图像处理失败、关闭超时和原始结果冲突，进一步证明容量不是利用率目标。
 - 移除 1/2/3 固定治理上限；按就绪独立包、有效空闲槽位与任务/时间/token 预算自适应分波，容量不是利用率目标。
-- `v29.0.0` 阶段曾将可移植和 live 配置迁到 V2 含根总容量 32；当前 post-release 候选已改用官方人类可读 `[agents]` 键的 31 个子线程，并把 V2 限定为 schema 兼容输入。
-- 将角色路由调整为 Terra/medium 探索与默认、Terra/high 实现、Sol/high 深度复核；异构派遣默认 fresh context，复杂度驱动升降档。
+- `v29.0.0` 阶段的 V2/32 槽位和随后 31 子线程配置均为历史实验；`features.multi_agent_v2` 不公开、不可移植，不应作为模板、兼容路径或迁移输入。
+- 历史角色示例曾使用 Terra/medium 探索、Terra/high 实现和 Sol/high 深度复核；当前治理只要求按实际可用能力、复杂度和成本选择兼容角色。
 - 允许父任务包显式授权递归子树，但根平铺分波仍是默认；整棵树共享收益、容量、互斥写入和紧凑结果门禁。
 - 增加 `28.2.0` 最新有效规则：每个任务实施宿主实际加载的 live 全局规则，旧对话和历史文件不得降级，也不按磁盘或远端最高版本号自主切换。
 - 将规则生效点限定为新任务或宿主明确重载，并保持有效指令优先级与 `agentmd-plan` 集中治理边界。
@@ -56,8 +61,8 @@
 
 ## Next Steps
 
-- 在新任务或宿主明确重载后确认 `29.1.0` 已进入有效指令链；不为此重复既有 31 子 Agent 压测。
-- 从真实任务记录波次、活跃槽位、上下文 fork、单位有效结果 token、返工和耗时；依据收益和递减回报使用分波，而非默认填满 31 个子槽位。
+- 对 `v30.0.0` 候选执行冻结的验证计划，并仅在完成明确授权后分别记录两仓发布与维护环境安装；不重复历史 31-child 压测。
+- 从真实任务记录波次、活跃槽位、上下文 fork、单位有效结果 token、返工和耗时；依据收益和递减回报使用分波，不设固定容量目标。
 - 根据实际使用反馈继续完善跨平台路径和安装体验。
 - 根据跨语言项目反馈扩展结构信号解析，同时保持事件触发和人工语义复核。
 - 仅在有明确收益时增加 GitHub 安全和社区自动化。
@@ -66,20 +71,22 @@
 
 - 文字 guardrail 能阻止把哈希写成默认验收，但无法自动判断每个领域是否存在真实的字节完整性消费者；最终仍需根任务把检查映射到明确断言。
 - 子 Agent 的最终有效权限来自派生时重新应用的父任务 live runtime overrides；静态角色配置只能说明默认能力，不能探测或保证本次写入/网络/审批权限。
-- 当前官方 JSON Schema 包含 `features.multi_agent_v2` 且声明启用时优先，但人类可读配置键表未列出它，也未说明其容量是否包含根线程；项目仅按既有实测保留兼容识别，不能把它宣传为可移植模板。`fork_turns` 同样只按当前编排器能力使用。
+- `features.multi_agent_v2` 是非公开、不可移植的运行时输入，容量语义也不作为本项目治理契约；不得宣传为可移植模板、兼容路径或迁移目标。`fork_turns` 同样只按当前编排器能力使用。
 - Codex 不保证 active task 对磁盘规则变更自动热重载；规则必须由宿主在新任务或明确重载后供应，才能成为该任务的有效指令。
-- 配置/提示接受 32 或更高容量不代表账号、后端或宿主保证真实并发；实时容量和平台硬限制始终优先。
+- 历史配置/提示曾接受 32 或更高容量，但不代表账号、后端或宿主保证真实并发；实时容量和平台硬限制始终优先。
 - 多 Agent 往往以更多总 token 换取时间、覆盖或质量；便宜模型、fresh context、去重和分波停止规则只能优化单位有效结果成本，不能保证绝对节省。
 - 规则系统仍依赖 Codex 正确触发 Skill；脚本和最终披露用于降低而非消除偏移。
 - 自定义 Agent 的发现可能需要新任务或重启；脚本可验证配置，但不能证明每次语义派遣都完全正确。
+- `v30.0.0` 的候选验证、维护环境安装、Git tag 和 GitHub Release 仍处于 pending；本记录不以旧发布证据替代这些步骤。
 
 ## Detailed Records
 
 - `docs/progress/rounds/2026-08-20-round-001-integrity-evidence-governance-29.1.0.md`
+- `docs/progress/rounds/2026-08-20-round-002-release-30.0.0-governance.md`
 - `docs/progress/rounds/2026-08-16-round-001-current-codex-subagent-governance.md`
 - `docs/progress/rounds/2026-08-11-round-001-handover-lifecycle-permission-aware-dispatch.md`
 - `docs/progress/rounds/2026-08-04-round-001-agent-first-multi-agent-governance-29.0.0.md`
-- `docs/progress/releases/v29.1.0/RELEASE_NOTES.md`
+- `docs/progress/releases/v30.0.0/RELEASE_NOTES.md`
 - `docs/progress/rounds/2026-08-03-round-004-latest-effective-global-rule-28.2.0.md`
 - `docs/progress/rounds/2026-08-03-round-003-centralized-governance-ownership-28.1.0.md`
 - `docs/progress/rounds/2026-08-03-round-002-gpt-5p6-execution-efficiency.md`

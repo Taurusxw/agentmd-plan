@@ -71,11 +71,12 @@ max_concurrent_threads_per_session = 128
             )
             v2_report = MODULE.validate_config(v2_path)
             self.assertTrue(v2_report["ok"])
-            self.assertEqual(v2_report["capacity"]["total_slots"], 128)
-            self.assertEqual(v2_report["capacity"]["child_slots"], 127)
+            self.assertEqual(v2_report["capacity"]["configured_value"], 128)
+            self.assertIsNone(v2_report["capacity"]["total_slots"])
+            self.assertIsNone(v2_report["capacity"]["child_slots"])
             self.assertFalse(v2_report["capacity"]["portable_configuration"])
             self.assertEqual(v2_report["capacity"]["backend"], "schema-v2-override")
-            self.assertIn("official JSON schema", v2_report["warnings"][0])
+            self.assertIn("non-public, non-portable", v2_report["warnings"][0])
 
             minimum_path = Path(directory) / "v2-minimum.toml"
             minimum_path.write_text(
@@ -91,10 +92,11 @@ max_concurrent_threads_per_session = 1
             )
             minimum_report = MODULE.validate_config(minimum_path)
             self.assertTrue(minimum_report["ok"], minimum_report)
-            self.assertEqual(minimum_report["capacity"]["total_slots"], 1)
-            self.assertEqual(minimum_report["capacity"]["child_slots"], 0)
+            self.assertEqual(minimum_report["capacity"]["configured_value"], 1)
+            self.assertIsNone(minimum_report["capacity"]["total_slots"])
+            self.assertIsNone(minimum_report["capacity"]["child_slots"])
 
-    def test_v2_precedence_warns_and_rejects_expensive_default(self) -> None:
+    def test_v2_precedence_does_not_prescribe_a_default_model(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "config.toml"
             path.write_text(
@@ -111,11 +113,25 @@ max_concurrent_threads_per_session = 32
                 encoding="utf-8",
             )
             report = MODULE.validate_config(path)
-            self.assertFalse(report["ok"])
-            self.assertEqual(len(report["errors"]), 2)
-            self.assertIn("must use the fast Terra family", report["errors"][0])
-            self.assertIn("must be low, medium, or high", report["errors"][1])
+            self.assertTrue(report["ok"], report)
+            self.assertEqual(report["errors"], [])
             self.assertTrue(any("is ignored" in warning for warning in report["warnings"]))
+
+    def test_accepts_available_role_model_and_effort_without_fixed_policy(self) -> None:
+        project = Path(__file__).parents[3]
+        source_roles = project / "config" / "agents"
+        with tempfile.TemporaryDirectory() as directory:
+            copied_roles = Path(directory)
+            for source in source_roles.glob("*.toml"):
+                text = source.read_text(encoding="utf-8")
+                if source.name == "worker-balanced.toml":
+                    text = text.replace('model = "gpt-5.6-terra"', 'model = "available-model"')
+                    text = text.replace('model_reasoning_effort = "high"', 'model_reasoning_effort = "available-effort"')
+                (copied_roles / source.name).write_text(text, encoding="utf-8")
+
+            report = MODULE.validate_roles(copied_roles)
+
+        self.assertTrue(report["ok"], report)
 
     def test_accepts_documented_defaults_and_legacy_capacity_alias(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

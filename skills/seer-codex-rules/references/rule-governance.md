@@ -15,6 +15,10 @@ Use this reference when designing, editing, auditing, compacting, or versioning 
 
 Choose the narrowest destination that still gives future Codex runs enough context to act correctly.
 
+## Temporary Overrides
+
+Create `AGENTS.override.md` only when the current task clearly requires a narrow temporary exception; the user does not have to name the file verbatim. State the affected path or task, the reason, and the restoration owner or condition. Preserve the prior effective rule context, verify precedence before relying on the exception, and remove the override or restore the original rule when the exception ends. Do not use an override to bypass protected-governance ownership, runtime permissions, or a missing authorization.
+
 ## Version Bump Rules
 
 Use `MAJOR.MINOR.PATCH` for versioned rule files such as global `AGENTS.md`.

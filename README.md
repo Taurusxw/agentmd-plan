@@ -2,9 +2,9 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-当前正式发布：`v29.1.0`
+当前准备中的发布候选：`v30.0.0`（尚未完成验收或公开发布）
 
-当前检出树、公开 artifact 与维护环境 live 规则均为 `29.1.0`。GitHub 保留历史 tags/Releases 和 Git commit 历史，当前检出树仅保留最新版本化资产。
+当前检出树和公开 artifact 的目标版本为 `30.0.0`。两仓发布路径中的源仓库与独立分发仓库，以及维护环境安装、Git tag 和 GitHub Release，均须在各自完成后单独记录；GitHub 保留历史 tags/Releases 和 Git commit 历史，当前检出树遵循 latest-only 本地资产策略。
 
 Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理方案。全局 `AGENTS.md` 只保留每次任务都应生效的纲要，复杂执行规则由 `seer-codex-rules` Skill 根据任务类型按需加载。
 
@@ -12,12 +12,12 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 
 - 防止全局 `AGENTS.md` 随规则增加而持续膨胀。
 - 让短任务保持轻量，同时为重要开发、迁移和发布保留完整验证与溯源。
-- 通过全局门禁、Skill 路由、reference 模块、校验脚本和最终披露降低规则偏移。
+- 通过条件化治理路由、Skill 路由、reference 模块、校验脚本和最终披露降低规则偏移。
 - 约束重复验收、过多 round 和低概率边界条件过度开发。
 - 让目标内本地修改和非破坏性验证默认直行，并对重复权限确认、回归测试和安全复核设置事件触发与证据复用规则。
 - 为持续运行的 Goal 冻结有限完成条件，防止自动续跑把可选边界不断变成必做工作。
 - 在连续补丁侵蚀模块边界前，用事件触发的热点检查恢复结构化与模块化决策。
-- 用规则显式授权在非 Ultra 下主动派遣，按独立工作包、官方 `[agents]` 容量和任务预算自适应分波，并用多模型路由、紧凑上下文与互斥写入平衡数量、速度、质量和 token。
+- 只在独立工作包具有明确净收益且运行时允许时派遣，按可用容量和任务预算自适应分波，并用紧凑上下文与互斥写入控制协调成本。
 - 将个人路径、私有备份和 live 状态隔离在公开仓库之外。
 - 截图、文档、链接和调研默认只分析、不持久化；只有用户对当次明确材料指定 `[入库]`、Knowledge 或具体 Book 时才调用 `seer-capture`，授权不跨对话或相邻任务继承。
 - 全局主 `AGENTS.md` 和 `seer-codex-rules` 只允许在 `agentmd-plan` 专有项目内修改；其他项目只能提交详细变更报告，不能直接同步或覆盖。
@@ -25,8 +25,8 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 
 ## 版本内容
 
-- `artifacts/AGENTS-29.1.0.md`：当前正式发布并已在维护环境安装的全局规则纲要。
-- `config/`：当前版本使用官方 `[agents]` 31 子线程（连同根任务通常共 32）的可移植模板，以及 Terra/medium 探索、Terra/high 实现和 Sol/high 深度复核角色模板。
+- `artifacts/AGENTS-30.0.0.md`：准备中的全局规则候选；安装与公开发布均待独立验收。
+- `config/`：可选的多 Agent 配置与角色示例；其中的容量和模型标识不是当前治理默认值，必须由实际运行时能力和任务需要决定。
 - `skills/seer-codex-rules/`：规则设计、任务分级、代码与文档治理、round/phase/release、验收收束和版本治理 Skill。
 - `skills/seer-codex-rules/scripts/`：规则体量、Skill 路由、结构热点、同步状态和恢复快照检查脚本。
 - `docs/`：公开项目状态、文档索引和必要的开发与发布记录。
@@ -38,22 +38,23 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 
 ```text
 全局 AGENTS.md
-  -> 强制加载 seer-codex-rules/SKILL.md
-      -> 判断 L0-L4 和 guardrail 等级
-          -> 扫描独立工作包；门禁通过即主动派遣并按容量/预算分波
-              -> 只加载当前任务需要的 reference
-                  -> 修改、验证、留痕、收束
+  -> 按任务匹配加载适用 Skill
+      -> 治理敏感任务加载 seer-codex-rules
+          -> 判断 L0-L4、guardrail 和独立工作包
+              -> 净收益门禁通过才派遣并按运行时容量/预算分波
+                  -> 只加载当前任务需要的 reference
+                      -> 修改、验证、留痕、收束
 ```
 
-普通文件修改任务只需读取一次 Skill 路由、任务分级和一个产物相关 reference，结束时复用已有上下文。规则同步、迁移或发布才启用更完整的 guardrail，避免为了合规机械消耗上下文。
+匹配现有 Skill 的任务照常加载该 Skill。`seer-codex-rules` 只在规则或 `AGENTS.md`、版本/progress/文档治理、发布/迁移/全局同步、架构漂移、Goal/验收扩张或多 Agent 协作等治理敏感情形加载；普通 L1/L2 与单文件工作不因一次本地修改而触发它。收益门禁通过才派遣，避免为了合规或填满容量机械消耗上下文。
 
 ## 安装
 
 1. 备份现有的 `<codex-home>/AGENTS.md`、`config.toml`、`agents/` 和同名 Skill。
 2. 将 `skills/seer-codex-rules/` 复制到 `<codex-home>/skills/seer-codex-rules/`。
-3. 审阅 `artifacts/AGENTS-29.1.0.md`，确认符合自己的工作方式。
+3. 审阅 `artifacts/AGENTS-30.0.0.md`，确认符合自己的工作方式。
 4. 将该 artifact 安装为 `<codex-home>/AGENTS.md`。
-5. 将 `config/agents.toml.example` 的 `[agents]` 表合并进 `<codex-home>/config.toml`，再将 `config/agents/*.toml` 复制到 `<codex-home>/agents/`。若旧环境显式使用官方 JSON Schema 支持但人类可读键表未列出的 `[features.multi_agent_v2]`，先按实际子槽位迁移，新配置不要同时保留两种容量键。
+5. 如需采用可选示例，再将 `config/agents.toml.example` 的 `[agents]` 表合并进 `<codex-home>/config.toml`，并将 `config/agents/*.toml` 复制到 `<codex-home>/agents/`。`[features.multi_agent_v2]` 是非公开、不可移植的运行时输入，不是文档化模板或迁移目标；不要在新配置中采用它。
 6. 运行下方校验命令，确认版本、Skill 路由、模型角色和同步状态。
 
 `<codex-home>` 通常由环境变量 `CODEX_HOME` 指定；未设置时一般是 `<user-home>/.codex`。
@@ -113,16 +114,16 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 
 ### 多 Agent 与模型路由
 
-- 关键执行前扫描独立的发现、实现、验证和专业复核工作包；收益门禁通过即主动派遣，适用规则本身就是非 Ultra `ExplicitRequestOnly` 的明确授权。
+- 识别独立的发现、实现、验证和专业复核工作包；只有工作包有界、可独立验证、写入互斥、运行时允许，且速度、隔离、能力路由或重大风险覆盖的收益明确高于协调与 token 成本时才派遣。
 - 每波数量取就绪独立包、实时空闲槽位和任务/时间/token 预算的最小值；治理层不设 1/2/3 固定上限，配置容量也不是利用率目标。
-- `explorer_fast` 默认 Terra/medium，`worker_balanced` 默认 Terra/high，`reviewer_deep` 默认 Sol/high；机械任务可降档，复杂实现可升到 max，Ultra 不作为派遣前提。
+- 可选角色示例中的模型和推理档位只作历史配置参考，不是治理默认值；每次派遣按实际可用能力、任务复杂度和成本选择兼容角色。
 - 每次派生前先写明工作包所需的只读/写入/网络/审批访问，并核对父任务当前有效 permission mode；角色文件中的静态 `sandbox_mode` 只表示默认能力，不能证明本次子 Agent 的最终权限。
 - 任务包同时记录具体路径、工具、服务或外部副作用目标，父任务实际观察到的有效访问及其观测来源，以及本次派遣的相容性结论；不能只写一个不可审计的 `checked=yes`。
 - 写任务只交给实现 worker。父任务权限不足或旧任务状态异常时，根任务继续完成可做工作，只请求一次必要授权或建议在正确权限的新任务重新派生，避免子 Agent 循环询权。
 - 主 Agent 保留需求、关键路径、写入所有权、分波汇总、集成和最终验证；一个文件或生成物同时只允许一个写入者。
 - 每个非平凡波次冻结验收信号和任务级上限；只有新增证据可能改变决定或关闭明确缺口时才续派，并记录首轮通过、返工和拒绝原因。
-- 当前编排器支持时，异构角色使用 `fork_turns="none"` 和紧凑任务包；该参数是宿主适配，不是可移植配置契约。嵌套默认关闭，只有父任务包明确授权递归子树并重过同一门禁时才允许。
-- 官方模板配置 31 个 spawned-agent 子线程，连同根任务通常共 32；解析接受该值不证明后端真实容量，必须在新任务中探测并服从运行时硬限制。
+- 当前编排器支持时，优先使用紧凑的新鲜上下文；具体上下文参数属于宿主适配，不是可移植配置契约。嵌套默认关闭，只有父任务包明确授权递归子树并重过同一门禁时才允许。
+- 31 个 spawned-agent 子线程（通常 32 个含根槽位）只是历史配置与压力观察，不是治理默认容量；每个任务以运行时硬限制和有效空闲槽位为准。
 
 ### 留痕控制
 
@@ -136,11 +137,11 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 在仓库根目录运行：
 
 ```powershell
-python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-29.1.0.md
+python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-30.0.0.md
 python -m py_compile skills/seer-codex-rules/scripts/agent_routing_check.py skills/seer-codex-rules/scripts/guardrail_check.py skills/seer-codex-rules/scripts/measure_rules.py skills/seer-codex-rules/scripts/snapshot_state.py skills/seer-codex-rules/scripts/structure_check.py
 python -m unittest discover -s skills/seer-codex-rules/tests -p "test_*.py" -v
 python skills/seer-codex-rules/scripts/agent_routing_check.py --config config/agents.toml.example --agents-dir config/agents --json
-python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-29.1.0.md --downloads-agents artifacts/AGENTS-29.1.0.md --skill skills/seer-codex-rules --json
+python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-30.0.0.md --downloads-agents artifacts/AGENTS-30.0.0.md --skill skills/seer-codex-rules --json
 codex --strict-config doctor --summary
 codex debug prompt-input probe
 ```
@@ -153,7 +154,7 @@ codex debug prompt-input probe
 - 全局工作模型或兼容边界变化升级 `MAJOR`。
 - 新增长期规则、Skill 路由或治理能力升级 `MINOR`。
 - 不改变行为的错字、格式和链接修正升级 `PATCH`。
-- 回退时恢复升级前的全局规则、Skill、`config.toml` 和自定义 Agent 文件，并重新运行同步、模型路由与覆盖检查。
+- 回退时恢复上一已验收版本的全局规则、Skill、`config.toml` 和自定义 Agent 文件；源仓库发布与维护环境安装是两个独立目标，必须分别确认并重新运行受影响检查。
 
 ## 隐私与安全
 
