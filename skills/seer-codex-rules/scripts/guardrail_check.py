@@ -37,6 +37,8 @@ REQUIRED_GATE_PHRASES = [
     "最新有效全局规则",
     "旧对话",
     "最高版本号",
+    "不得用文件、逐页、树或 artifact 哈希替代",
+    "没有上述需求时默认不计算、不记录",
 ]
 
 REQUIRED_REFERENCES = {
@@ -92,6 +94,8 @@ REQUIRED_REFERENCE_PHRASES = {
         "Full-Suite Triggers",
         "Security Review Triggers",
         "Bug-Discriminating Evidence",
+        "Integrity Metadata Boundary",
+        "Default to no integrity metadata",
     },
     "goal-mode-closure.md": {
         "Completion Contract",
@@ -107,16 +111,27 @@ REQUIRED_REFERENCE_PHRASES = {
     "multi-agent-governance.md": {
         "Agent-First Decision",
         "Explicit Delegation Authorization",
+        "Effective Permission Gate",
         "Delegation Benefit Gate",
         "Critical Path Ownership",
         "Adaptive Fan-Out And Waves",
+        "Wave Budget And Stop Gate",
         "Runtime Capacity And Backend Semantics",
         "Model Routing Matrix",
         "Fresh Context And Fork Semantics",
         "Conditional Nested Delegation",
         "fork_turns=\"none\"",
+        "Required effective access",
+        "Required capability scope",
+        "Parent permission checked",
+        "Current parent effective access",
+        "Parent access observation source",
+        "Dispatch decision",
+        "runtime_permissions_verified=false",
         "no fixed governance ceiling",
         "Close Completed Agents",
+        "Do not ask a child to create a checksum, hash, or manifest by default",
+        "A mismatch triggers one reread of current state and a root decision",
     },
 }
 

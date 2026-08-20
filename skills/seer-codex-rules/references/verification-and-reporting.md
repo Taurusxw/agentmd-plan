@@ -51,11 +51,20 @@ For a bug fix, prefer evidence that distinguishes the defect from unchanged beha
 
 For features, prove the new acceptance behavior. For refactors, prove preserved public behavior plus the specific structural invariant. Evidence quality matters more than command count.
 
+## Integrity Metadata Boundary
+
+Map every check to the exact claim it proves. A hash, checksum, manifest, tree digest, or similar fingerprint proves only byte identity against a known value; it does not prove semantic correctness, source authority, behavioral success, test adequacy, or visual quality.
+
+- Default to no integrity metadata. Use it only when the acceptance contract requires byte identity, content addressing, a cache key, supply-chain verification, or drift detection and names an actual consumer of the result.
+- Do not generate checksum manifests, per-page hashes, tree hashes, or artifact fingerprints merely to make an evidence package look complete. For a fixed PDF, one file-level digest already covers its bytes; page-level digests need a separate-page, change-localization, or forensic contract with a defined normalization method.
+- For synchronized global-rule copies, canonical artifacts, or recovery snapshots, perform one final deterministic comparison and reuse that evidence until an input changes. Do not repeat hashing at intermediate stages.
+- Use trusted-source or signature evidence for provenance, focused tests for behavior, semantic review for meaning, and actual rendering for visual artifacts.
+
 ## Artifact Check Selection
 
 | Artifact | Selective Checks |
 |---|---|
-| Rule file | `measure_rules.py`, version/date, changed coverage anchors, diff |
+| Rule file | Semantic diff, version/date, changed coverage anchors, and `measure_rules.py`; synchronized-copy hash only when synchronization is in scope |
 | Skill | `quick_validate.py`, changed route/script tests, template-residue check |
 | Code | focused behavior test, then affected type/lint/build only when relevant |
 | Frontend | affected build and rendered browser or screenshot when layout changed |

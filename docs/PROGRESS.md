@@ -2,18 +2,28 @@
 
 ## Current State
 
-- 当前正式发布为 `v29.0.0`；live 全局规则、Downloads 副本、Skill、Agent 路由、公开 artifact 与 release 记录一致。
+- 当前正式发布、`VERSION`、公开 artifact、live 全局 `AGENTS.md`、Downloads 同步副本和 live `seer-codex-rules` 均为 `v29.1.0`；当前检出树仅保留最新版本化资产，GitHub 和 Git 历史继续保留旧版本。
+- 当前版本已将多 Agent 配置迁回官方人类可读参考中的 `[agents].max_concurrent_threads_per_session`，用 31 个 spawned-agent 子线程保持通常 32 个含根总槽位；官方 JSON Schema 支持、但键表未列出的 `features.multi_agent_v2` 只作为带警告的后端覆盖兼容输入。
+- 当前已安装 Skill 在 permission-aware dispatch 基线上加入默认零哈希、证据类型边界、单次最终快照和多 Agent mismatch 停止规则；live 与发布源码均为同一 26 文件状态。
 - 新任务已验证 Sol/high 非 Ultra 显式派遣可突破三个子 Agent：31/31 创建请求被接受，直接观察到 22 个子 Agent 同时运行；旧任务仍保留创建时的四总槽位快照。
 - `seer-codex-rules` 已作为可浏览源码纳入仓库。
 - 项目采用 MIT License，并完成首次公开发布净化。
 
 ## Recent Progress
 
+- 正式发布 `v29.1.0`：普通任务默认不生成完整性元数据，多 Agent 结果不再默认生成 checksum/manifest；同时纳入 permission-aware 派遣证据、官方 `[agents]` 31 子线程模板、任务级波次停止门和当前 Codex 配置兼容边界。
+- 用户单独授权后，已创建忽略 Git 的本机回退副本，将 `29.1.0` 全局候选同步到 live 与 Downloads，并将同轮 Skill 增量安装到 live；未修改 Agent 配置，未执行 Git/GitHub、公开发布、HANDOFF 刷新或 31 子 Agent 压测。
+- 基于 GPT-5.6 社区多源“SHA theater”报告和 OpenAI 精简提示指导，新增默认零哈希策略：只有字节一致性验收存在实际消费者时才计算一次，禁止用文件、逐页、树或 artifact 哈希替代语义、来源、行为、测试或视觉验证；多 Agent 结果契约也禁止默认生成 checksum/manifest 或因 mismatch 进入重复哈希循环。
+- 此前已将 post-release permission-aware Skill、三份角色和 `[agents]` 31 子线程配置同步到 live；相关 validator、router、guardrail 和 fresh-task 四子 Agent 冒烟证据保持有效，本轮没有修改或重复验证这些配置。
+- 结合当前 OpenAI Codex Subagents、配置与 Skills 官方文档，以及 Anthropic、Google、Microsoft 的多 Agent/评测一手资料，确认现有 Agent-first、渐进加载和自适应分波方向成立，并补入可移植配置边界、任务级波次预算、边际证据停止门和首轮通过/返工指标。
+- 缩短 `seer-codex-rules` frontmatter 描述以降低大型 Skill 清单的常驻上下文占用，同时保留规则、文档、验收、架构和多 Agent 触发面。
+- 验证 `seer-project-handover` 已区分显式生成与接收时一次性消费；普通接管、实现、验证和收尾不会刷新冻结 HANDOFF，只有以后再次明确请求交接才整体重建。
+- 增加 Effective Permission Gate、任务包权限字段、角色相容性检查和静态非证明信号；写包只允许实现 worker，旧任务或权限不足时在根任务收束并只请求一次必要授权或建议新任务。
 - 正式发布 `v29.0.0`，并按 local latest-only 策略清理当前树的旧 artifact/release 文档与本地旧 tags；GitHub 旧 tags/Releases 和 Git commit 历史保持不变。
 - 增加 `29.0.0` Agent-first 候选：收益门禁通过即由适用规则明确要求主动派遣，无需再次点名或使用 Ultra。
 - 完成 31 子 Agent 压力验证：无 collaboration-limit 创建失败，但满载出现 `429`、图像处理失败、关闭超时和原始结果冲突，进一步证明容量不是利用率目标。
 - 移除 1/2/3 固定治理上限；按就绪独立包、有效空闲槽位与任务/时间/token 预算自适应分波，容量不是利用率目标。
-- 将可移植和 live 配置迁移到 V2 含根总容量 32；静态校验区分 V1 子线程 `N+1` 与 V2 总槽位 `N`，并拒绝冲突键。
+- `v29.0.0` 阶段曾将可移植和 live 配置迁到 V2 含根总容量 32；当前 post-release 候选已改用官方人类可读 `[agents]` 键的 31 个子线程，并把 V2 限定为 schema 兼容输入。
 - 将角色路由调整为 Terra/medium 探索与默认、Terra/high 实现、Sol/high 深度复核；异构派遣默认 fresh context，复杂度驱动升降档。
 - 允许父任务包显式授权递归子树，但根平铺分波仍是默认；整棵树共享收益、容量、互斥写入和紧凑结果门禁。
 - 增加 `28.2.0` 最新有效规则：每个任务实施宿主实际加载的 live 全局规则，旧对话和历史文件不得降级，也不按磁盘或远端最高版本号自主切换。
@@ -46,6 +56,7 @@
 
 ## Next Steps
 
+- 在新任务或宿主明确重载后确认 `29.1.0` 已进入有效指令链；不为此重复既有 31 子 Agent 压测。
 - 从真实任务记录波次、活跃槽位、上下文 fork、单位有效结果 token、返工和耗时；依据收益和递减回报使用分波，而非默认填满 31 个子槽位。
 - 根据实际使用反馈继续完善跨平台路径和安装体验。
 - 根据跨语言项目反馈扩展结构信号解析，同时保持事件触发和人工语义复核。
@@ -53,6 +64,9 @@
 
 ## Risks
 
+- 文字 guardrail 能阻止把哈希写成默认验收，但无法自动判断每个领域是否存在真实的字节完整性消费者；最终仍需根任务把检查映射到明确断言。
+- 子 Agent 的最终有效权限来自派生时重新应用的父任务 live runtime overrides；静态角色配置只能说明默认能力，不能探测或保证本次写入/网络/审批权限。
+- 当前官方 JSON Schema 包含 `features.multi_agent_v2` 且声明启用时优先，但人类可读配置键表未列出它，也未说明其容量是否包含根线程；项目仅按既有实测保留兼容识别，不能把它宣传为可移植模板。`fork_turns` 同样只按当前编排器能力使用。
 - Codex 不保证 active task 对磁盘规则变更自动热重载；规则必须由宿主在新任务或明确重载后供应，才能成为该任务的有效指令。
 - 配置/提示接受 32 或更高容量不代表账号、后端或宿主保证真实并发；实时容量和平台硬限制始终优先。
 - 多 Agent 往往以更多总 token 换取时间、覆盖或质量；便宜模型、fresh context、去重和分波停止规则只能优化单位有效结果成本，不能保证绝对节省。
@@ -61,8 +75,11 @@
 
 ## Detailed Records
 
+- `docs/progress/rounds/2026-08-20-round-001-integrity-evidence-governance-29.1.0.md`
+- `docs/progress/rounds/2026-08-16-round-001-current-codex-subagent-governance.md`
+- `docs/progress/rounds/2026-08-11-round-001-handover-lifecycle-permission-aware-dispatch.md`
 - `docs/progress/rounds/2026-08-04-round-001-agent-first-multi-agent-governance-29.0.0.md`
-- `docs/progress/releases/v29.0.0/RELEASE_NOTES.md`
+- `docs/progress/releases/v29.1.0/RELEASE_NOTES.md`
 - `docs/progress/rounds/2026-08-03-round-004-latest-effective-global-rule-28.2.0.md`
 - `docs/progress/rounds/2026-08-03-round-003-centralized-governance-ownership-28.1.0.md`
 - `docs/progress/rounds/2026-08-03-round-002-gpt-5p6-execution-efficiency.md`

@@ -1,6 +1,6 @@
 ---
 name: seer-codex-rules
-description: Design, revise, audit, version, compact, migrate, and maintain Codex rule systems, enforce centralized ownership and current-effective-rule freshness for the global AGENTS.md and seer-codex-rules, and act as a lightweight compliance gate for file-changing development tasks. Use for AGENTS.md, project rules, latest-rule or rule-drift questions, Codex workflows, governance change reports, multi-agent or subagent delegation, model routing, collaboration token control, task-level checks, repeated regression tests or permission prompts, over-applied security review, Goal mode completion and runaway edge-condition loops, architecture drift and repeated patch hotspots, documentation governance, progress records, versioning, rule migration, or start/end compliance checks that route to detailed rule modules.
+description: Govern Codex rule systems and provide the mandatory lightweight compliance gate for file-changing tasks. Use for AGENTS.md or project-rule design, versions/docs/progress, Skill maintenance, owner or freshness drift, task scaling and acceptance/Goal closure, architecture hotspots, and subagent model/permission/token routing.
 ---
 
 # Seer Codex Rules
@@ -18,7 +18,7 @@ Use this skill to govern Codex rule systems without letting global `AGENTS.md` b
 - `migrate-rules`: move oversized or specialized guidance from `AGENTS.md` into a Skill or project document.
 - `skill-maintenance`: create or refine a Codex Skill that carries complex workflow rules.
 - `governance-change-report`: outside the dedicated `agentmd-plan` owner context, inspect protected governance assets read-only and return a detailed handoff report without modifying them.
-- `agent-orchestration`: identify ready independent work, proactively delegate after the benefit gate passes, route the cheapest capable model, scale waves to effective capacity and budget, and integrate compact results.
+- `agent-orchestration`: identify ready independent work, check the packet's required access against the parent's live permission mode, proactively delegate after the benefit gate passes, route the cheapest capable model, scale waves to effective capacity and budget, and integrate compact results.
 
 Use the smallest mode that satisfies the request. If the user asks for execution or says to proceed, edit files directly after reading the relevant context.
 
@@ -37,7 +37,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
    - When a persistent Goal is created, resumed, or close to completion, read `references/goal-mode-closure.md`. It becomes the sole owner of continuation and repair budgets; do not apply `acceptance-closure.md` as a second iteration budget.
    - If discovered edge conditions start expanding implementation or validation, read `references/acceptance-closure.md` before doing more edge-focused work.
    - If the same production file or module is repeatedly patched, or a change adds an independent responsibility, broadens a dispatcher/interface, or duplicates non-trivial sibling logic, read `references/architecture-drift.md` and run its event-triggered check.
-   - Before material execution, scan for independent discovery, implementation, validation, and specialist-review packets. If any exist, read `references/multi-agent-governance.md`; when its benefit gate passes, this Skill explicitly requires proactive delegation without waiting for another user request or Ultra reasoning. A matching Skill mandate is a binding routing signal unless a higher-priority instruction or runtime boundary blocks it; disclose a skipped mandate.
+   - Before material execution, scan for independent discovery, implementation, validation, and specialist-review packets. If any exist, read `references/multi-agent-governance.md`; apply its Effective Permission Gate immediately before each spawn, then delegate when the benefit gate passes without waiting for another user request or Ultra reasoning. A matching Skill mandate is a binding routing signal unless a higher-priority instruction or runtime boundary blocks it; disclose a skipped mandate.
 
 2. **Measure before changing**
    - Run `scripts/measure_rules.py` on existing rule files or documentation directories when size, versioning, duplication, or round organization matters.
@@ -70,7 +70,7 @@ Use the smallest mode that satisfies the request. If the user asks for execution
    - For rule files, re-run measurement, check version/date consistency, inspect diffs, and verify any synchronized copies.
    - Reuse passing evidence until covered code, tests, configuration, dependencies, or environment materially change. Do not rerun the same or overlapping check merely to seek stronger confidence.
    - For projects with progress docs, check whether a round, phase, release, changelog, or doc index update is actually warranted.
-   - After substantial changes to this Skill, run `scripts/snapshot_state.py --write` so the formal project contains a current recoverable snapshot and state manifest.
+   - After the final integrated state of a substantial global-rule or Skill change, run `scripts/snapshot_state.py --write` once so the formal project contains a current recoverable snapshot and state manifest. Do not refresh it during intermediate edits or ordinary tasks.
    - Use strict guardrails for global sync or release; ordinary compliance checks stay lightweight.
 
 7. **Report clearly**
@@ -98,8 +98,8 @@ Use the smallest mode that satisfies the request. If the user asks for execution
 - Run `scripts/measure_rules.py` for deterministic line, byte, version, date, and progress-directory checks.
 - Run `scripts/guardrail_check.py` for a low-token preflight over global gate, dynamic reference routing, coverage anchors, synchronized copies, current state, and project provenance.
 - Run `scripts/structure_check.py <project-root>` only when architecture-drift triggers fire; its signals require human boundary review and never mandate splitting by line count alone.
-- Run `scripts/agent_routing_check.py` after installing or changing `[agents]` defaults or custom agent files; use `--config` and `--agents-dir` to validate portable templates.
-- Run `scripts/snapshot_state.py --write` after substantive Skill changes to refresh the canonical Skill snapshot and `artifacts/current-state.json`.
+- Run `scripts/agent_routing_check.py` after installing or changing `[agents]` defaults or custom agent files; use `--config` and `--agents-dir` to validate the documented spawned-thread template, its legacy alias, and schema-only backend overrides. Treat success as static configuration evidence only: `runtime_permissions_verified=false` means every spawn still needs a fresh parent-permission check.
+- Run `scripts/snapshot_state.py --write` once after the final integrated state of a substantive global-rule or Skill change; do not rerun it during intermediate iterations or unrelated tasks.
 
 ## Safety Rules
 

@@ -35,6 +35,8 @@ agentmd-plan` 专有项目
 最新有效全局规则
 旧对话
 最高版本号
+不得用文件、逐页、树或 artifact 哈希替代
+没有上述需求时默认不计算、不记录
 """
             path.write_text(base, encoding="utf-8")
             self.assertIn("完成契约", MODULE.check_global_gate(path)["missing_gate_phrases"])
@@ -67,6 +69,8 @@ agentmd-plan` 专有项目
 最新有效全局规则
 旧对话
 最高版本号
+不得用文件、逐页、树或 artifact 哈希替代
+没有上述需求时默认不计算、不记录
 """
             path.write_text(text, encoding="utf-8")
             missing = MODULE.check_global_gate(path)["missing_gate_phrases"]
@@ -113,6 +117,30 @@ agentmd-plan` 专有项目
             ])
             path.write_text(text, encoding="utf-8")
             self.assertIn("最高版本号", MODULE.check_global_gate(path)["missing_gate_phrases"])
+
+    def test_global_gate_requires_integrity_evidence_boundary(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "AGENTS.md"
+            required_phrases = (
+                "不得用文件、逐页、树或 artifact 哈希替代",
+                "没有上述需求时默认不计算、不记录",
+            )
+            for required_phrase in required_phrases:
+                with self.subTest(required_phrase=required_phrase):
+                    text = "\n".join([
+                        "版本：29.1.0",
+                        "定版日期：2026-08-20",
+                        *(
+                            phrase
+                            for phrase in MODULE.REQUIRED_GATE_PHRASES
+                            if phrase != required_phrase
+                        ),
+                    ])
+                    path.write_text(text, encoding="utf-8")
+                    self.assertIn(
+                        required_phrase,
+                        MODULE.check_global_gate(path)["missing_gate_phrases"],
+                    )
 
 
 if __name__ == "__main__":

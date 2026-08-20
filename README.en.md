@@ -2,7 +2,9 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-Current formal release: `v29.0.0`
+Current formal release: `v29.1.0`
+
+The current checkout, public artifact, and maintainer live rules all use `29.1.0`. GitHub retains historical tags, Releases, and Git commit history, while the current checkout retains only the latest versioned assets.
 
 Agentmd Plan is a portable, verifiable, low-token governance system for Codex rules. The global `AGENTS.md` keeps only the outline that must remain active on every task, while the `seer-codex-rules` Skill loads detailed execution rules on demand.
 
@@ -15,7 +17,7 @@ Agentmd Plan is a portable, verifiable, low-token governance system for Codex ru
 - Lets in-scope local edits and non-destructive validation proceed by default while making repeated permission prompts, regression tests, and security review evidence-triggered.
 - Freezes finite completion criteria for persistent Goals so auto-continuations cannot turn optional edges into endless required work.
 - Restores architecture and module-boundary decisions before repeated patches turn a production hotspot into structural drift.
-- Explicitly authorizes proactive non-Ultra delegation, sizes waves from independent packets, effective V2 capacity, and budget, and balances quantity, speed, quality, and tokens through multi-model routing, compact contexts, and exclusive write ownership.
+- Explicitly authorizes proactive non-Ultra delegation, sizes waves from independent packets, documented `[agents]` capacity, and task budget, and balances quantity, speed, quality, and tokens through multi-model routing, compact contexts, and exclusive write ownership.
 - Keeps personal paths, private backups, and live state outside the public repository.
 - Keeps screenshots, documents, links, and research analysis-only by default. It invokes `seer-capture` only when the user explicitly routes the named material to Knowledge or a named Book, and never inherits that authorization across conversations or adjacent tasks.
 - Allows direct changes to the global `AGENTS.md` and `seer-codex-rules` only inside the dedicated `agentmd-plan` owner project; every other project is report-only.
@@ -23,8 +25,8 @@ Agentmd Plan is a portable, verifiable, low-token governance system for Codex ru
 
 ## Release Contents
 
-- `artifacts/AGENTS-29.0.0.md`: the formal release artifact synchronized with the current live rules.
-- `config/`: a portable V2 template with 32 total slots including the root, plus Terra/medium exploration, Terra/high implementation, and Sol/high deep-review roles.
+- `artifacts/AGENTS-29.1.0.md`: the current formal global-rule artifact installed in the maintainer environment.
+- `config/`: the current release uses a portable documented `[agents]` template with 31 spawned-agent threads (normally 32 total with the root), plus Terra/medium exploration, Terra/high implementation, and Sol/high deep-review roles.
 - `skills/seer-codex-rules/`: the Skill for rule design, task scaling, code and documentation governance, round/phase/release handling, acceptance closure, and versioning.
 - `skills/seer-codex-rules/scripts/`: checks for rule size, Skill routing, structural hotspots, synchronized state, and recovery snapshots.
 - `docs/`: public project status, document index, and necessary development and release records.
@@ -49,9 +51,9 @@ An ordinary file-changing task reads the Skill router, task-scaling guidance, an
 
 1. Back up the existing `<codex-home>/AGENTS.md`, `config.toml`, `agents/`, and Skill directory.
 2. Copy `skills/seer-codex-rules/` to `<codex-home>/skills/seer-codex-rules/`.
-3. Review `artifacts/AGENTS-29.0.0.md` to confirm that it fits your workflow.
+3. Review `artifacts/AGENTS-29.1.0.md` to confirm that it fits your workflow.
 4. Install that artifact as `<codex-home>/AGENTS.md`.
-5. Merge the `[agents]` and `[features.multi_agent_v2]` tables from `config/agents.toml.example` into `<codex-home>/config.toml` without retaining the old V1 capacity key, then copy `config/agents/*.toml` to `<codex-home>/agents/`.
+5. Merge the `[agents]` table from `config/agents.toml.example` into `<codex-home>/config.toml`, then copy `config/agents/*.toml` to `<codex-home>/agents/`. If an older environment explicitly uses `[features.multi_agent_v2]`, which is supported by the official JSON Schema but absent from the human-readable key table, migrate by preserving the observed child-slot count and do not author both capacity forms in new configuration.
 6. Run the validation commands below to verify the version, Skill routing, model roles, and synchronized state.
 
 `<codex-home>` is normally set by the `CODEX_HOME` environment variable. When unset, it is usually `<user-home>/.codex`.
@@ -71,6 +73,7 @@ An ordinary file-changing task reads the Skill router, task-scaling guidance, an
 - Change, build, fix, or optimize requests authorize in-scope local reads, edits, formatting, and non-destructive validation without another question.
 - Confirm only external writes or publication, destructive or irreversible actions, purchases, credential disclosure, or a material change in target or risk; confirm the same authorization envelope once.
 - Move through direct, behavioral, affected, and full-release validation only as lower steps become insufficient.
+- Ordinary tasks generate no hash, checksum, or manifest by default. Compute one only when acceptance explicitly requires byte identity and names an actual consumer; integrity metadata cannot replace semantic, source, behavioral, test, or visual evidence.
 - Passing evidence expires only after a relevant code, test, configuration, dependency, generated-input, or environment change; do not repeat identical or overlapping checks.
 - Full regression and security scans are event-triggered. Merely mentioning security or permissions does not activate them.
 - Prefer tests that distinguish the buggy baseline from the fixed candidate; a suite that already passed is regression evidence, not repair proof.
@@ -113,9 +116,13 @@ An ordinary file-changing task reads the Skill router, task-scaling guidance, an
 - Scan independent discovery, implementation, validation, and specialist-review packets before material execution. Delegate as soon as the benefit gate passes; the applicable rule is explicit authorization under non-Ultra `ExplicitRequestOnly`.
 - Wave size is the minimum of ready packets, effective free slots, and the task/time/token budget. Governance has no fixed one/two/three-agent ceiling, and configured capacity is not a utilization target.
 - `explorer_fast` defaults to Terra/medium, `worker_balanced` to Terra/high, and `reviewer_deep` to Sol/high. Mechanical work may step down, complex implementation may step up to max, and Ultra is not a delegation prerequisite.
+- Before each spawn, state the packet's required read/write/network/approval access and check the parent task's current effective permission mode. A role file's static `sandbox_mode` is only a default capability signal, not proof of that child's final access.
+- Also record the concrete paths, tools, services, or side-effect sinks, the parent access actually observed and its observation source, and the compatibility decision for this spawn; a bare `checked=yes` is not auditable evidence.
+- Send write packets only to implementation workers. If the parent mode is insufficient or an old task is inconsistent, keep permitted work in the root and request access once or recommend a fresh task with the correct mode instead of letting children loop on permission prompts.
 - The root owns requirements, the critical path, write assignment, wave synthesis, integration, and final validation. A file or generated artifact has one concurrent writer.
-- Heterogeneous roles default to `fork_turns="none"` and a compact packet. Nesting is off by default and requires an explicitly authorized recursive packet that repeats the same gates.
-- The V2 template configures 32 total slots including the root. Parser or prompt acceptance does not prove backend capacity; verify a fresh task and obey runtime hard limits.
+- Freeze an acceptance signal and task-scoped ceiling for each non-trivial wave. Continue only when new evidence can change the decision or close a named gap, and record first-pass acceptance, rework, and rejection reasons.
+- When the current orchestrator supports it, heterogeneous roles use `fork_turns="none"` and a compact packet; that parameter is a host adapter, not a portable config contract. Nesting is off by default and requires an explicitly authorized recursive packet that repeats the same gates.
+- The documented template configures 31 spawned-agent threads, normally 32 total with the root. Parser acceptance does not prove backend capacity; verify a fresh task and obey runtime hard limits.
 
 ### Traceability Control
 
@@ -129,16 +136,16 @@ An ordinary file-changing task reads the Skill router, task-scaling guidance, an
 Run from the repository root:
 
 ```powershell
-python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-29.0.0.md
+python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-29.1.0.md
 python -m py_compile skills/seer-codex-rules/scripts/agent_routing_check.py skills/seer-codex-rules/scripts/guardrail_check.py skills/seer-codex-rules/scripts/measure_rules.py skills/seer-codex-rules/scripts/snapshot_state.py skills/seer-codex-rules/scripts/structure_check.py
 python -m unittest discover -s skills/seer-codex-rules/tests -p "test_*.py" -v
 python skills/seer-codex-rules/scripts/agent_routing_check.py --config config/agents.toml.example --agents-dir config/agents --json
-python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-29.0.0.md --downloads-agents artifacts/AGENTS-29.0.0.md --skill skills/seer-codex-rules --json
+python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-29.1.0.md --downloads-agents artifacts/AGENTS-29.1.0.md --skill skills/seer-codex-rules --json
 codex --strict-config doctor --summary
 codex debug prompt-input probe
 ```
 
-After installation, run `agent_routing_check.py --json` without path overrides to check the live router. `snapshot_state.py --write` can create a private state manifest and Skill recovery snapshot. Do not commit live manifests or backups that contain personal paths.
+After installation, run `agent_routing_check.py --json` without path overrides to check the live static router configuration. It always reports `runtime_permissions_verified=false`; each spawn still needs a fresh check of the parent task's live permission mode. `snapshot_state.py --write` can create a private state manifest and Skill recovery snapshot. Do not commit live manifests or backups that contain personal paths.
 
 ## Upgrade And Rollback
 

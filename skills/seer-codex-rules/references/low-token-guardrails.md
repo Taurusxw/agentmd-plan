@@ -71,7 +71,7 @@ If drift is found, fix it before continuing when it affects the current task. Ot
 - Do not reread `SKILL.md` or a reference at completion when it remains in context and did not change; the end check reuses the selected rules.
 - Prefer `guardrail_check.py` for preflight facts instead of manually reading many files.
 - Use default guardrail mode for routine work; use `--strict` only for global sync, release, or a task that must fail on warnings.
-- Refresh the state manifest only after a substantive Skill or approved global change, not during read-only analysis.
+- Refresh the state manifest once after the final integrated state of a substantive Skill or approved global change. Do not refresh it during read-only analysis, intermediate iterations, or ordinary tasks.
 - Keep global `AGENTS.md` as a gate and summary, not the detailed rule body.
 - Cache passing command evidence in the current task. Rerun only after a relevant invalidating change, and avoid commands whose coverage is already supplied by another passing check.
 - Prefer final one-line disclosure unless the user asks for detailed audit output.

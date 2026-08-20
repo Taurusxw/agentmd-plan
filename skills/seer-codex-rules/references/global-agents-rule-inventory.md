@@ -1,10 +1,10 @@
 # Global AGENTS Rule Inventory
 
-This inventory maps `<codex-home>/AGENTS.md` version `29.0.0` to detailed `seer-codex-rules` modules and explicitly routed companion Skills.
+This inventory maps `<codex-home>/AGENTS.md` version `29.1.0` to detailed `seer-codex-rules` modules and explicitly routed companion Skills.
 
-Source global version: `29.0.0`
-Source global SHA256: `E82A3B28999BC93B6F702A06E2C345C062B908FFC85D50CAF70EF3167DEC1638`
-Coverage verified: `2026-08-04`
+Source global version: `29.1.0`
+Source global SHA256: `2A84F623607689C1709B6F3F3C6E17154B7CF9326A4369238CB7101F43BECCC5`
+Coverage verified: `2026-08-20`
 
 ## 1. Core Principles
 
@@ -109,6 +109,7 @@ Coverage verified: `2026-08-04`
 | Classify task-caused, pre-existing, transient, external, and unknown failures before retrying | `acceptance-closure.md`, `verification-and-reporting.md` |
 | Render visual artifacts | `verification-and-reporting.md` |
 | A zero exit code is not sufficient evidence | `verification-and-reporting.md` |
+| Default to no hash/checksum/manifest; allow integrity metadata only for an explicit byte-identity consumer and never as a substitute for semantic, source, behavioral, test, or visual evidence | `verification-and-reporting.md`, `multi-agent-governance.md` |
 | Disclose unrun checks and residual risk | `verification-and-reporting.md` |
 | Stop after acceptance; classify external blocks as residual risk | `acceptance-closure.md` |
 | Only blockers and material safety findings expand current scope | `acceptance-closure.md` |
