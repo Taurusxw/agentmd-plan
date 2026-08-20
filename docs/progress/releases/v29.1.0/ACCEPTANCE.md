@@ -2,7 +2,7 @@
 
 ## Status
 
-validated-awaiting-publication
+completed
 
 ## Release Contract
 
@@ -25,7 +25,11 @@ validated-awaiting-publication
 
 ## Publication Verification
 
-Pending the authorized release commit, `main` push, annotated `v29.1.0` tag, and GitHub Release. A post-publication record will name the release commit, final `main` commit, remote Release state, and local-tag cleanup result without moving the tag.
+- Release commit `39988ba27a1670831ae4de54c29f74c91092827b` was fast-forwarded to remote `main`; the annotated `v29.1.0` tag dereferences to that release commit and is not moved by this later verification record.
+- GitHub Release `Agentmd Plan v29.1.0` is published at <https://github.com/Taurusxw/agentmd-plan/releases/tag/v29.1.0>, is non-draft, non-prerelease, and marked latest; remote `VERSION` is `29.1.0`.
+- The repository remains public with an MIT license and `main` as the default branch.
+- GitHub retains the prior `v29.0.0` tag and Release, while the local checkout retains only tag `v29.1.0`; Git history was not rewritten.
+- Remote `main` intentionally advances once after the tag to record this publication verification; the tagged release contents remain the validated release commit above.
 
 ## Publication Path
 
