@@ -2,11 +2,11 @@
 
 ## Status
 
-Candidate validation and maintainer-environment installation passed. Source commit, Git tag, GitHub Release, and final publication record remain pending.
+Released on 2026-08-20 after candidate validation, maintainer installation, and both repository publication paths passed.
 
 ## 中文
 
-`v30.0.0` 是一次 major 治理候选：匹配的 Skills 照常加载，`seer-codex-rules` 仅在治理敏感情形路由；多 Agent 仅在净收益门禁通过时派遣，并继续保留互斥写入、有效权限核对和紧凑结果契约。
+`v30.0.0` 是一次 major 治理发布：匹配的 Skills 照常加载，`seer-codex-rules` 仅在治理敏感情形路由；多 Agent 仅在净收益门禁通过时派遣，并继续保留互斥写入、有效权限核对和紧凑结果契约。
 
 ### 主要内容
 
@@ -18,7 +18,7 @@ Candidate validation and maintainer-environment installation passed. Source comm
 
 ## English
 
-`v30.0.0` is a major governance candidate: matching Skills load normally, while `seer-codex-rules` routes only for governance-sensitive work. Multi-agent work dispatches only after the net-benefit gate passes and retains exclusive writes, effective-access checks, and compact-result contracts.
+`v30.0.0` is a major governance release: matching Skills load normally, while `seer-codex-rules` routes only for governance-sensitive work. Multi-agent work dispatches only after the net-benefit gate passes and retains exclusive writes, effective-access checks, and compact-result contracts.
 
 ### Highlights
 
@@ -28,9 +28,9 @@ Candidate validation and maintainer-environment installation passed. Source comm
 - Self-owned Seer optimization covers `seer-capture`, `seer-project-space-health`, `seer-math-exam`, `seer-mathbook`, and `seer-prepare-open-source-release`, narrowing ordinary capture, deep-cleanup, mathematical-rigor, exact-figure implementation, and open-source release routing. Third-party Skills remain read-only audit targets. All `nature-*` source, version, test, installed-copy, and `.agents` duplicate-copy assets are frozen and outside this release scope; observations are future audit candidates only.
 - The source and separate distribution repositories are independent targets in the two-repository release path, and maintainer-environment installation also requires separate authorization and acceptance. After authorized cleanup, the local checkout retains latest versioned assets only; Git/GitHub history is not rewritten.
 
-## Pending Release Fields
+## Publication
 
-- Candidate validation: pending release-owner evidence.
-- Maintainer-environment installation: pending separate authorization and evidence.
-- Git commit and annotated tag: pending.
-- GitHub Release and publication URL: pending.
+- Candidate validation and maintainer installation: passed.
+- Skills distribution commit: `38cd851` on `skills-manager-backup/main`; no Release created.
+- Source release commit: `4b4a2d7`; annotated tag: `v30.0.0`.
+- GitHub Release: <https://github.com/Taurusxw/agentmd-plan/releases/tag/v30.0.0>.

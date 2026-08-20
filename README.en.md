@@ -2,9 +2,9 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-Prepared release candidate: `v30.0.0` (not yet accepted or published)
+Current formal release: `v30.0.0`
 
-The current checkout and public artifact target `30.0.0`. The source and separate distribution repositories in the two-repository release path, along with maintainer-environment installation, Git tagging, and the GitHub Release, are recorded separately only when completed; GitHub retains historical tags, Releases, and Git commit history, while the checkout follows a latest-only local-asset policy.
+The current checkout, public artifact, maintainer-environment installation, Git tag, and GitHub Release are all at `30.0.0`. The separate Skills distribution repository is published through its own commit without a Release; GitHub retains historical tags, Releases, and Git commit history, while the checkout follows a latest-only local-asset policy.
 
 Agentmd Plan is a portable, verifiable, low-token governance system for Codex rules. The global `AGENTS.md` keeps only the outline that must remain active on every task, while the `seer-codex-rules` Skill loads detailed execution rules on demand.
 
@@ -25,7 +25,7 @@ Agentmd Plan is a portable, verifiable, low-token governance system for Codex ru
 
 ## Release Contents
 
-- `artifacts/AGENTS-30.0.0.md`: the prepared global-rule candidate; installation and publication remain separately accepted steps.
+- `artifacts/AGENTS-30.0.0.md`: the accepted and published global-rule artifact.
 - `config/`: optional multi-agent configuration and role examples. Their capacity and model identifiers are not current governance defaults; choose them from actual runtime capability and task need.
 - `skills/seer-codex-rules/`: the Skill for rule design, task scaling, code and documentation governance, round/phase/release handling, acceptance closure, and versioning.
 - `skills/seer-codex-rules/scripts/`: checks for rule size, Skill routing, structural hotspots, synchronized state, and recovery snapshots.

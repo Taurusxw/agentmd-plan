@@ -10,7 +10,7 @@
 
 - [2026-08-20 Round 002: Release 30.0.0 Governance](rounds/2026-08-20-round-002-release-30.0.0-governance.md)
 - [2026-08-20 Round 001: Integrity Evidence Governance 29.1.0](rounds/2026-08-20-round-001-integrity-evidence-governance-29.1.0.md)
-- [v30.0.0 Release Candidate](releases/v30.0.0/RELEASE_NOTES.md)
+- [v30.0.0 Release](releases/v30.0.0/RELEASE_NOTES.md)
 - [2026-08-16 Round 001: Current Codex Subagent Governance](rounds/2026-08-16-round-001-current-codex-subagent-governance.md)
 - [2026-08-11 Round 001: Handover Lifecycle And Permission-Aware Dispatch](rounds/2026-08-11-round-001-handover-lifecycle-permission-aware-dispatch.md)
 - [2026-08-04 Round 001: Agent-First Multi-Agent Governance 29.0.0](rounds/2026-08-04-round-001-agent-first-multi-agent-governance-29.0.0.md)

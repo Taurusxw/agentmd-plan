@@ -2,16 +2,16 @@
 
 ## Current State
 
-- `VERSION` 与当前检出树的发布目标为 `v30.0.0`；候选静态与 15 场景路由验收、Skills 分发仓库推送和维护环境安装已通过，源仓库 commit、Git tag、GitHub Release 和最终公开发布记录仍待完成。当前检出树遵循 latest-only 本地资产策略；GitHub 历史 tags/Releases 和 Git history 不改写。
+- `VERSION`、当前检出树、公开 artifact、live/Downloads、治理 Skill、Git tag 和 GitHub Release 均为正式 `v30.0.0`。Skills 分发仓库 `main` 为 `38cd851`，源仓库 release commit 为 `4b4a2d7`；当前检出树遵循 latest-only 本地资产策略，GitHub 历史 tags/Releases 和 Git history 不改写。
 - `config/` 的容量和模型标识仅是可选示例；31/32 槽位配置与 Terra/Sol 路由是历史配置/观察，不是当前治理默认值。`features.multi_agent_v2` 是非公开、不可移植的运行时输入，不是可移植模板或迁移目标。
-- 候选仅在规则或 `AGENTS.md`、版本/progress/文档治理、发布/迁移/全局同步、架构漂移、Goal/验收扩张或多 Agent 协作等治理敏感情形加载 `seer-codex-rules`；普通 L1/L2 与单文件任务不因一次本地修改而触发它。多 Agent 仅在净收益门禁通过时派遣，容量不是目标。
+- 当前规则仅在规则或 `AGENTS.md`、版本/progress/文档治理、发布/迁移/全局同步、架构漂移、Goal/验收扩张或多 Agent 协作等治理敏感情形加载 `seer-codex-rules`；普通 L1/L2 与单文件任务不因一次本地修改而触发它。多 Agent 仅在净收益门禁通过时派遣，容量不是目标。
 - 历史新任务观察曾以 Sol/high 非 Ultra 请求 31 个子 Agent，并直接观察到 22 个同时运行；它证明容量不是目标，也不构成当前容量或模型默认值。
 - `seer-codex-rules` 已作为可浏览源码纳入仓库。
 - 项目采用 MIT License，并完成首次公开发布净化。
 
 ## Recent Progress
 
-- 准备 `v30.0.0` major candidate：将 `seer-codex-rules` 改为治理敏感的条件路由，并更新多 Agent 工作模型；候选保留零哈希边界、permission-aware dispatch、净收益派遣、两仓发布边界和 latest-only 本地资产策略。尚未声称候选验证或发布完成。
+- 正式发布 `v30.0.0`：将 `seer-codex-rules` 改为治理敏感的条件路由，并更新多 Agent 工作模型；保留零哈希边界、permission-aware dispatch、净收益派遣、两仓发布边界和 latest-only 本地资产策略。
 - 在隔离分发仓库 worktree 中优化 5 个自有 Seer Skills：`seer-capture`、`seer-project-space-health`、`seer-math-exam`、`seer-mathbook` 和 `seer-prepare-open-source-release`。它们分别收窄捕获、深度清理、数学严谨性引用、精确图形实现和开源发布触发边界。
 - 上述 5 个 Seer Skills 已通过 commit `38cd851` 推送到 `skills-manager-backup/main`（不建 Release）并经 canonical symlink 安装；30.0.0 全局 live、Downloads 与治理 Skill 也已安装，私有回退副本与最终恢复状态已保留。
 - 最终恢复阶段发现并修复旧 `snapshot_state.py` 对公开 inventory 的常驻 SHA256 依赖；inventory 现在只锚定版本，字节指纹仅由真实恢复消费者现场生成。受影响共享测试 25/25 通过，final strict live/state/global-copy guardrail 无 mismatch。
@@ -61,7 +61,7 @@
 
 ## Next Steps
 
-- 对 `v30.0.0` 候选执行冻结的验证计划，并仅在完成明确授权后分别记录两仓发布与维护环境安装；不重复历史 31-child 压测。
+- 从真实普通开发和治理任务继续观察 Skill 误触发率、输入 token、净收益派遣和返工；不重复历史 31-child 压测。
 - 从真实任务记录波次、活跃槽位、上下文 fork、单位有效结果 token、返工和耗时；依据收益和递减回报使用分波，不设固定容量目标。
 - 根据实际使用反馈继续完善跨平台路径和安装体验。
 - 根据跨语言项目反馈扩展结构信号解析，同时保持事件触发和人工语义复核。
@@ -77,7 +77,7 @@
 - 多 Agent 往往以更多总 token 换取时间、覆盖或质量；便宜模型、fresh context、去重和分波停止规则只能优化单位有效结果成本，不能保证绝对节省。
 - 规则系统仍依赖 Codex 正确触发 Skill；脚本和最终披露用于降低而非消除偏移。
 - 自定义 Agent 的发现可能需要新任务或重启；脚本可验证配置，但不能证明每次语义派遣都完全正确。
-- `v30.0.0` 的候选验证、维护环境安装、Git tag 和 GitHub Release 仍处于 pending；本记录不以旧发布证据替代这些步骤。
+- 当前发布与安装证据已收束；残留风险是新规则只在新任务或宿主明确重载后生效，当前任务不假设热重载。
 
 ## Detailed Records
 

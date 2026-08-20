@@ -2,7 +2,7 @@
 
 ## Status
 
-candidate validation and maintainer installation passed — source-repository commit, tag, GitHub Release, and final publication record remain pending.
+accepted and published — candidate validation, maintainer installation, both repository paths, annotated tag, GitHub Release, and publication verification passed.
 
 ## Release Contract
 
@@ -10,8 +10,8 @@ candidate validation and maintainer installation passed — source-repository co
 - [x] Chinese and English manuals describe the same governance-sensitive conditional routing (with ordinary matching Skills unaffected), net-benefit delegation, zero-hash boundary, two-target release boundary, and latest-only local policy.
 - [x] Candidate validation is recorded from the final integrated source state; the read-only baseline is not substituted for it.
 - [x] `seer-codex-rules` and the five approved Seer Skills pass their focused validators from source worktrees before installation.
-- [ ] The source and separate distribution repositories in the two-repository release path are separately authorized and evidenced; the distribution repository and maintainer installation are complete, while source publication remains pending.
-- [ ] Git commit, annotated `v30.0.0` tag, GitHub Release, and publication URL are recorded only after those external actions complete.
+- [x] The source and separate distribution repositories in the two-repository release path are separately authorized and evidenced; the distribution repository was pushed without a Release and the source repository has a formal Release.
+- [x] Git commit, annotated `v30.0.0` tag, GitHub Release, and publication URL are recorded only after those external actions complete.
 - [x] Local latest-only source cleanup removes only the obsolete `29.1.0` artifact/release assets; Git/GitHub history remains intact.
 - [x] `docs/HANDOFF.md` remains unchanged.
 - [x] No `nature-*` source, version, test, installed copy, or `.agents` duplicate-copy change is attributed to this release; the entire Nature scope remains frozen and unvalidated.
@@ -24,11 +24,11 @@ candidate validation and maintainer installation passed — source-repository co
 | Governance and five-Seer focused validators | Source-level behavior and routing | passed |
 | Release-owner selected source checks | Final integrated candidate behavior | passed |
 | Separate installation evidence | Maintainer-environment target | passed |
-| External release evidence | Tag and GitHub publication | pending |
+| External release evidence | Tag and GitHub publication | passed |
 
 ## Candidate Evaluation
 
-- Governance static evidence: valid Skill; 24/24 shared unit tests; strict global size 35 non-empty lines / 4,567 bytes; static routing valid with `runtime_permissions_verified=false`; non-live strict guardrail passed without requesting hashes or recovery state.
+- Governance static evidence: valid Skill; final shared suite 25/25; strict global size 35 non-empty lines / 4,567 bytes; static routing valid with `runtime_permissions_verified=false`; non-live strict guardrail passed without requesting hashes or recovery state.
 - Seer source evidence: 5/5 focused validators passed; `seer-mathbook` routing tests passed 4/4.
 - Candidate routing evidence: scenarios 1–15 passed in a temporary non-live `CODEX_HOME`; seven governance loads, zero subagent dispatches, zero hash commands, and no live writes.
 - Baseline/candidate for scenarios 1–15: total input `2,700,004 -> 2,287,102`; median `169,355 -> 133,725`.
@@ -43,11 +43,11 @@ candidate validation and maintainer installation passed — source-repository co
 ## Publication Fields
 
 - Distribution repository commit: `38cd851` on `skills-manager-backup/main`; pushed without a Release.
-- Release commit: pending.
-- Annotated tag: pending.
-- GitHub Release URL/state: pending.
+- Release commit: `4b4a2d7a63e4e29be48d31ba9270996d161df964`.
+- Annotated tag: `v30.0.0`; remote tag published, local latest-only tag set contains only `v30.0.0`.
+- GitHub Release URL/state: <https://github.com/Taurusxw/agentmd-plan/releases/tag/v30.0.0>; public, non-draft, non-prerelease, and latest at verification time.
 - Maintainer-environment installation state: 30.0.0 global live/Downloads and installed governance Skill; five approved Seer Skills updated through canonical source links; private rollback backup retained.
 
 ## Residual Risk
 
-Until the pending fields are filled with final-state evidence, `v30.0.0` must not be described as accepted, installed, tagged, or published.
+The active task does not assume that live rule changes hot-reload. `30.0.0` becomes effective for new tasks or after an explicit host reload.

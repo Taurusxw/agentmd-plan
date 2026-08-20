@@ -6,7 +6,7 @@
 |---|---|
 | `../README.md` | 中文项目说明书、安装、验证和隐私边界。 |
 | `../README.en.md` | English project manual, installation, validation, and privacy boundaries. |
-| `../VERSION` | 当前准备中的项目发布目标；验收和公开发布状态见 release record。 |
+| `../VERSION` | 当前正式项目版本；验收和公开发布状态见 release record。 |
 | `../AGENTS.md` | 本仓库的 Codex 工作规则。 |
 | `../CONTRIBUTING.md` | 贡献和验证要求。 |
 | `../SECURITY.md` | 私密安全报告流程。 |
@@ -16,11 +16,11 @@
 
 | Path | Purpose |
 |---|---|
-| `../artifacts/AGENTS-30.0.0.md` | `v30.0.0` 全局规则候选；不表示已安装或已公开发布。 |
+| `../artifacts/AGENTS-30.0.0.md` | 已验收、安装并公开发布的 `v30.0.0` 全局规则。 |
 | `../config/` | 可移植的多 Agent 默认配置和角色模板。 |
 | `../skills/seer-codex-rules/` | 可安装的 Skill 源码。 |
 | `progress/rounds/` | 有长期价值的公开开发记录。 |
-| `progress/releases/v30.0.0/` | `v30.0.0` 候选发布说明与待完成验收记录。 |
+| `progress/releases/v30.0.0/` | `v30.0.0` 正式发布说明与验收记录。 |
 
 ## Recent Governance Record
 

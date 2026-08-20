@@ -2,9 +2,9 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-当前准备中的发布候选：`v30.0.0`（尚未完成验收或公开发布）
+当前正式版本：`v30.0.0`
 
-当前检出树和公开 artifact 的目标版本为 `30.0.0`。两仓发布路径中的源仓库与独立分发仓库，以及维护环境安装、Git tag 和 GitHub Release，均须在各自完成后单独记录；GitHub 保留历史 tags/Releases 和 Git commit 历史，当前检出树遵循 latest-only 本地资产策略。
+当前检出树、公开 artifact、维护环境安装、Git tag 和 GitHub Release 均为 `30.0.0`。独立 Skills 分发仓库通过单独提交发布且不创建 Release；GitHub 保留历史 tags/Releases 和 Git commit 历史，当前检出树遵循 latest-only 本地资产策略。
 
 Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理方案。全局 `AGENTS.md` 只保留每次任务都应生效的纲要，复杂执行规则由 `seer-codex-rules` Skill 根据任务类型按需加载。
 
@@ -25,7 +25,7 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 
 ## 版本内容
 
-- `artifacts/AGENTS-30.0.0.md`：准备中的全局规则候选；安装与公开发布均待独立验收。
+- `artifacts/AGENTS-30.0.0.md`：已验收并发布的全局规则 artifact。
 - `config/`：可选的多 Agent 配置与角色示例；其中的容量和模型标识不是当前治理默认值，必须由实际运行时能力和任务需要决定。
 - `skills/seer-codex-rules/`：规则设计、任务分级、代码与文档治理、round/phase/release、验收收束和版本治理 Skill。
 - `skills/seer-codex-rules/scripts/`：规则体量、Skill 路由、结构热点、同步状态和恢复快照检查脚本。
