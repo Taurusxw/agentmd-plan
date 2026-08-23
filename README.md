@@ -2,9 +2,9 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-当前正式版本：`v30.0.0`
+当前正式版本：`v30.1.0`
 
-当前检出树、公开 artifact、维护环境安装、Git tag 和 GitHub Release 均为 `30.0.0`。独立 Skills 分发仓库通过单独提交发布且不创建 Release；GitHub 保留历史 tags/Releases 和 Git commit 历史，当前检出树遵循 latest-only 本地资产策略。
+当前检出树、维护环境 `seer-codex-rules`、Git tag 和 GitHub Release 均为 `30.1.0`。本次仅增强治理 Skill；已发布的全局 `AGENTS.md` artifact 与 live 规则仍为 `30.0.0`，因为全局规则内容没有变化。独立 Skills 分发仓库是单独的发布目标；GitHub 保留历史 tags/Releases 和 Git commit 历史，当前检出树遵循 latest-only 本地资产策略。
 
 Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理方案。全局 `AGENTS.md` 只保留每次任务都应生效的纲要，复杂执行规则由 `seer-codex-rules` Skill 根据任务类型按需加载。
 
@@ -28,7 +28,7 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 - `artifacts/AGENTS-30.0.0.md`：已验收并发布的全局规则 artifact。
 - `config/`：可选的多 Agent 配置与角色示例；其中的容量和模型标识不是当前治理默认值，必须由实际运行时能力和任务需要决定。
 - `skills/seer-codex-rules/`：规则设计、任务分级、代码与文档治理、round/phase/release、验收收束和版本治理 Skill。
-- `skills/seer-codex-rules/scripts/`：规则体量、Skill 路由、结构热点、同步状态和恢复快照检查脚本。
+- `skills/seer-codex-rules/scripts/`：规则体量、Skill catalog/运行时可见性、Skill 路由、结构热点、同步状态和恢复快照检查脚本。
 - `docs/`：公开项目状态、文档索引和必要的开发与发布记录。
 - `VERSION`：项目当前发布版本。
 
@@ -138,10 +138,11 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 
 ```powershell
 python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-30.0.0.md
-python -m py_compile skills/seer-codex-rules/scripts/agent_routing_check.py skills/seer-codex-rules/scripts/guardrail_check.py skills/seer-codex-rules/scripts/measure_rules.py skills/seer-codex-rules/scripts/snapshot_state.py skills/seer-codex-rules/scripts/structure_check.py
+python -m py_compile skills/seer-codex-rules/scripts/agent_routing_check.py skills/seer-codex-rules/scripts/guardrail_check.py skills/seer-codex-rules/scripts/measure_rules.py skills/seer-codex-rules/scripts/skill_catalog_check.py skills/seer-codex-rules/scripts/snapshot_state.py skills/seer-codex-rules/scripts/structure_check.py
 python -m unittest discover -s skills/seer-codex-rules/tests -p "test_*.py" -v
 python skills/seer-codex-rules/scripts/agent_routing_check.py --config config/agents.toml.example --agents-dir config/agents --json
 python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-30.0.0.md --downloads-agents artifacts/AGENTS-30.0.0.md --skill skills/seer-codex-rules --json
+python skills/seer-codex-rules/scripts/skill_catalog_check.py --require-runtime-health --json
 codex --strict-config doctor --summary
 codex debug prompt-input probe
 ```

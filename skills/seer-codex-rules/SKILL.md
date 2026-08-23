@@ -1,6 +1,6 @@
 ---
 name: seer-codex-rules
-description: Govern Codex rule systems, acceptance boundaries, architecture drift, and safe multi-agent routing. Use for rules, governance records, releases, Goal/acceptance expansion, or agent coordination; not routine L1/L2 edits.
+description: Govern rules/AGENTS.md, version/progress/docs, release/migration/global sync/recovery, Goal/acceptance expansion, architecture drift, multi-agent routing; not routine L1/L2 edits.
 ---
 
 # Seer Codex Rules
@@ -33,7 +33,7 @@ Routine L1/L2 code, configuration, or documentation edits do not invoke a univer
    - execution, change boundaries, project-rule templates, or final governance review: [execution standards](references/execution-standards.md), [code-change governance](references/code-change-governance.md), [project template](references/project-agents-template.md), or [rule review](references/rule-review-checklist.md).
    - lowest-cost governance routing: [low-token guardrails](references/low-token-guardrails.md).
 4. Keep changes in the narrowest responsible file. Use a temporary `AGENTS.override.md` only when the current task clearly needs a narrow exception with a named scope and restoration plan; the user need not name the override file verbatim.
-5. Select only the affected validation from [verification and reporting](references/verification-and-reporting.md). Run `scripts/measure_rules.py` for rule-size or metadata claims, `scripts/structure_check.py` only for architecture drift, and `scripts/agent_routing_check.py` only after routing-template changes.
+5. Choose the affected script via [verification and reporting](references/verification-and-reporting.md): `measure_rules.py` for rule size, `structure_check.py` for drift, `agent_routing_check.py` for routing, or `skill_catalog_check.py` for global catalog discovery/enablement. Scripts are under `scripts/`.
 6. Use `scripts/guardrail_check.py` for governance-sensitive global/rule checks, not ordinary edits. Run `scripts/quick_validate.py <skill-dir>` when available for Skill maintenance. A byte comparison is off by default; perform one final comparison only for an actual global/live sync or recovery consumer.
 
 ## Multi-agent boundary

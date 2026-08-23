@@ -55,6 +55,7 @@ REQUIRED_SCRIPTS = {
     "snapshot_state.py",
     "structure_check.py",
     "agent_routing_check.py",
+    "skill_catalog_check.py",
 }
 
 REQUIRED_REFERENCE_PHRASES = {
