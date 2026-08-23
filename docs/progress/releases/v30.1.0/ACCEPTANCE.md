@@ -35,7 +35,7 @@ Accepted and released on 2026-08-24.
 
 ## Cleanup And Rollback
 
-- Local `v30.0.0` release records and tag were removed only after `v30.1.0` publication succeeded; prior commits, the remote tag, and the GitHub Release remain recoverable.
+- Local `v30.0.0` release records were replaced by the `v30.1.0` release commit; the old local tag was removed only after publication succeeded. Prior commits, the remote tag, and the GitHub Release remain recoverable.
 - The pre-install Skill copy was held only as a temporary local rollback target and removed after byte-equivalent installation verification.
 - The ignored pre-29.1.0 private install backup was removed with the authorized old-local-version cleanup. Its exact private folder is no longer locally recoverable; the corresponding public source history remains on GitHub.
 - Rollback remains available from GitHub `v30.0.0` or the prior source commit; no history rewrite was performed.

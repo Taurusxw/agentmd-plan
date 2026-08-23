@@ -32,7 +32,7 @@ Released on 2026-08-24 after source validation, complete maintainer-environment 
 
 ## Publication
 
-- Project version and annotated source tag: `v30.1.0`.
+- Source release commit: `5e06645`; project version and annotated source tag: `v30.1.0`.
 - Maintainer Skill installation: complete and byte-equivalent to the release source.
 - GitHub Release: <https://github.com/Taurusxw/agentmd-plan/releases/tag/v30.1.0>.
 - The separate Skills distribution repository remains an independent publication target and was not changed by this source-repository release.
