@@ -2,7 +2,7 @@
 
 ## Status
 
-in-progress
+completed
 
 ## Goal
 
@@ -42,6 +42,8 @@ Non-goals: deleting historical Git/GitHub evidence, changing the independent Ski
 - All 42 governance unit tests, governance-script bytecode compilation, agent routing, source strict guardrails, release scans, and source runtime catalog health passed.
 - The live global rule, Downloads copy, installed Skill, and private recovery snapshot are synchronized at `3.2.0`; the final strict state/global-copy guardrail passed, and the 28-file source/live Skill trees are byte-identical.
 - Installed runtime catalog health and the independent prompt-input probe passed. `codex doctor` remains nonzero only for the pre-existing `TERM=dumb` condition and stale thread rows pointing to missing rollouts; its configuration, authentication, network, runtime, and Git checks are healthy.
+- The standard `github.com` Git transport was unavailable while `api.github.com` remained healthy. The official Git Data API created the same tree, commit, and annotated tag objects; every SHA matched locally before either remote reference moved.
+- Annotated tag `v3.2.0` points to source commit `6faff2106f9356eb826e751cc82334596c6a5892`, and the GitHub Release is published as Latest at `https://github.com/Taurusxw/agentmd-plan/releases/tag/v3.2.0`.
 
 ## Risks And Follow-Up
 

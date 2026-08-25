@@ -2,7 +2,7 @@
 
 ## Status
 
-ready-for-publication
+passed
 
 ## Frozen Scope
 
@@ -27,6 +27,6 @@ ready-for-publication
 
 ## Result
 
-Local source and live acceptance passed. The global rule, Downloads copy, installed Skill, and private recovery state are synchronized at `3.2.0`; strict guardrails, the final source/live Skill comparison, and runtime catalog health all pass. Git push, tag, and GitHub Release remain the publication step.
+All required evidence passed. The global rule, Downloads copy, installed Skill, and private recovery state are synchronized at `3.2.0`; strict guardrails, the final source/live Skill comparison, and runtime catalog health pass. Source commit `6faff2106f9356eb826e751cc82334596c6a5892` is published under annotated tag `v3.2.0`, and the GitHub Release is marked Latest.
 
 `codex --strict-config doctor --summary` remains nonzero only for the pre-existing `TERM=dumb` terminal condition and stale thread-database rows that reference missing rollouts. Configuration, authentication, network, runtime, and Git checks are healthy, and the independent `codex debug prompt-input probe` passed; these environment residues are not caused by this release.

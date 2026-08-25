@@ -2,7 +2,7 @@
 
 ## Status
 
-Prepared on 2026-08-25 for publication after final source validation and maintainer-environment installation. Publication evidence will be recorded on `main` after GitHub confirms the release.
+Released on 2026-08-25 as the latest GitHub Release. Annotated tag `v3.2.0` points to source commit `6faff2106f9356eb826e751cc82334596c6a5892`; publication verification is recorded on `main` after that tagged commit.
 
 ## 中文
 
