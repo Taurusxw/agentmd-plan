@@ -51,6 +51,12 @@ For a bug fix, prefer evidence that distinguishes the defect from unchanged beha
 
 For features, prove the new acceptance behavior. For refactors, prove preserved public behavior plus the specific structural invariant. Evidence quality matters more than command count.
 
+## Deliverable And Evidence Boundary
+
+Validation, reviews, plans, reports, manifests, and status records are supporting evidence. They prove or explain work; they do not replace the requested deliverable or count as user-outcome progress unless the user requested that artifact. Every added evidence artifact needs a project requirement, acceptance criterion, or named consumer; otherwise omit it.
+
+If evidence production grows while the requested outcome remains unchanged, stop adding evidence and identify the smallest missing proof or implementation action. Do not compensate for an unfinished deliverable with a larger audit package.
+
 ## Integrity Metadata Boundary
 
 Map every check to the exact claim it proves. A hash, checksum, manifest, tree digest, or similar fingerprint proves only byte identity against a known value; it does not prove semantic correctness, source authority, behavioral success, test adequacy, or visual quality.
@@ -107,4 +113,4 @@ For rule work, report:
 - synchronized-copy status and residual risk;
 - subagent role/model and closure status only when a child was actually used.
 
-Do not paste every command, checklist question, passing retry, or raw log. Use these risk labels when useful: `No known residual risk`, `Low residual risk`, `Moderate residual risk`, or `High residual risk`.
+Lead with the outcome and material evidence. Do not paste every command, checklist question, passing retry, raw log, or routine tool narration. Omit repeated status or rules, generic praise, apology, reassurance, and unnecessary sign-offs. Use these risk labels when useful: `No known residual risk`, `Low residual risk`, `Moderate residual risk`, or `High residual risk`.

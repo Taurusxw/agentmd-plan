@@ -28,6 +28,10 @@ REQUIRED_GATE_PHRASES = [
     "Ordinary L1/L2 file edits",
     "global/live synchronization or recovery",
     "current effective access",
+    "not substitutes for it",
+    "invalidate every dependent",
+    "fixed acceptance checks pass",
+    "routine tool narration",
 ]
 
 REQUIRED_REFERENCES = {
@@ -78,14 +82,18 @@ REQUIRED_REFERENCE_PHRASES = {
         "Evidence Reuse And Invalidation",
         "No relevant invalidation, no rerun",
         "Failure And Retry Policy",
+        "Post-Acceptance Mutation Barrier",
+        "post-validation write",
     },
     "verification-and-reporting.md": {
         "Validation Ladder",
         "Full-Suite Triggers",
         "Security Review Triggers",
         "Bug-Discriminating Evidence",
+        "Deliverable And Evidence Boundary",
         "Integrity Metadata Boundary",
         "Default to no integrity metadata",
+        "routine tool narration",
     },
     "goal-mode-closure.md": {
         "Completion Contract",
@@ -97,6 +105,14 @@ REQUIRED_REFERENCE_PHRASES = {
         "they are not `required work`",
         "Do not create or launch another Goal automatically",
         "does not lower a platform-required blocked threshold",
+        "supporting evidence are not the Outcome",
+        "perform no further work",
+    },
+    "execution-standards.md": {
+        "Outcome And Support Work",
+        "Correction Invalidation",
+        "does not replace the requested deliverable",
+        "Discard dependent assumptions",
     },
     "multi-agent-governance.md": {
         "Net-Benefit Gate",

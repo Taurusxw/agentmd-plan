@@ -6,7 +6,7 @@
 |---|---|
 | `../README.md` | 中文项目说明书、安装、验证和隐私边界。 |
 | `../README.en.md` | English project manual, installation, validation, and privacy boundaries. |
-| `../VERSION` | 当前正式项目版本 `v30.1.0`；验收和公开发布状态见 release record。 |
+| `../VERSION` | 当前正式项目版本 `v3.2.0`；验收和公开发布状态见 release record。 |
 | `../AGENTS.md` | 本仓库的 Codex 工作规则。 |
 | `../CONTRIBUTING.md` | 贡献和验证要求。 |
 | `../SECURITY.md` | 私密安全报告流程。 |
@@ -16,14 +16,15 @@
 
 | Path | Purpose |
 |---|---|
-| `../artifacts/AGENTS-30.0.0.md` | 已验收、安装并公开发布的 `v30.0.0` 全局规则。 |
+| `../artifacts/AGENTS-3.2.0.md` | 已验收、安装并公开发布的 `v3.2.0` 全局规则。 |
 | `../config/` | 可移植的多 Agent 默认配置和角色模板。 |
 | `../skills/seer-codex-rules/` | 可安装的 Skill 源码。 |
 | `progress/rounds/` | 有长期价值的公开开发记录。 |
-| `progress/releases/v30.1.0/` | `v30.1.0` 正式发布说明与验收记录。 |
+| `progress/releases/v3.2.0/` | `v3.2.0` 正式发布说明与验收记录。 |
 
 ## Recent Governance Record
 
+- `progress/rounds/2026-08-25-round-001-gpt-5p6-output-discipline.md`：将 GPT-5.6 过度生产反馈收束为结果优先、纠正失效、复杂度门禁和达标硬停止。
 - `progress/rounds/2026-08-20-round-001-integrity-evidence-governance-29.1.0.md`：将普通任务改为默认零哈希，并限制同步/恢复场景只做一次最终一致性证明。
 - `progress/rounds/2026-08-20-round-002-release-30.0.0-governance.md`：冻结 major 候选的路由基线、验证计划、两目标发布边界和 Nature 排除项。
 - `progress/rounds/2026-08-16-round-001-current-codex-subagent-governance.md`：记录当时的容量键、派遣权限证据、波次停止门和真实任务评测；容量与模型配置均为历史资料，非当前默认值。

@@ -24,7 +24,7 @@ class GuardrailCheckTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "AGENTS.md"
             text = "\n".join([
-                "版本：30.0.0",
+                "版本：1.2.3",
                 "定版日期：2026-08-20",
                 *(phrase for phrase in MODULE.REQUIRED_GATE_PHRASES if phrase != "concrete net benefit"),
             ])
@@ -37,11 +37,20 @@ class GuardrailCheckTests(unittest.TestCase):
             self.assertTrue(report["ok"], report)
             self.assertNotIn("sha256", report)
 
+    def test_output_discipline_candidate_satisfies_global_gate(self) -> None:
+        project = Path(__file__).parents[3]
+        report = MODULE.check_global_gate(
+            project / "artifacts" / "AGENTS-3.2.0.md"
+        )
+
+        self.assertTrue(report["ok"], report)
+        self.assertEqual(report["version"], "3.2.0")
+
     def test_default_state_and_copy_comparison_are_off(self) -> None:
         project = Path(__file__).parents[3]
         state = MODULE.check_state(
             project,
-            project / "artifacts" / "AGENTS-30.0.0.md",
+            project / "artifacts" / "AGENTS-3.2.0.md",
             project / "skills" / "seer-codex-rules",
             required=False,
         )
@@ -52,10 +61,10 @@ class GuardrailCheckTests(unittest.TestCase):
     def test_inventory_anchor_requires_version_without_persisted_digest(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             inventory = Path(directory) / "global-agents-rule-inventory.md"
-            inventory.write_text("Source global version: `30.0.0`\n", encoding="utf-8")
+            inventory.write_text("Source global version: `1.2.3`\n", encoding="utf-8")
 
-            self.assertEqual(MODULE.parse_inventory_version(inventory), "30.0.0")
-            self.assertEqual(SNAPSHOT_MODULE.parse_inventory_version(inventory), "30.0.0")
+            self.assertEqual(MODULE.parse_inventory_version(inventory), "1.2.3")
+            self.assertEqual(SNAPSHOT_MODULE.parse_inventory_version(inventory), "1.2.3")
 
     def test_installed_skill_routes_and_contains_current_multi_agent_anchors(self) -> None:
         skill = Path(__file__).parents[1]

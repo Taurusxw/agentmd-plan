@@ -1,9 +1,9 @@
 # Global AGENTS Rule Inventory
 
-This inventory maps `<codex-home>/AGENTS.md` version `30.0.0` to detailed `seer-codex-rules` modules.
+This inventory maps `<codex-home>/AGENTS.md` version `3.2.0` to detailed `seer-codex-rules` modules.
 
-Source global version: `30.0.0`
-Coverage verified: `2026-08-20`
+Source global version: `3.2.0`
+Coverage verified: `2026-08-25`
 
 | Global rule | Coverage |
 |---|---|
@@ -18,6 +18,9 @@ Coverage verified: `2026-08-20`
 | architecture drift | `architecture-drift.md` |
 | default zero hashes; one actual-consumer comparison | `verification-and-reporting.md`, `multi-agent-governance.md` |
 | Goal and acceptance admission | `goal-mode-closure.md`, `acceptance-closure.md` |
+| requested outcome over process artifacts | `execution-standards.md`, `goal-mode-closure.md`, `verification-and-reporting.md` |
+| corrected-premise invalidation | `execution-standards.md` |
+| post-acceptance mutation barrier and compact reporting | `acceptance-closure.md`, `verification-and-reporting.md` |
 | multi-agent net benefit, access, ownership, integration | `multi-agent-governance.md` |
 
 Inventory review is a governance operation. It does not require a hash unless a named global/live synchronization or recovery consumer requires one final byte comparison.

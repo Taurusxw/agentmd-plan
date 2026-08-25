@@ -2,9 +2,9 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-Current formal release: `v30.1.0`
+Current formal release: `v3.2.0`
 
-The current checkout, maintainer-installed `seer-codex-rules`, Git tag, and GitHub Release are all at `30.1.0`. This release changes only the governance Skill; the published global `AGENTS.md` artifact and live rule remain at `30.0.0` because their content did not change. The separate Skills distribution repository is an independent release target. GitHub retains historical tags, Releases, and Git commit history, while the checkout follows a latest-only local-asset policy.
+The current checkout, global `AGENTS.md` artifact, live/Downloads rules, and maintainer-installed `seer-codex-rules` are all at `3.2.0`. This release adds outcome-first delivery, corrected-premise invalidation, an evidence-based complexity gate, a post-acceptance stop, and compact reporting, while normalizing the version line from 30.x to 3.x. The separate Skills distribution repository is an independent release target. GitHub retains historical tags, Releases, and Git commit history, while the checkout follows a latest-only local-asset policy.
 
 Agentmd Plan is a portable, verifiable, low-token governance system for Codex rules. The global `AGENTS.md` keeps only the outline that must remain active on every task, while the `seer-codex-rules` Skill loads detailed execution rules on demand.
 
@@ -14,6 +14,7 @@ Agentmd Plan is a portable, verifiable, low-token governance system for Codex ru
 - Keeps small tasks lightweight while preserving validation and traceability for important development, migrations, and releases.
 - Reduces rule drift through conditional governance routing, Skill routing, modular references, validation scripts, and final disclosure.
 - Constrains repeated acceptance loops, excessive rounds, and overdevelopment of low-probability edge conditions.
+- Keeps plans, tests, audits, manifests, and status records as supporting evidence rather than substitutes for the requested deliverable.
 - Lets in-scope local edits and non-destructive validation proceed by default while making repeated permission prompts, regression tests, and security review evidence-triggered.
 - Freezes finite completion criteria for persistent Goals so auto-continuations cannot turn optional edges into endless required work.
 - Restores architecture and module-boundary decisions before repeated patches turn a production hotspot into structural drift.
@@ -25,7 +26,7 @@ Agentmd Plan is a portable, verifiable, low-token governance system for Codex ru
 
 ## Release Contents
 
-- `artifacts/AGENTS-30.0.0.md`: the accepted and published global-rule artifact.
+- `artifacts/AGENTS-3.2.0.md`: the accepted, installed, and published global-rule artifact.
 - `config/`: optional multi-agent configuration and role examples. Their capacity and model identifiers are not current governance defaults; choose them from actual runtime capability and task need.
 - `skills/seer-codex-rules/`: the Skill for rule design, task scaling, code and documentation governance, round/phase/release handling, acceptance closure, and versioning.
 - `skills/seer-codex-rules/scripts/`: checks for rule size, Skill catalog/runtime visibility, Skill routing, structural hotspots, synchronized state, and recovery snapshots.
@@ -52,7 +53,7 @@ Tasks that match an existing Skill load that Skill normally. `seer-codex-rules` 
 
 1. Back up the existing `<codex-home>/AGENTS.md`, `config.toml`, `agents/`, and Skill directory.
 2. Copy `skills/seer-codex-rules/` to `<codex-home>/skills/seer-codex-rules/`.
-3. Review `artifacts/AGENTS-30.0.0.md` to confirm that it fits your workflow.
+3. Review `artifacts/AGENTS-3.2.0.md` to confirm that it fits your workflow.
 4. Install that artifact as `<codex-home>/AGENTS.md`.
 5. If adopting the optional examples, merge the `[agents]` table from `config/agents.toml.example` into `<codex-home>/config.toml`, then copy `config/agents/*.toml` to `<codex-home>/agents/`. `[features.multi_agent_v2]` is a non-public, non-portable runtime input, not a documented template or migration target; do not author it in new configuration.
 6. Run the validation commands below to verify the version, Skill routing, model roles, and synchronized state.
@@ -137,11 +138,11 @@ Tasks that match an existing Skill load that Skill normally. `seer-codex-rules` 
 Run from the repository root:
 
 ```powershell
-python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-30.0.0.md
+python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-3.2.0.md
 python -m py_compile skills/seer-codex-rules/scripts/agent_routing_check.py skills/seer-codex-rules/scripts/guardrail_check.py skills/seer-codex-rules/scripts/measure_rules.py skills/seer-codex-rules/scripts/skill_catalog_check.py skills/seer-codex-rules/scripts/snapshot_state.py skills/seer-codex-rules/scripts/structure_check.py
 python -m unittest discover -s skills/seer-codex-rules/tests -p "test_*.py" -v
 python skills/seer-codex-rules/scripts/agent_routing_check.py --config config/agents.toml.example --agents-dir config/agents --json
-python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-30.0.0.md --downloads-agents artifacts/AGENTS-30.0.0.md --skill skills/seer-codex-rules --json
+python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-3.2.0.md --downloads-agents artifacts/AGENTS-3.2.0.md --skill skills/seer-codex-rules --json
 python skills/seer-codex-rules/scripts/skill_catalog_check.py --require-runtime-health --json
 codex --strict-config doctor --summary
 codex debug prompt-input probe

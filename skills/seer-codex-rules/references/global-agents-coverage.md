@@ -2,8 +2,8 @@
 
 Use this matrix when a global candidate changes. Coverage is semantic, not literal duplication.
 
-Source global version: `30.0.0`
-Coverage verified: `2026-08-20`
+Source global version: `3.2.0`
+Coverage verified: `2026-08-25`
 
 | Global concern | Detailed coverage |
 |---|---|
@@ -11,6 +11,7 @@ Coverage verified: `2026-08-20`
 | task scale, authorization, execution | `task-scaling-and-context.md`, `execution-standards.md`, `code-change-governance.md` |
 | documentation and version governance | `documentation-governance.md`, `rule-governance.md` |
 | Goal and acceptance boundaries | `goal-mode-closure.md`, `acceptance-closure.md`, `verification-and-reporting.md` |
+| outcome-first delivery, correction invalidation, post-acceptance stop, compact reporting | `execution-standards.md`, `goal-mode-closure.md`, `acceptance-closure.md`, `verification-and-reporting.md` |
 | architecture drift | `architecture-drift.md` |
 | governance-sensitive routing and checks | `low-token-guardrails.md`, `verification-and-reporting.md`, `rule-review-checklist.md` |
 | multi-agent net-benefit, access, ownership | `multi-agent-governance.md` |

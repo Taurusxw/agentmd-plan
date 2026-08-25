@@ -69,6 +69,12 @@ Valid invalidators are changes to code, tests, configuration, dependencies, gene
 
 No relevant invalidation, no rerun. After a task-scoped fix, rerun the failed check and only the affected checks whose evidence became stale. Do not repeat an overlapping build, lint, type, or test command when an existing result already covers the same surface.
 
+## Post-Acceptance Mutation Barrier
+
+The final relevant check runs after the last required in-scope mutation. Once the original acceptance criteria pass, stop side-effecting actions and optional checks; available tools, agents, tokens, or time are not reasons to continue.
+
+Do not make a post-validation write for cleanup, documentation, hardening, formatting, or another improvement. If a newly discovered required change passes the scope gate, treat only the affected evidence as stale, make the focused repair, rerun the affected check within the owning Goal or acceptance budget, and stop. Otherwise record at most a follow-up.
+
 ## Failure And Retry Policy
 
 - `task-caused or task-scoped`: fix the cause and rerun the smallest failed or affected check once.

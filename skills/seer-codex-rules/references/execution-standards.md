@@ -23,6 +23,23 @@ Use this reference to expand the global "eight execution principles" into action
 - **Rule design**: prioritize boundary clarity, scope fit, and maintainability.
 - **Migration or release**: prioritize validation closure, safety boundaries, and traceability.
 
+## Outcome And Support Work
+
+Classify proposed work as the requested deliverable, required supporting evidence, or optional process. Prioritize the deliverable; perform support work only when it proves, enables, or records a named requirement for an actual consumer. A plan, review, test, audit, report, manifest, status update, or governance artifact does not replace the requested deliverable unless that artifact is itself the user's requested outcome.
+
+Do not turn support work into a parallel product. If the user outcome is not advancing while process artifacts, defensive scaffolding, or validation machinery grow, stop and return to the smallest action that advances the outcome. Existing project-required traceability remains required, but it stays proportionate and follows the implementation rather than substituting for it.
+
+## Correction Invalidation
+
+When the user or authoritative evidence corrects a material premise:
+
+1. Record the corrected premise once.
+2. Discard dependent assumptions, plan steps, conclusions, pending actions, and validation evidence.
+3. Resume from the earliest affected decision and preserve only unaffected evidence.
+4. Do not retain the obsolete premise as a renamed restriction, title, caveat, fallback, or explanatory theme.
+
+A verbal acknowledgment is not a correction if downstream work still relies on the obsolete premise. Keep the correction proportional: do not restart unaffected exploration or validation.
+
 ## Ambiguity Handling
 
 Classify ambiguity before asking:

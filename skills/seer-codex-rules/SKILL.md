@@ -36,6 +36,8 @@ Routine L1/L2 code, configuration, or documentation edits do not invoke a univer
 5. Choose the affected script via [verification and reporting](references/verification-and-reporting.md): `measure_rules.py` for rule size, `structure_check.py` for drift, `agent_routing_check.py` for routing, or `skill_catalog_check.py` for global catalog discovery/enablement. Scripts are under `scripts/`.
 6. Use `scripts/guardrail_check.py` for governance-sensitive global/rule checks, not ordinary edits. Run `scripts/quick_validate.py <skill-dir>` when available for Skill maintenance. A byte comparison is off by default; perform one final comparison only for an actual global/live sync or recovery consumer.
 
+Plans, checks, reports, documentation, manifests, and other governance artifacts are supporting evidence, not substitutes for the requested deliverable. If the user or authoritative evidence corrects a premise, discard the dependent route and evidence before continuing. Once the selected proof passes, stop; do not add post-validation writes, checks, or process work.
+
 ## Multi-agent boundary
 
 Delegate only a bounded, independently verifiable, disjoint packet with a named net benefit. Immediately before every spawn, compare the packet's required access and capability scope with the parent's current effective access. Keep scope, critical-path decisions, write ownership, integration, final validation, and the final answer in the root. Static roles and configuration never prove runtime permission.
@@ -44,4 +46,4 @@ Use compact fresh packets unless continuity materially helps. Child returns cont
 
 ## Reporting
 
-State the changed destination, version rationale when applicable, focused evidence, and residual risk. Do not claim compliance when a required governance check is unavailable or fails.
+State the changed destination, version rationale when applicable, focused evidence, and residual risk. Lead with the result; omit routine tool narration, repeated status or rules, generic praise or apology, and unnecessary sign-offs. Do not claim compliance when a required governance check is unavailable or fails.

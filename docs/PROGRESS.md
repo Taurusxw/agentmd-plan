@@ -2,7 +2,7 @@
 
 ## Current State
 
-- `VERSION`、当前检出树、live 治理 Skill、Git tag 和 GitHub Release 均为正式 `v30.1.0`。全局 `AGENTS.md` artifact、live 与 Downloads 规则保持 `v30.0.0`，因为规则内容未变化；独立 Skills 分发仓库仍为单独发布目标。当前检出树遵循 latest-only 本地资产策略，GitHub 历史 tags/Releases 和 Git history 不改写。
+- `VERSION`、当前检出树、全局 `AGENTS.md` artifact、live/Downloads 规则、live 治理 Skill、Git tag 和 GitHub Release 均为正式 `v3.2.0`。版本编号按维护者要求从 30.x 归一为 3.x；当前检出树和本地 tags 遵循 latest-only 策略，GitHub 历史 tags/Releases 和 Git history 不改写。
 - `config/` 的容量和模型标识仅是可选示例；31/32 槽位配置与 Terra/Sol 路由是历史配置/观察，不是当前治理默认值。`features.multi_agent_v2` 是非公开、不可移植的运行时输入，不是可移植模板或迁移目标。
 - 当前规则仅在规则或 `AGENTS.md`、版本/progress/文档治理、发布/迁移/全局同步、架构漂移、Goal/验收扩张或多 Agent 协作等治理敏感情形加载 `seer-codex-rules`；普通 L1/L2 与单文件任务不因一次本地修改而触发它。多 Agent 仅在净收益门禁通过时派遣，容量不是目标。
 - 历史新任务观察曾以 Sol/high 非 Ultra 请求 31 个子 Agent，并直接观察到 22 个同时运行；它证明容量不是目标，也不构成当前容量或模型默认值。
@@ -11,6 +11,7 @@
 
 ## Recent Progress
 
+- 正式发布 `v3.2.0`：将 GPT-5.6 社区反馈中的范围膨胀、元工作替代交付、纠正仪式化、验证后继续行动和低价值输出转成结果优先、纠正失效、复杂度准入、post-acceptance mutation barrier 与精简汇报；同步安装全局规则和治理 Skill，并将版本线从 30.x 归一为 3.x。
 - 正式发布 `v30.1.0`：新增依赖-free `skill_catalog_check.py`，验证全局 Skill catalog 的发现、配置去重、prompt 名称/路径/描述保真、本地文件存在性和 selector 行为；缺失本地 prompt 文件现在会使 runtime health 失败，无法解析的托管 URI 仅报告。
 - 正式发布 `v30.0.0`：将 `seer-codex-rules` 改为治理敏感的条件路由，并更新多 Agent 工作模型；保留零哈希边界、permission-aware dispatch、净收益派遣、两仓发布边界和 latest-only 本地资产策略。
 - 在隔离分发仓库 worktree 中优化 5 个自有 Seer Skills：`seer-capture`、`seer-project-space-health`、`seer-math-exam`、`seer-mathbook` 和 `seer-prepare-open-source-release`。它们分别收窄捕获、深度清理、数学严谨性引用、精确图形实现和开源发布触发边界。
@@ -78,16 +79,17 @@
 - 多 Agent 往往以更多总 token 换取时间、覆盖或质量；便宜模型、fresh context、去重和分波停止规则只能优化单位有效结果成本，不能保证绝对节省。
 - 规则系统仍依赖 Codex 正确触发 Skill；脚本和最终披露用于降低而非消除偏移。
 - 自定义 Agent 的发现可能需要新任务或重启；脚本可验证配置，但不能证明每次语义派遣都完全正确。
-- 当前发布与安装证据已收束；残留风险是更新后的 Skill 只在新任务或宿主明确重载后进入新的初始上下文，当前任务不假设热重载。
+- `v3.2.0` 发布与安装证据已收束；残留风险是更新后的规则与 Skill 只在新任务或宿主明确重载后进入新的初始上下文，当前任务不假设热重载。
 
 ## Detailed Records
 
+- `docs/progress/releases/v3.2.0/RELEASE_NOTES.md`
+- `docs/progress/rounds/2026-08-25-round-001-gpt-5p6-output-discipline.md`
 - `docs/progress/rounds/2026-08-20-round-001-integrity-evidence-governance-29.1.0.md`
 - `docs/progress/rounds/2026-08-20-round-002-release-30.0.0-governance.md`
 - `docs/progress/rounds/2026-08-16-round-001-current-codex-subagent-governance.md`
 - `docs/progress/rounds/2026-08-11-round-001-handover-lifecycle-permission-aware-dispatch.md`
 - `docs/progress/rounds/2026-08-04-round-001-agent-first-multi-agent-governance-29.0.0.md`
-- `docs/progress/releases/v30.1.0/RELEASE_NOTES.md`
 - `docs/progress/rounds/2026-08-03-round-004-latest-effective-global-rule-28.2.0.md`
 - `docs/progress/rounds/2026-08-03-round-003-centralized-governance-ownership-28.1.0.md`
 - `docs/progress/rounds/2026-08-03-round-002-gpt-5p6-execution-efficiency.md`

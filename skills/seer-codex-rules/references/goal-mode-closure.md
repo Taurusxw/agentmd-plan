@@ -22,6 +22,8 @@ Closure: complete immediately when all criteria pass; optional findings are foll
 
 Keep the contract in the Goal objective so continuations can use it without rereading project history. Do not create a separate project document unless L3/L4 handoff already requires one.
 
+The `Outcome` names the user's requested deliverable. Plans, tests, reviews, reports, manifests, and other supporting evidence are not the Outcome unless the user explicitly requested that artifact.
+
 ## Normalize Open-Ended Language
 
 Do not execute words such as "fully", "completely", "perfect", "all cases", "no omissions", "as much as possible", or "best" as unbounded requirements. Convert each into an observable criterion or declared support boundary. Ask only when the ambiguity materially changes data, permissions, deployment, destructive behavior, or critical user experience.
@@ -57,7 +59,7 @@ A cheap fix is not automatically required. Ordinary edge work needs both evidenc
 3. `verify`: run the fixed validation list once and reuse passing evidence; do not add gates after it passes.
 4. `repair`: if a task-scoped failure appears, allow one focused repair and affected retest.
 5. `classify`: route new findings through Required-Work Admission.
-6. `close`: when all Frozen Criteria pass, mark the Goal `complete` immediately.
+6. `close`: when all Frozen Criteria pass, mark the Goal `complete` immediately and perform no further work except the required status update and compact final report.
 
 Do not create or launch another Goal automatically. List at most three useful follow-ups in the final answer.
 

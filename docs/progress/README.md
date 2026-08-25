@@ -8,7 +8,8 @@
 
 ## Recent
 
-- [v30.1.0 Release](releases/v30.1.0/RELEASE_NOTES.md)
+- [v3.2.0 Release](releases/v3.2.0/RELEASE_NOTES.md)
+- [2026-08-25 Round 001: GPT-5.6 Output Discipline](rounds/2026-08-25-round-001-gpt-5p6-output-discipline.md)
 - [2026-08-20 Round 002: Release 30.0.0 Governance](rounds/2026-08-20-round-002-release-30.0.0-governance.md)
 - [2026-08-20 Round 001: Integrity Evidence Governance 29.1.0](rounds/2026-08-20-round-001-integrity-evidence-governance-29.1.0.md)
 - [2026-08-16 Round 001: Current Codex Subagent Governance](rounds/2026-08-16-round-001-current-codex-subagent-governance.md)

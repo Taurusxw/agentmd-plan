@@ -2,9 +2,9 @@
 
 [简体中文](README.md) | [English](README.en.md)
 
-当前正式版本：`v30.1.0`
+当前正式版本：`v3.2.0`
 
-当前检出树、维护环境 `seer-codex-rules`、Git tag 和 GitHub Release 均为 `30.1.0`。本次仅增强治理 Skill；已发布的全局 `AGENTS.md` artifact 与 live 规则仍为 `30.0.0`，因为全局规则内容没有变化。独立 Skills 分发仓库是单独的发布目标；GitHub 保留历史 tags/Releases 和 Git commit 历史，当前检出树遵循 latest-only 本地资产策略。
+当前检出树、全局 `AGENTS.md` artifact、live/Downloads 规则与维护环境 `seer-codex-rules` 均为 `3.2.0`。本版增加结果优先、纠正失效、复杂度门禁、验收后硬停止和精简汇报，并将版本编号从 30.x 归一到 3.x。独立 Skills 分发仓库是单独发布目标；GitHub 保留历史 tags/Releases 和 Git commit 历史，当前检出树遵循 latest-only 本地资产策略。
 
 Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理方案。全局 `AGENTS.md` 只保留每次任务都应生效的纲要，复杂执行规则由 `seer-codex-rules` Skill 根据任务类型按需加载。
 
@@ -14,6 +14,7 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 - 让短任务保持轻量，同时为重要开发、迁移和发布保留完整验证与溯源。
 - 通过条件化治理路由、Skill 路由、reference 模块、校验脚本和最终披露降低规则偏移。
 - 约束重复验收、过多 round 和低概率边界条件过度开发。
+- 将计划、测试、审计、manifest 和状态记录限定为支持证据，不能替代用户要求的真实交付物。
 - 让目标内本地修改和非破坏性验证默认直行，并对重复权限确认、回归测试和安全复核设置事件触发与证据复用规则。
 - 为持续运行的 Goal 冻结有限完成条件，防止自动续跑把可选边界不断变成必做工作。
 - 在连续补丁侵蚀模块边界前，用事件触发的热点检查恢复结构化与模块化决策。
@@ -25,7 +26,7 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 
 ## 版本内容
 
-- `artifacts/AGENTS-30.0.0.md`：已验收并发布的全局规则 artifact。
+- `artifacts/AGENTS-3.2.0.md`：已验收、安装并发布的全局规则 artifact。
 - `config/`：可选的多 Agent 配置与角色示例；其中的容量和模型标识不是当前治理默认值，必须由实际运行时能力和任务需要决定。
 - `skills/seer-codex-rules/`：规则设计、任务分级、代码与文档治理、round/phase/release、验收收束和版本治理 Skill。
 - `skills/seer-codex-rules/scripts/`：规则体量、Skill catalog/运行时可见性、Skill 路由、结构热点、同步状态和恢复快照检查脚本。
@@ -52,7 +53,7 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 
 1. 备份现有的 `<codex-home>/AGENTS.md`、`config.toml`、`agents/` 和同名 Skill。
 2. 将 `skills/seer-codex-rules/` 复制到 `<codex-home>/skills/seer-codex-rules/`。
-3. 审阅 `artifacts/AGENTS-30.0.0.md`，确认符合自己的工作方式。
+3. 审阅 `artifacts/AGENTS-3.2.0.md`，确认符合自己的工作方式。
 4. 将该 artifact 安装为 `<codex-home>/AGENTS.md`。
 5. 如需采用可选示例，再将 `config/agents.toml.example` 的 `[agents]` 表合并进 `<codex-home>/config.toml`，并将 `config/agents/*.toml` 复制到 `<codex-home>/agents/`。`[features.multi_agent_v2]` 是非公开、不可移植的运行时输入，不是文档化模板或迁移目标；不要在新配置中采用它。
 6. 运行下方校验命令，确认版本、Skill 路由、模型角色和同步状态。
@@ -137,11 +138,11 @@ Agentmd Plan 是一套可移植、可验证、低 token 的 Codex 规则治理�
 在仓库根目录运行：
 
 ```powershell
-python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-30.0.0.md
+python skills/seer-codex-rules/scripts/measure_rules.py --strict artifacts/AGENTS-3.2.0.md
 python -m py_compile skills/seer-codex-rules/scripts/agent_routing_check.py skills/seer-codex-rules/scripts/guardrail_check.py skills/seer-codex-rules/scripts/measure_rules.py skills/seer-codex-rules/scripts/skill_catalog_check.py skills/seer-codex-rules/scripts/snapshot_state.py skills/seer-codex-rules/scripts/structure_check.py
 python -m unittest discover -s skills/seer-codex-rules/tests -p "test_*.py" -v
 python skills/seer-codex-rules/scripts/agent_routing_check.py --config config/agents.toml.example --agents-dir config/agents --json
-python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-30.0.0.md --downloads-agents artifacts/AGENTS-30.0.0.md --skill skills/seer-codex-rules --json
+python skills/seer-codex-rules/scripts/guardrail_check.py --strict --project . --global-agents artifacts/AGENTS-3.2.0.md --downloads-agents artifacts/AGENTS-3.2.0.md --skill skills/seer-codex-rules --json
 python skills/seer-codex-rules/scripts/skill_catalog_check.py --require-runtime-health --json
 codex --strict-config doctor --summary
 codex debug prompt-input probe
